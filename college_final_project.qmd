@@ -6,6 +6,7 @@ format: html
 ```{r}
 install.packages("httr2")
 library(httr2)
+library(tidyverse)
 
 
 college_request <- request("https://api.data.gov") %>% 
@@ -26,7 +27,7 @@ college_response <- req_perform(college_request)
 college_response
 
 
-#install.packages("janitor")
+install.packages("janitor")
 
 college_tbl <- college_response %>%
   resp_body_json(simplifyVector = TRUE) %>%
