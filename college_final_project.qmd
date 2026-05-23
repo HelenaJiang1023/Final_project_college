@@ -38,3 +38,9 @@ college_tbl
 
 
 ```
+
+```{r}
+college2 <- read_csv("College_Data.csv")
+
+college2
+```
