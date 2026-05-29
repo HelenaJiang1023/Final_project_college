@@ -52,6 +52,20 @@ colleges <- bind_rows(school_list)
 ```
 
 ```{r}
+
+# not sure how accurate the apps & accept columns
 college2 <- read_csv("College_Data.csv")
 college2
+
+college2 <- college2 %>%
+  rename(name = ...1)
+
+colleges <- colleges %>%
+  rename(name = school.name)
+```
+
+```{r}
+merged_colleges <- left_join(college2, colleges, by = "name")
+
+# some duplicates in here
 ```
