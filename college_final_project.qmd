@@ -50,6 +50,8 @@ college_request <- request("https://api.data.gov") %>%
 ```{r}
 colleges <- bind_rows(school_list)
 ```
+
+
 ```{r}
 colnames(colleges)
 ```
@@ -82,10 +84,15 @@ alt_colleges <- read_csv("alt_college_data.csv")
 ```{r}
 alt_colleges <- alt_colleges %>%
   rename(name = INSTNM)
+
+alt_colleges <- alt_colleges %>%
+  rename(id = UNITID)
 ```
 
 ```{r}
-merged_colleges_big <- left_join(colleges, alt_colleges, by = c("school.name" = "name"))
+#merged_colleges_big <- left_join(colleges, alt_colleges, by = c("school.name" = "name"))
+
+merged_colleges_big <- left_join(colleges, alt_colleges, by = "id")
 ```
 
 
