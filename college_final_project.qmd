@@ -71,3 +71,29 @@ merged_colleges <- left_join(college2, colleges, by = "name")
 
 # some duplicates in here
 ```
+
+```{r}
+alt_colleges <- read_csv("alt_college_data.csv")
+```
+
+```{r}
+alt_colleges <- alt_colleges %>%
+  rename(name = INSTNM)
+```
+
+```{r}
+merged_colleges_big <- left_join(colleges, alt_colleges, by = "name")
+```
+
+```{r}
+merged_colleges %>%
+  ggplot(aes(x = Private, y = latest.cost.tuition.out_of_state)) +
+    geom_boxplot() +
+    coord_flip() +
+    theme_minimal() +
+    labs(
+      y = "Tuition (Out of State)",
+      x = "Private",
+      title = "Cost of Public vs. Private Schools"
+    )
+```
