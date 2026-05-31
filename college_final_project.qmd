@@ -50,24 +50,27 @@ college_request <- request("https://api.data.gov") %>%
 ```{r}
 colleges <- bind_rows(school_list)
 ```
+```{r}
+colnames(colleges)
+```
 
 ```{r}
 
 # not sure how accurate the apps & accept columns
 # could use this set too it has more rows:
 # https://www.kaggle.com/datasets/thedevastator/u-s-department-of-education-college-scorecard-da
-college2 <- read_csv("College_Data.csv")
-college2
+#college2 <- read_csv("College_Data.csv")
+#college2
 
-college2 <- college2 %>%
-  rename(name = ...1)
+#college2 <- college2 %>%
+# rename(name = ...1)
 
-colleges <- colleges %>%
-  rename(name = school.name)
+#colleges <- colleges %>%
+#  rename(name = school.name)
 ```
 
 ```{r}
-merged_colleges <- left_join(college2, colleges, by = "name")
+# merged_colleges <- left_join(college2, colleges, by = "name")
 
 # some duplicates in here
 ```
@@ -82,8 +85,9 @@ alt_colleges <- alt_colleges %>%
 ```
 
 ```{r}
-merged_colleges_big <- left_join(colleges, alt_colleges, by = "name")
+merged_colleges_big <- left_join(colleges, alt_colleges, by = c("school.name" = "name"))
 ```
+
 
 ```{r}
 merged_colleges %>%
