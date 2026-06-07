@@ -229,6 +229,27 @@ ggplot(
 ```
 
 
+```{r}
+colleges <- colleges %>%
+  rename(name = school.name) %>%
+  rename(state = school.state) %>%
+  rename(five_yr_earnings = latest.earnings.5_yrs_after_completion.median) %>%
+  rename(one_yr_earnings = latest.earnings.1_yr_after_completion.median) %>%
+  rename(size = latest.student.size) %>%
+  rename(instate_tuition = latest.cost.tuition.in_state) %>%
+  rename(outstate_tuition = latest.cost.tuition.out_of_state) %>%
+  rename(acceptance = latest.admissions.admission_rate.overall) %>%
+  rename(avg_cost = latest.cost.attendance.academic_year) %>%
+  rename(graduation = latest.completion.completion_rate_4yr_150nt) %>%
+  rename(repaid_debt = latest.repayment.2_yr_bb_fed_repayment.ugcomp.fullypaid)
+```
+
+## Variables in question
+
+`name`: the institution name `state`: the institution's state `instate_tuition`: cost of instate tuition, before aid `outstate_tuition`: cost of out-of-state tuition, before aid `acceptance`: overall acceptance rate `graduation`: overall graduation rate, in four years `repaid_debt`: proportion of graduates who have fully repaid debt after 2 years `size:` the most recent number of undergraduate students `avg_cost:` average cost of attendance, before aid `one_yr_earnings:` median earnings of graduates after 1 year from graduation `five_yr_earnings:` median earnings of graduates after 5 years from graduation
+
+
+
 #Part 2: Do expensive colleges produce better outcomes? 
 
 
@@ -327,7 +348,7 @@ grad_rate_inStateTuition<-colleges%>%
   ggplot(aes(x=latest.cost.tuition.in_state,
              y=latest.completion.completion_rate_4yr_150nt)
          )+
-  geom_point()+
+  geom_point(aes(text = name))+
   geom_smooth(method = "lm")+
   labs(x="In-state Tuition",
        y="Graduation Rate",
@@ -358,96 +379,9 @@ grad_rate_outStateTuition
 
 
 
-## Relationship between cost of attendance and graduation rate
-
-```{r}
-
-
-grad_rate_costAttendance<-colleges%>%
-  ggplot(aes(x=latest.cost.attendance.academic_year,
-             y=latest.completion.completion_rate_4yr_150nt)
-         )+
-  geom_point()+
-  geom_smooth(method = "lm")+
-  labs(x="Cost of attendance",
-       y="Graduation Rate",
-       title="Graduation Rate VS Cost of Attendance")+
-   consistent_theme
- 
-  
-grad_rate_costAttendance
-
-
-```
-
-
-#Relationship between 1-year earnings and cost of attendance
-
-```{r}
-
-oneYr_earn_costAttendance<-colleges%>%
-  ggplot(aes(x=latest.cost.attendance.academic_year,
-             y=latest.earnings.1_yr_after_completion.median)
-         )+
-  geom_point()+
-  geom_smooth(method = "lm")+
-  labs(x="Cost of attendance ",
-       y="Median earnings 1 year after graduation",
-       title="Median After-One-year Earnings VS \n Cost of Attendance")+
-   consistent_theme
-
-oneYr_earn_costAttendance
-
-
-```
-
-
-#Relationship between 5-years earnings and cost of attendance 
-
-```{r}
-
-fiveYr_earn_costAttendance<-colleges%>%
-  ggplot(aes(x=latest.cost.attendance.academic_year,
-             y=latest.earnings.5_yrs_after_completion.median)
-         )+
-  geom_point()+
-  geom_smooth(method = "lm")+
-  labs(x="Cost of attendance ",
-       y="Median earnings 5 years after graduation",
-       title="Median After-Five-year Earnings VS \n Cost of Attendance")+
-   consistent_theme
-
-fiveYr_earn_costAttendance
-
-
-
-```
-
-
-
-
-
 
 # Part 3: ROI
 
-```{r}
-colleges <- colleges %>%
-  rename(name = school.name) %>%
-  rename(state = school.state) %>%
-  rename(five_yr_earnings = latest.earnings.5_yrs_after_completion.median) %>%
-  rename(one_yr_earnings = latest.earnings.1_yr_after_completion.median) %>%
-  rename(size = latest.student.size) %>%
-  rename(instate_tuition = latest.cost.tuition.in_state) %>%
-  rename(outstate_tuition = latest.cost.tuition.out_of_state) %>%
-  rename(acceptance = latest.admissions.admission_rate.overall) %>%
-  rename(avg_cost = latest.cost.attendance.academic_year) %>%
-  rename(graduation = latest.completion.completion_rate_4yr_150nt) %>%
-  rename(repaid_debt = latest.repayment.2_yr_bb_fed_repayment.ugcomp.fullypaid)
-```
-
-## Variables in question
-
-`name`: the institution name `state`: the institution's state `instate_tuition`: cost of instate tuition, before aid `outstate_tuition`: cost of out-of-state tuition, before aid `acceptance`: overall acceptance rate `graduation`: overall graduation rate, in four years `repaid_debt`: proportion of graduates who have fully repaid debt after 2 years `size:` the most recent number of undergraduate students `avg_cost:` average cost of attendance, before aid `one_yr_earnings:` median earnings of graduates after 1 year from graduation `five_yr_earnings:` median earnings of graduates after 5 years from graduation
 
 ## Charts
 
