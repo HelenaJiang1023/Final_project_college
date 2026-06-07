@@ -206,6 +206,60 @@ colleges <- colleges %>%
 
 #Part 2: Do expensive colleges produce better outcomes? 
 
+In this part, we investigate whether more expensive colleges are worth the cost by producing better outcomes, that is, leading to higher graduation rate and higher income after graduation. For income after graduation, we examined the median income one years after graduation and five years after graduation to see whether the trend persists over time.  
+
+## Relationship between tuition and graduation rate 
+
+```{r}
+
+# Graduation rate VS In state tuition 
+
+grad_rate_inStateTuition<-colleges%>%
+  ggplot(aes(x=instate_tuition,
+             y=graduation)
+         )+
+  geom_point(aes(text = name))+
+  geom_smooth(method = "lm")+
+  labs(x="In-state Tuition",
+       y="Graduation Rate",
+       title="Graduation Rate VS In-state Tuition")+
+   consistent_theme
+ 
+
+
+# Graduation rate VS Out of state tuition 
+
+grad_rate_outStateTuition<-colleges%>%
+  ggplot(aes(x=outstate_tuition,
+             y=graduation)
+         )+
+  geom_point(aes(text = name))+
+  geom_smooth(method = "lm")+
+  labs(x="Out-of-state Tuition",
+       y="Graduation Rate",
+       title="Graduation Rate VS Out-of-state Tuition")+
+  consistent_theme
+  
+
+
+subplot(
+  ggplotly(grad_rate_inStateTuition, tooltip = "text"),
+  ggplotly(grad_rate_outStateTuition, tooltip = "text"),
+  nrows = 1,
+  shareY = TRUE,
+  titleX = TRUE,
+  titleY = TRUE
+) %>%
+  layout(
+    title = list(
+      text = "<b>Graduation Rate vs Tuition</b>",
+      font = list(size = 24),
+      x = 0.5
+    )
+  )
+
+```
+
 
 ## Relationship between tuition and earnings
 
@@ -280,50 +334,6 @@ fiveYr_earn_outStateTuition<-colleges%>%
   consistent_theme
   
 ggplotly(fiveYr_earn_outStateTuition, tooltip = "text")
-
-```
-
-
-## Relationship between tuition and graduation rate 
-
-```{r}
-
-# Graduation rate VS In state tuition 
-
-grad_rate_inStateTuition<-colleges%>%
-  ggplot(aes(x=instate_tuition,
-             y=graduation)
-         )+
-  geom_point(aes(text = name))+
-  geom_smooth(method = "lm")+
-  labs(x="In-state Tuition",
-       y="Graduation Rate",
-       title="Graduation Rate VS In-state Tuition")+
-   consistent_theme
- 
-ggplotly(grad_rate_inStateTuition, tooltip = "text")
-
-
-
-
-# Graduation rate VS Out of state tuition 
-
-grad_rate_outStateTuition<-colleges%>%
-  ggplot(aes(x=outstate_tuition,
-             y=graduation)
-         )+
-  geom_point(aes(text = name))+
-  geom_smooth(method = "lm")+
-  labs(x="Out-of-state Tuition",
-       y="Graduation Rate",
-       title="Graduation Rate VS Out-of-state Tuition")+
-  consistent_theme
-  
-
-ggplotly(grad_rate_outStateTuition, tooltip = "text")
-
-
-
 
 ```
 
