@@ -24,8 +24,6 @@ consistent_theme <-theme(
     )
 ```
 
-
-
 ```{r}
 school_list <- list()
 
@@ -220,7 +218,6 @@ median_tuition
 ```
 
 This figure shows that out-of-state tuition is highly right-skewed. The median tuition is 16,369.50, meaning that most institutions charge less than 20,000 per year. However, a small number of colleges charge substantially higher tuition, creating a long right tail in the distribution. These results suggest that expensive colleges are the exception rather than the norm, motivating further investigation into whether their higher costs are associated with better outcomes.
-
 
 ## Where are more expensive?
 
@@ -436,89 +433,11 @@ ename(instate_tuition = latest.cost.tuition.in_state) %>%
 
 `name`: the institution name \n `state`: the institution's state \n `instate_tuition`: cost of instate tuition, before aid \n `outstate_tuition`: cost of out-of-state tuition, before aid \n `acceptance`: overall acceptance rate \n `graduation`: overall graduation rate, in four years \n `repaid_debt`: proportion of graduates who have fully repaid debt after 2 years \n `size:` the most recent number of undergraduate students \n `avg_cost:` average cost of attendance, before aid \n `one_yr_earnings:` median earnings of graduates after 1 year from graduation \n `five_yr_earnings:` median earnings of graduates after 5 years from graduation
 
+# Part 2: Do expensive colleges produce better outcomes?
 
+In this part, we investigate whether more expensive colleges are worth the cost by producing better outcomes, that is, leading to higher graduation rate and higher income after graduation. For income after graduation, we examined the median income one years after graduation and five years after graduation to see whether the trend persists over time.
 
-#Part 2: Do expensive colleges produce better outcomes? 
-
-
-## Relationship between tuition and earnings
-
-```{r}
-
-# One year earnings VS In state tuition
-
-oneYr_earn_inStateTuition<-colleges%>%
-  ggplot(aes(x=instate_tuition,
-             y=one_yr_earnings)
-         )+
-  geom_point(aes(text = name))+
-  geom_smooth(method = "lm")+
-  labs(x="In-state Tuition",
-       y="Median earnings 1 year after graduation",
-       title="Median After-One-year Earnings VS \n In-state Tuition")+
-   consistent_theme
- 
-  
-ggplotly(oneYr_earn_inStateTuition, tooltip = "text")
-
-
-
-# One year earnings VS Out of state tuition 
-
-oneYr_earn_outStateTuition<-colleges%>%
-  ggplot(aes(x=outstate_tuition,
-             y=one_yr_earnings)
-         )+
-  geom_point(aes(text = name))+
-  geom_smooth(method = "lm")+
-  labs(x="Out-of-state Tuition",
-       y="Median earnings 1 year after graduation",
-       title="Median After-One-year Earnings VS \n Out-of-state Tuition")+
-  consistent_theme
-  
-oneYr_earn_outStateTuition
-
-ggplotly(oneYr_earn_outStateTuition, tooltip = "text")
-
-
-
-# Five year earning VS In state tuition
-
-fiveYr_earn_inStateTuition<-colleges%>%
-  ggplot(aes(x=instate_tuition,
-             y=five_yr_earnings)
-         )+
-  geom_point(aes(text = name))+
-  geom_smooth(method = "lm")+
-  labs(x="In-state Tuition",
-       y="Median earnings 5 years after graduation",
-       title="Median After-Five-years Earnings VS \n In-state Tuition ")+
-  consistent_theme
-
-
-ggplotly(fiveYr_earn_inStateTuition, tooltip = "text")
-
-
-
-# Five year earnings VS Out of State tuition 
-
-fiveYr_earn_outStateTuition<-colleges%>%
-  ggplot(aes(x=outstate_tuition,
-             y=five_yr_earnings)
-         )+
-  geom_point(aes(text = name))+
-  geom_smooth(method = "lm")+
-  labs(x="Out-of-state Tuition",
-       y="Median earnings 5 year after graduation",
-       title="Median After-Five-years Earnings VS \n Out-of-state Tuition")+
-  consistent_theme
-  
-ggplotly(fiveYr_earn_outStateTuition, tooltip = "text")
-
-```
-
-
-## Relationship between tuition and graduation rate 
+## Relationship between tuition and graduation rate
 
 ```{r}
 
@@ -535,9 +454,6 @@ grad_rate_inStateTuition<-colleges%>%
        title="Graduation Rate VS In-state Tuition")+
    consistent_theme
  
-ggplotly(grad_rate_inStateTuition, tooltip = "text")
-
-
 
 
 # Graduation rate VS Out of state tuition 
@@ -554,18 +470,137 @@ grad_rate_outStateTuition<-colleges%>%
   consistent_theme
   
 
-ggplotly(grad_rate_outStateTuition, tooltip = "text")
 
+subplot(
+  ggplotly(grad_rate_inStateTuition, tooltip = "text"),
+  ggplotly(grad_rate_outStateTuition, tooltip = "text"),
+  nrows = 1,
+  shareY = TRUE,
+  titleX = TRUE,
+  titleY = TRUE
+) %>%
+  layout(
+    title = list(
+      text = "<b>Graduation Rate vs Tuition</b>",
+      font = list(size = 24),
+      x = 0.5
+    )
+  )
+
+```
+
+## Relationship between tuition and median earnings 1 year after graduation
+
+```{r}
+
+# One year earnings VS In state tuition
+
+oneYr_earn_inStateTuition<-colleges%>%
+  ggplot(aes(x=instate_tuition,
+             y=one_yr_earnings)
+         )+
+  geom_point(aes(text = name))+
+  geom_smooth(method = "lm")+
+  labs(x="In-state Tuition",
+       y="Median earnings 1 year after graduation",
+      title= "Median After-One-year Earnings VS \n In-state Tuition"
+       )+
+   consistent_theme
+ 
+  
+
+# One year earnings VS Out of state tuition 
+
+oneYr_earn_outStateTuition<-colleges%>%
+  ggplot(aes(x=outstate_tuition,
+             y=one_yr_earnings)
+         )+
+  geom_point(aes(text = name))+
+  geom_smooth(method = "lm")+
+  labs(x="Out-of-state Tuition",
+       y="Median earnings 1 year after graduation",
+       title= "Median After-One-year Earnings VS \n Out-of-state Tuition"
+       )+
+  consistent_theme
+  
+
+
+# 1 year earnings VS tuition
+subplot(
+  ggplotly(oneYr_earn_inStateTuition, tooltip = "text"),
+  ggplotly(oneYr_earn_outStateTuition, tooltip = "text"),
+  nrows = 1,
+  shareY = TRUE,
+  titleX = TRUE,
+  titleY = TRUE
+) %>%
+  layout(
+    title = list(
+      text = "<b> Median After-One-year Earnings VS \n Tuition </b>",
+      font = list(size = 24),
+      x = 0.5
+    )
+  )
+
+```
+
+From the graph, there is a median strong positive relationship between the median earnings 1 year after graduation of the graduates and both the in-state and out-of-state tuition, meaning that higher the tuition, higher the income soon after graduation.
+
+```{r}
+
+
+# Five year earning VS In state tuition
+
+fiveYr_earn_inStateTuition<-colleges%>%
+  ggplot(aes(x=instate_tuition,
+             y=five_yr_earnings)
+         )+
+  geom_point(aes(text = name))+
+  geom_smooth(method = "lm")+
+  labs(x="In-state Tuition",
+       y="Median earnings 5 years after graduation",
+       title="Median After-Five-years Earnings VS \n In-state Tuition")+
+  consistent_theme
+
+
+
+# Five year earnings VS Out of State tuition 
+
+fiveYr_earn_outStateTuition<-colleges%>%
+  ggplot(aes(x=outstate_tuition,
+             y=five_yr_earnings)
+         )+
+  geom_point(aes(text = name))+
+  geom_smooth(method = "lm")+
+  labs(x="Out-of-state Tuition",
+       y="Median earnings 5 year after graduation",
+       title="Median After-Five-years Earnings VS \n Out-of-state Tuition")+
+  consistent_theme
+  
+
+
+
+subplot(
+  ggplotly(fiveYr_earn_inStateTuition, tooltip = "text"),
+  ggplotly(fiveYr_earn_outStateTuition, tooltip = "text"),
+  nrows = 1,
+  shareY = TRUE,
+  titleX = TRUE,
+  titleY = TRUE
+) %>%
+  layout(
+    title = list(
+      text = "<b> Median After-Five-year Earnings VS \n Tuition</b>",
+      font = list(size = 24),
+      x = 0.5
+    )
+  )
 
 
 
 ```
 
-
-
-
 # Part 3: ROI
-
 
 ## Charts
 
@@ -584,7 +619,7 @@ roi_plot1 <- colleges %>%
 ggplotly(roi_plot1, tooltip = "text")
 ```
 
-### Observation: there is a clear positive trend between the two variables. This suggests that more expensive colleges might be worth it because there is a higher chance of graduating with a degree.
+Observation: there is a clear positive trend between the two variables. This suggests that more expensive colleges might be worth it because there is a higher chance of graduating with a degree.
 
 ```{r}
 roi_plot2 <- colleges %>%
@@ -602,7 +637,7 @@ roi_plot2 <- colleges %>%
 ggplotly(roi_plot2, tooltip = "text")
 ```
 
-### Observation: there is a slight positive trend, but it is almost flat. This suggests that a more expensive college might not be worth it in the short-term, using 1-year median earnings as a marker of ROI.
+Observation: there is a slight positive trend, but it is almost flat. This suggests that a more expensive college might not be worth it in the short-term, using 1-year median earnings as a marker of ROI.
 
 ```{r}
 roi_plot3 <- colleges %>%
@@ -620,10 +655,31 @@ roi_plot3 <- colleges %>%
 ggplotly(roi_plot3, tooltip = "text")
 ```
 
-### Observation: the trend is more significant after 5 years. This gives evidence that a more expensive college might be worth it in the long-term, as they can lead to higher-paying careers.
+Observation: the trend is more significant after 5 years. This gives evidence that a more expensive college might be worth it in the long-term, as they can lead to higher-paying careers.
 
 ```{r}
+colleges <- colleges %>%
+  mutate(
+    repaid_debt = parse_number(repaid_debt)
+  )
 roi_plot4 <- colleges %>%
+  ggplot(aes(x = avg_cost, y = repaid_debt, color = acceptance)) +
+    geom_point(aes(text = name)) +
+    geom_smooth(method = "lm", se = FALSE, color = "purple") +
+    theme_minimal() +
+    labs(
+      x = "Average Cost of Attendance",
+      y = "Proportion of Graduates with Repaid Debt",
+      color = "Acceptance Rate",
+      title = "Repaid Debt vs. Cost of Attendance",
+    )
+ggplotly(roi_plot4, tooltip = "text")
+```
+
+Observation: there is a trend of higher-costing colleges yielding better results for debt repayment. However, this is influenced by some of the outliers on the top right, which blurs the results.
+
+```{r}
+roi_plot5 <- colleges %>%
   ggplot(aes(x = avg_cost, y = acceptance)) +
     geom_point() +
     geom_smooth(method = "lm", se = FALSE, color = "purple") +
@@ -633,9 +689,66 @@ roi_plot4 <- colleges %>%
       y = "Acceptance Rate",
       title = "Acceptance Rate vs. Cost of Attendance",
     )
-roi_plot4
+roi_plot5
 ```
 
-### Observation: there is a strong negative association between these variables. More expensive colleges are often more selective, with lower acceptance rates. This could mean that the cost of attendance doesn't necessarily predict outcomes, but the prestige of the institution.
+Observation: there is a strong negative association between these variables. More expensive colleges are often more selective, with lower acceptance rates. This could mean that the cost of attendance doesn't necessarily predict outcomes, but the prestige of the institution.
 
+## Looking at top 500 college data
 
+```{r}
+library(stringr)
+top_colleges <- read_csv("clean_top_colleges.csv")
+```
+
+```{r}
+ranked_colleges <- top_colleges %>%
+  left_join(colleges, by = "name")
+
+ranked_colleges <- ranked_colleges %>%
+  select(c("name", "rank", "state", "acceptance", "graduation", "avg_cost", "one_yr_earnings", "five_yr_earnings"))
+```
+
+The new data set, `ranked_colleges`, contains the information from the College Scorecard API for just the top 500 colleges, according to this ranking of colleges from 2022.
+
+### Charts
+
+```{r}
+roi_pt2_plot1 <- ranked_colleges %>%
+  ggplot(aes(x = avg_cost, y = one_yr_earnings, color = rank)) +
+    geom_point(aes(text = name)) +
+    geom_smooth(method = "lm", se = FALSE, color = "purple") +
+    theme_minimal() +
+    labs(
+      x = "Average Cost of Attendance",
+      y = "Median Earnings After 1 Year",
+      color = "Rank",
+      title = "Median Earnings After 1 Year vs. Cost of Attendance",
+      subtitle = "For Top 500 Schools"
+    )
+ggplotly(roi_pt2_plot1, tooltip = "text")
+```
+
+Observation: there is not a clear trend here, though the line of best fit is slightly positive. There are also two clear clusters here, likely public schools on the left (cheaper) and private schools on the right (more expensive).
+
+```{r}
+roi_pt2_plot2 <- ranked_colleges %>%
+  ggplot(aes(x = avg_cost, y = five_yr_earnings, color = rank)) +
+    geom_point(aes(text = name)) +
+    geom_smooth(method = "lm", se = FALSE, color = "purple") +
+    theme_minimal() +
+    labs(
+      x = "Average Cost of Attendance",
+      y = "Median Earnings After 5 Years",
+      color = "Rank",
+      title = "Median Earnings After 5 Years vs. Cost of Attendance",
+      subtitle = "For Top 500 Schools"
+    )
+ggplotly(roi_pt2_plot2, tooltip = "text")
+```
+
+Observation: after 5 years, there is a slightly steeper trend line, though it's not clear. This is likely influenced by outliers on the upper right hand side of the graph. Other than those schools, the trend is basically flat, suggesting less expensive schools might be worth it because the outcomes are similar for schools across cost.
+
+Summary: unless you attend one of the outlier schools (MIT, Stanford, Harvey Mudd, Cal Tech), it doesn't really make a difference if you pay more. The less expensive schools probably have a better return on investment, but this perspective does not take into account financial aid.
+
+\<\<\<\<\<\<\< HEAD \>\>\>\>\>\>\> 1fec88dd11383938c8e5110ac9f36b00f368128d
