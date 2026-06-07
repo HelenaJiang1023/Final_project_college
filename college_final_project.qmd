@@ -261,7 +261,7 @@ subplot(
 ```
 
 
-## Relationship between tuition and earnings
+## Relationship between tuition and median earnings 1 year after graduation 
 
 ```{r}
 
@@ -314,9 +314,15 @@ subplot(
     )
   )
 
+```
+
+From the graph, there is a median strong positive relationship between the median earnings 1 year after graduation of the graduates and both the in-state and out-of-state tuition, meaning that higher the tuition, higher the income soon after graduation. 
 
 
-###############################################################################################################
+
+
+
+```{r}
 
 
 # Five year earning VS In state tuition
