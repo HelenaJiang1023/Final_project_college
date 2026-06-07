@@ -204,7 +204,7 @@ colleges <- colleges %>%
 
 
 
-#Part 2: Do expensive colleges produce better outcomes? 
+# Part 2: Do expensive colleges produce better outcomes? 
 
 In this part, we investigate whether more expensive colleges are worth the cost by producing better outcomes, that is, leading to higher graduation rate and higher income after graduation. For income after graduation, we examined the median income one years after graduation and five years after graduation to see whether the trend persists over time.  
 
