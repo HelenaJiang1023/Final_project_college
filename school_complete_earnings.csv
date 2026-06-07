@@ -1,0 +1,676 @@
+"cip_code","program_title","degree_level","earnings_4_yr_median_pell","earnings_4_yr_median_nonpell","earnings_4_yr_median","school_name","school_id"
+"0109","Animal Sciences.",3,,,,"Alabama A & M University",100654
+"0110","Food Science and Technology.",3,,,,"Alabama A & M University",100654
+"0199","Agricultural/Animal/Plant/Veterinary Science and Related Fields, Other.",3,,,,"Alabama A & M University",100654
+"0305","Forestry.",3,,,64749,"Alabama A & M University",100654
+"0403","City/Urban, Community, and Regional Planning.",3,,,,"Alabama A & M University",100654
+"1002","Audiovisual Communications Technologies/Technicians.",3,,,42272,"Alabama A & M University",100654
+"1101","Computer and Information Sciences, General.",3,65929,,88490,"Alabama A & M University",100654
+"1310","Special Education and Teaching.",3,,,,"Alabama A & M University",100654
+"1312","Teacher Education and Professional Development, Specific Levels and Methods.",3,,,,"Alabama A & M University",100654
+"1313","Teacher Education and Professional Development, Specific Subject Areas.",3,36383,,,"Alabama A & M University",100654
+"1408","Civil Engineering.",3,,,,"Alabama A & M University",100654
+"1410","Electrical, Electronics, and Communications Engineering.",3,77117,,98045,"Alabama A & M University",100654
+"1419","Mechanical Engineering.",3,72472,,87291,"Alabama A & M University",100654
+"1510","Construction Engineering Technology/Technician.",3,,,,"Alabama A & M University",100654
+"1901","Family and Consumer Sciences/Human Sciences, General.",3,,,44814,"Alabama A & M University",100654
+"2301","English Language and Literature, General.",3,,,,"Alabama A & M University",100654
+"2401","Liberal Arts and Sciences, General Studies and Humanities.",3,39549,,43770,"Alabama A & M University",100654
+"2601","Biology, General.",3,39054,,44145,"Alabama A & M University",100654
+"2701","Mathematics.",3,,,,"Alabama A & M University",100654
+"3105","Sports, Kinesiology, and Physical Education/Fitness.",3,,,,"Alabama A & M University",100654
+"4005","Chemistry.",3,,,,"Alabama A & M University",100654
+"4008","Physics.",3,,,,"Alabama A & M University",100654
+"4201","Psychology, General.",3,39836,,42127,"Alabama A & M University",100654
+"4301","Criminal Justice and Corrections.",3,38164,,48912,"Alabama A & M University",100654
+"4407","Social Work.",3,38453,,47121,"Alabama A & M University",100654
+"4510","Political Science and Government.",3,,,,"Alabama A & M University",100654
+"4511","Sociology.",3,,,,"Alabama A & M University",100654
+"5007","Fine and Studio Arts.",3,,,,"Alabama A & M University",100654
+"5009","Music.",3,,,,"Alabama A & M University",100654
+"5202","Business Administration, Management and Operations.",3,49911,,58176,"Alabama A & M University",100654
+"5203","Accounting and Related Services.",3,,,61503,"Alabama A & M University",100654
+"5207","Entrepreneurial and Small Business Operations.",3,,,,"Alabama A & M University",100654
+"5208","Finance and Financial Management Services.",3,,,,"Alabama A & M University",100654
+"5214","Marketing.",3,,,,"Alabama A & M University",100654
+"0502","Ethnic, Cultural Minority, Gender, and Group Studies.",3,,,,"University of Alabama at Birmingham",100663
+"0901","Communication and Media Studies.",3,38012,47850,44461,"University of Alabama at Birmingham",100663
+"1101","Computer and Information Sciences, General.",3,87329,,104654,"University of Alabama at Birmingham",100663
+"1312","Teacher Education and Professional Development, Specific Levels and Methods.",3,39920,41035,49139,"University of Alabama at Birmingham",100663
+"1313","Teacher Education and Professional Development, Specific Subject Areas.",3,37542,43263,52435,"University of Alabama at Birmingham",100663
+"1401","Engineering, General.",3,94542,112286,,"University of Alabama at Birmingham",100663
+"1405","Biomedical/Medical Engineering.",3,,,90415,"University of Alabama at Birmingham",100663
+"1408","Civil Engineering.",3,75629,,78054,"University of Alabama at Birmingham",100663
+"1410","Electrical, Electronics, and Communications Engineering.",3,96232,,90089,"University of Alabama at Birmingham",100663
+"1418","Materials Engineering.",3,,,83985,"University of Alabama at Birmingham",100663
+"1419","Mechanical Engineering.",3,78078,,89589,"University of Alabama at Birmingham",100663
+"1601","Linguistic, Comparative, and Related Language Studies and Services.",3,,,,"University of Alabama at Birmingham",100663
+"2301","English Language and Literature, General.",3,,,48706,"University of Alabama at Birmingham",100663
+"2401","Liberal Arts and Sciences, General Studies and Humanities.",3,40147,,45714,"University of Alabama at Birmingham",100663
+"2601","Biology, General.",3,40673,46414,55174,"University of Alabama at Birmingham",100663
+"2605","Microbiological Sciences and Immunology.",3,,,,"University of Alabama at Birmingham",100663
+"2608","Genetics.",3,,,,"University of Alabama at Birmingham",100663
+"2609","Physiology, Pathology and Related Sciences.",3,,,,"University of Alabama at Birmingham",100663
+"2611","Biomathematics, Bioinformatics, and Computational Biology.",3,,,,"University of Alabama at Birmingham",100663
+"2615","Neurobiology and Neurosciences.",3,,,,"University of Alabama at Birmingham",100663
+"2701","Mathematics.",3,,,57453,"University of Alabama at Birmingham",100663
+"3801","Philosophy.",3,,,,"University of Alabama at Birmingham",100663
+"4005","Chemistry.",3,,,60318,"University of Alabama at Birmingham",100663
+"4008","Physics.",3,,,,"University of Alabama at Birmingham",100663
+"4201","Psychology, General.",3,36888,42399,46369,"University of Alabama at Birmingham",100663
+"4301","Criminal Justice and Corrections.",3,43668,,51643,"University of Alabama at Birmingham",100663
+"4304","Security Science and Technology.",3,,,,"University of Alabama at Birmingham",100663
+"4407","Social Work.",3,40019,,47791,"University of Alabama at Birmingham",100663
+"4502","Anthropology.",3,,,31991,"University of Alabama at Birmingham",100663
+"4510","Political Science and Government.",3,,,44493,"University of Alabama at Birmingham",100663
+"4511","Sociology.",3,33843,,40148,"University of Alabama at Birmingham",100663
+"4599","Social Sciences, Other.",3,,,47004,"University of Alabama at Birmingham",100663
+"5005","Drama/Theatre Arts and Stagecraft.",3,,,37173,"University of Alabama at Birmingham",100663
+"5007","Fine and Studio Arts.",3,34148,,43138,"University of Alabama at Birmingham",100663
+"5009","Music.",3,,,41768,"University of Alabama at Birmingham",100663
+"5100","Health Services/Allied Health/Health Sciences, General.",3,,,,"University of Alabama at Birmingham",100663
+"5107","Health and Medical Administrative Services.",3,47770,57115,53021,"University of Alabama at Birmingham",100663
+"5122","Public Health.",3,36197,,44398,"University of Alabama at Birmingham",100663
+"5138","Registered Nursing, Nursing Administration, Nursing Research and Clinical Nursing.",3,67000,64744,78224,"University of Alabama at Birmingham",100663
+"5202","Business Administration, Management and Operations.",3,54088,59240,63036,"University of Alabama at Birmingham",100663
+"5203","Accounting and Related Services.",3,50468,61430,69201,"University of Alabama at Birmingham",100663
+"5206","Business/Managerial Economics.",3,,,,"University of Alabama at Birmingham",100663
+"5207","Entrepreneurial and Small Business Operations.",3,,,,"University of Alabama at Birmingham",100663
+"5208","Finance and Financial Management Services.",3,,,66980,"University of Alabama at Birmingham",100663
+"5210","Human Resources Management and Services.",3,,,61781,"University of Alabama at Birmingham",100663
+"5212","Management Information Systems and Services.",3,63689,63307,79843,"University of Alabama at Birmingham",100663
+"5214","Marketing.",3,48544,45864,56591,"University of Alabama at Birmingham",100663
+"5218","General Sales, Merchandising and Related Marketing Operations.",3,,,76648,"University of Alabama at Birmingham",100663
+"5401","History.",3,34301,,48565,"University of Alabama at Birmingham",100663
+"1907","Human Development, Family Studies, and Related Services.",3,,,,"Amridge University",100690
+"3902","Bible/Biblical Studies.",3,,,,"Amridge University",100690
+"4301","Criminal Justice and Corrections.",3,,,,"Amridge University",100690
+"5202","Business Administration, Management and Operations.",3,,,,"Amridge University",100690
+"5205","Business/Corporate Communications.",3,,,,"Amridge University",100690
+"5210","Human Resources Management and Services.",3,,,,"Amridge University",100690
+"5212","Management Information Systems and Services.",3,,,,"Amridge University",100690
+"0901","Communication and Media Studies.",3,,,,"University of Alabama in Huntsville",100706
+"1101","Computer and Information Sciences, General.",3,74879,,95076,"University of Alabama in Huntsville",100706
+"1110","Computer/Information Technology Administration and Management.",3,,,,"University of Alabama in Huntsville",100706
+"1310","Special Education and Teaching.",3,,,,"University of Alabama in Huntsville",100706
+"1312","Teacher Education and Professional Development, Specific Levels and Methods.",3,,,42922,"University of Alabama in Huntsville",100706
+"1401","Engineering, General.",3,,,91645,"University of Alabama in Huntsville",100706
+"1402","Aerospace, Aeronautical, and Astronautical/Space Engineering.",3,,,87339,"University of Alabama in Huntsville",100706
+"1407","Chemical Engineering.",3,,,90681,"University of Alabama in Huntsville",100706
+"1408","Civil Engineering.",3,,,78858,"University of Alabama in Huntsville",100706
+"1409","Computer Engineering.",3,,,105920,"University of Alabama in Huntsville",100706
+"1410","Electrical, Electronics, and Communications Engineering.",3,81567,,100296,"University of Alabama in Huntsville",100706
+"1419","Mechanical Engineering.",3,,,95341,"University of Alabama in Huntsville",100706
+"1435","Industrial Engineering.",3,,,95153,"University of Alabama in Huntsville",100706
+"1499","Engineering, Other.",3,,,,"University of Alabama in Huntsville",100706
+"1500","Engineering Technologies/Technicians, General.",3,,,,"University of Alabama in Huntsville",100706
+"1601","Linguistic, Comparative, and Related Language Studies and Services.",3,,,,"University of Alabama in Huntsville",100706
+"2301","English Language and Literature, General.",3,,,,"University of Alabama in Huntsville",100706
+"2313","Rhetoric and Composition/Writing Studies.",3,,,,"University of Alabama in Huntsville",100706
+"2601","Biology, General.",3,42376,,45992,"University of Alabama in Huntsville",100706
+"2701","Mathematics.",3,,,,"University of Alabama in Huntsville",100706
+"3099","Multi/Interdisciplinary Studies, Other.",3,,,,"University of Alabama in Huntsville",100706
+"3105","Sports, Kinesiology, and Physical Education/Fitness.",3,,,49270,"University of Alabama in Huntsville",100706
+"3801","Philosophy.",3,,,,"University of Alabama in Huntsville",100706
+"4005","Chemistry.",3,,,,"University of Alabama in Huntsville",100706
+"4008","Physics.",3,,,,"University of Alabama in Huntsville",100706
+"4099","Physical Sciences, Other.",3,,,,"University of Alabama in Huntsville",100706
+"4201","Psychology, General.",3,,,,"University of Alabama in Huntsville",100706
+"4510","Political Science and Government.",3,,,,"University of Alabama in Huntsville",100706
+"4511","Sociology.",3,,,,"University of Alabama in Huntsville",100706
+"5005","Drama/Theatre Arts and Stagecraft.",3,,,,"University of Alabama in Huntsville",100706
+"5007","Fine and Studio Arts.",3,,,43321,"University of Alabama in Huntsville",100706
+"5009","Music.",3,,,,"University of Alabama in Huntsville",100706
+"5138","Registered Nursing, Nursing Administration, Nursing Research and Clinical Nursing.",3,55859,58353,75430,"University of Alabama in Huntsville",100706
+"5201","Business/Commerce, General.",3,,,,"University of Alabama in Huntsville",100706
+"5202","Business Administration, Management and Operations.",3,49697,,62872,"University of Alabama in Huntsville",100706
+"5203","Accounting and Related Services.",3,,,71245,"University of Alabama in Huntsville",100706
+"5206","Business/Managerial Economics.",3,,,,"University of Alabama in Huntsville",100706
+"5208","Finance and Financial Management Services.",3,,,89472,"University of Alabama in Huntsville",100706
+"5212","Management Information Systems and Services.",3,75225,,78319,"University of Alabama in Huntsville",100706
+"5214","Marketing.",3,,,58015,"University of Alabama in Huntsville",100706
+"5401","History.",3,,,,"University of Alabama in Huntsville",100706
+"0901","Communication and Media Studies.",3,32928,,38566,"Alabama State University",100724
+"1104","Information Science/Studies.",3,44601,,53416,"Alabama State University",100724
+"1107","Computer Science.",3,,,,"Alabama State University",100724
+"1301","Education, General.",3,,,,"Alabama State University",100724
+"1310","Special Education and Teaching.",3,,,,"Alabama State University",100724
+"1312","Teacher Education and Professional Development, Specific Levels and Methods.",3,38557,,51014,"Alabama State University",100724
+"1313","Teacher Education and Professional Development, Specific Subject Areas.",3,,,46629,"Alabama State University",100724
+"1405","Biomedical/Medical Engineering.",3,,,,"Alabama State University",100724
+"2301","English Language and Literature, General.",3,,,,"Alabama State University",100724
+"2601","Biology, General.",3,34536,,46370,"Alabama State University",100724
+"2613","Ecology, Evolution, Systematics, and Population Biology.",3,,,,"Alabama State University",100724
+"2701","Mathematics.",3,,,,"Alabama State University",100724
+"3099","Multi/Interdisciplinary Studies, Other.",3,,,37576,"Alabama State University",100724
+"3103","Parks, Recreation, and Leisure Facilities Management.",3,,,,"Alabama State University",100724
+"4005","Chemistry.",3,,,,"Alabama State University",100724
+"4201","Psychology, General.",3,28207,,41766,"Alabama State University",100724
+"4301","Criminal Justice and Corrections.",3,34165,,45173,"Alabama State University",100724
+"4304","Security Science and Technology.",3,,,,"Alabama State University",100724
+"4407","Social Work.",3,35479,,43661,"Alabama State University",100724
+"4510","Political Science and Government.",3,,,,"Alabama State University",100724
+"5003","Dance.",3,,,,"Alabama State University",100724
+"5005","Drama/Theatre Arts and Stagecraft.",3,,,29142,"Alabama State University",100724
+"5007","Fine and Studio Arts.",3,,,,"Alabama State University",100724
+"5009","Music.",3,,,,"Alabama State University",100724
+"5107","Health and Medical Administrative Services.",3,,,,"Alabama State University",100724
+"5123","Rehabilitation and Therapeutic Professions.",3,37672,,40152,"Alabama State University",100724
+"5202","Business Administration, Management and Operations.",3,,,46126,"Alabama State University",100724
+"5203","Accounting and Related Services.",3,,,63070,"Alabama State University",100724
+"5208","Finance and Financial Management Services.",3,,,,"Alabama State University",100724
+"5214","Marketing.",3,,,,"Alabama State University",100724
+"5401","History.",3,,,,"Alabama State University",100724
+"0301","Natural Resources Conservation and Research.",3,,,52619,"The University of Alabama",100751
+"0501","Area Studies.",3,,,,"The University of Alabama",100751
+"0502","Ethnic, Cultural Minority, Gender, and Group Studies.",3,,,,"The University of Alabama",100751
+"0901","Communication and Media Studies.",3,48712,43860,61548,"The University of Alabama",100751
+"0904","Journalism.",3,39446,54104,55043,"The University of Alabama",100751
+"0907","Radio, Television, and Digital Communication.",3,37788,48189,55894,"The University of Alabama",100751
+"0909","Public Relations, Advertising, and Applied Communication.",3,51478,56174,68227,"The University of Alabama",100751
+"1101","Computer and Information Sciences, General.",3,86944,92348,115980,"The University of Alabama",100751
+"1110","Computer/Information Technology Administration and Management.",3,,,,"The University of Alabama",100751
+"1306","Educational Assessment, Evaluation, and Research.",3,,,,"The University of Alabama",100751
+"1310","Special Education and Teaching.",3,,44565,50763,"The University of Alabama",100751
+"1312","Teacher Education and Professional Development, Specific Levels and Methods.",3,44657,45437,49007,"The University of Alabama",100751
+"1313","Teacher Education and Professional Development, Specific Subject Areas.",3,45970,49406,53940,"The University of Alabama",100751
+"1402","Aerospace, Aeronautical, and Astronautical/Space Engineering.",3,,,91999,"The University of Alabama",100751
+"1404","Architectural Engineering.",3,,,,"The University of Alabama",100751
+"1407","Chemical Engineering.",3,87111,87869,100857,"The University of Alabama",100751
+"1408","Civil Engineering.",3,76121,79565,87685,"The University of Alabama",100751
+"1409","Computer Engineering.",3,,,,"The University of Alabama",100751
+"1410","Electrical, Electronics, and Communications Engineering.",3,96868,98531,98943,"The University of Alabama",100751
+"1414","Environmental/Environmental Health Engineering.",3,,,,"The University of Alabama",100751
+"1419","Mechanical Engineering.",3,83906,83756,95079,"The University of Alabama",100751
+"1420","Metallurgical Engineering.",3,,,,"The University of Alabama",100751
+"1433","Construction Engineering.",3,,,,"The University of Alabama",100751
+"1436","Manufacturing Engineering.",3,,,,"The University of Alabama",100751
+"1601","Linguistic, Comparative, and Related Language Studies and Services.",3,,,,"The University of Alabama",100751
+"1609","Romance Languages, Literatures, and Linguistics.",3,,,,"The University of Alabama",100751
+"1901","Family and Consumer Sciences/Human Sciences, General.",3,36515,51316,57205,"The University of Alabama",100751
+"1904","Family and Consumer Economics and Related Studies.",3,46943,56413,65674,"The University of Alabama",100751
+"1905","Foods, Nutrition, and Related Services.",3,,,57002,"The University of Alabama",100751
+"1907","Human Development, Family Studies, and Related Services.",3,37876,42466,45751,"The University of Alabama",100751
+"1909","Apparel and Textiles.",3,41280,,54254,"The University of Alabama",100751
+"2301","English Language and Literature, General.",3,37083,38226,44278,"The University of Alabama",100751
+"2401","Liberal Arts and Sciences, General Studies and Humanities.",3,,,,"The University of Alabama",100751
+"2601","Biology, General.",3,53398,34504,59637,"The University of Alabama",100751
+"2605","Microbiological Sciences and Immunology.",3,,,,"The University of Alabama",100751
+"2613","Ecology, Evolution, Systematics, and Population Biology.",3,,,,"The University of Alabama",100751
+"2615","Neurobiology and Neurosciences.",3,,,,"The University of Alabama",100751
+"2701","Mathematics.",3,,,77899,"The University of Alabama",100751
+"3000","Multi-/Interdisciplinary Studies, General.",3,44449,50054,56945,"The University of Alabama",100751
+"3044","Geography and Environmental Studies.",3,,,,"The University of Alabama",100751
+"3070","Data Science.",3,,,,"The University of Alabama",100751
+"3105","Sports, Kinesiology, and Physical Education/Fitness.",3,,,,"The University of Alabama",100751
+"3801","Philosophy.",3,,,,"The University of Alabama",100751
+"3802","Religion/Religious Studies.",3,,,,"The University of Alabama",100751
+"4005","Chemistry.",3,,,,"The University of Alabama",100751
+"4006","Geological and Earth Sciences/Geosciences.",3,,,,"The University of Alabama",100751
+"4008","Physics.",3,,,,"The University of Alabama",100751
+"4201","Psychology, General.",3,37411,40951,49900,"The University of Alabama",100751
+"4301","Criminal Justice and Corrections.",3,47495,46466,57796,"The University of Alabama",100751
+"4407","Social Work.",3,46775,,49561,"The University of Alabama",100751
+"4502","Anthropology.",3,33510,,35701,"The University of Alabama",100751
+"4504","Criminology.",3,,,,"The University of Alabama",100751
+"4506","Economics.",3,,,,"The University of Alabama",100751
+"4507","Geography and Cartography.",3,,,49269,"The University of Alabama",100751
+"4509","International Relations and National Security Studies.",3,,,55419,"The University of Alabama",100751
+"4510","Political Science and Government.",3,44589,57121,61617,"The University of Alabama",100751
+"4511","Sociology.",3,,,,"The University of Alabama",100751
+"5003","Dance.",3,,,51744,"The University of Alabama",100751
+"5004","Design and Applied Arts.",3,40309,49470,60546,"The University of Alabama",100751
+"5005","Drama/Theatre Arts and Stagecraft.",3,,,,"The University of Alabama",100751
+"5007","Fine and Studio Arts.",3,36378,,41100,"The University of Alabama",100751
+"5009","Music.",3,,,31666,"The University of Alabama",100751
+"5102","Communication Disorders Sciences and Services.",3,51637,51967,56071,"The University of Alabama",100751
+"5109","Allied Health Diagnostic, Intervention, and Treatment Professions.",3,,,53616,"The University of Alabama",100751
+"5122","Public Health.",3,,,51588,"The University of Alabama",100751
+"5138","Registered Nursing, Nursing Administration, Nursing Research and Clinical Nursing.",3,62526,70211,85532,"The University of Alabama",100751
+"5199","Health Professions and Related Clinical Sciences, Other.",3,38659,,,"The University of Alabama",100751
+"5201","Business/Commerce, General.",3,,,,"The University of Alabama",100751
+"5202","Business Administration, Management and Operations.",3,58982,55527,69715,"The University of Alabama",100751
+"5203","Accounting and Related Services.",3,64233,71156,87621,"The University of Alabama",100751
+"5206","Business/Managerial Economics.",3,,107056,86114,"The University of Alabama",100751
+"5208","Finance and Financial Management Services.",3,77721,65866,85020,"The University of Alabama",100751
+"5209","Hospitality Administration/Management.",3,41422,46494,53180,"The University of Alabama",100751
+"5212","Management Information Systems and Services.",3,95509,96098,105393,"The University of Alabama",100751
+"5213","Management Sciences and Quantitative Methods.",3,73929,67217,79811,"The University of Alabama",100751
+"5214","Marketing.",3,64822,64872,77451,"The University of Alabama",100751
+"5401","History.",3,47178,46683,50213,"The University of Alabama",100751
+"1101","Computer and Information Sciences, General.",3,83702,,102639,"Athens State University",100812
+"1310","Special Education and Teaching.",3,,,47550,"Athens State University",100812
+"1312","Teacher Education and Professional Development, Specific Levels and Methods.",3,40356,41792,44214,"Athens State University",100812
+"1313","Teacher Education and Professional Development, Specific Subject Areas.",3,,,49331,"Athens State University",100812
+"1399","Education, Other.",3,,,,"Athens State University",100812
+"2301","English Language and Literature, General.",3,39233,,47773,"Athens State University",100812
+"2401","Liberal Arts and Sciences, General Studies and Humanities.",3,39661,,55507,"Athens State University",100812
+"2601","Biology, General.",3,,,56511,"Athens State University",100812
+"2701","Mathematics.",3,,,,"Athens State University",100812
+"3017","Behavioral Sciences.",3,,,,"Athens State University",100812
+"3099","Multi/Interdisciplinary Studies, Other.",3,,,,"Athens State University",100812
+"3105","Sports, Kinesiology, and Physical Education/Fitness.",3,,,,"Athens State University",100812
+"3802","Religion/Religious Studies.",3,,,,"Athens State University",100812
+"4005","Chemistry.",3,,,,"Athens State University",100812
+"4201","Psychology, General.",3,35586,,34242,"Athens State University",100812
+"4301","Criminal Justice and Corrections.",3,,,47683,"Athens State University",100812
+"4302","Fire Protection.",3,,,,"Athens State University",100812
+"4303","Homeland Security.",3,,,,"Athens State University",100812
+"4501","Social Sciences, General.",3,,,,"Athens State University",100812
+"4510","Political Science and Government.",3,,,,"Athens State University",100812
+"4511","Sociology.",3,,,,"Athens State University",100812
+"4901","Air Transportation.",3,,,,"Athens State University",100812
+"5005","Drama/Theatre Arts and Stagecraft.",3,,,,"Athens State University",100812
+"5007","Fine and Studio Arts.",3,20269,,40502,"Athens State University",100812
+"5107","Health and Medical Administrative Services.",3,,,,"Athens State University",100812
+"5122","Public Health.",3,,,,"Athens State University",100812
+"5138","Registered Nursing, Nursing Administration, Nursing Research and Clinical Nursing.",3,,,,"Athens State University",100812
+"5199","Health Professions and Related Clinical Sciences, Other.",3,,,,"Athens State University",100812
+"5202","Business Administration, Management and Operations.",3,51084,65149,67349,"Athens State University",100812
+"5203","Accounting and Related Services.",3,54308,50511,63516,"Athens State University",100812
+"5210","Human Resources Management and Services.",3,46657,,52775,"Athens State University",100812
+"5212","Management Information Systems and Services.",3,,,,"Athens State University",100812
+"5299","Business, Management, Marketing, and Related Support Services, Other.",3,54415,,63342,"Athens State University",100812
+"5401","History.",3,,,,"Athens State University",100812
+"0301","Natural Resources Conservation and Research.",3,,,,"Auburn University at Montgomery",100830
+"0901","Communication and Media Studies.",3,34667,,43317,"Auburn University at Montgomery",100830
+"1101","Computer and Information Sciences, General.",3,,,55184,"Auburn University at Montgomery",100830
+"1107","Computer Science.",3,,,,"Auburn University at Montgomery",100830
+"1310","Special Education and Teaching.",3,,,,"Auburn University at Montgomery",100830
+"1312","Teacher Education and Professional Development, Specific Levels and Methods.",3,42679,,48715,"Auburn University at Montgomery",100830
+"1601","Linguistic, Comparative, and Related Language Studies and Services.",3,,,,"Auburn University at Montgomery",100830
+"1609","Romance Languages, Literatures, and Linguistics.",3,,,,"Auburn University at Montgomery",100830
+"2301","English Language and Literature, General.",3,,,,"Auburn University at Montgomery",100830
+"2401","Liberal Arts and Sciences, General Studies and Humanities.",3,,,,"Auburn University at Montgomery",100830
+"2601","Biology, General.",3,38736,,42965,"Auburn University at Montgomery",100830
+"2701","Mathematics.",3,,,,"Auburn University at Montgomery",100830
+"3000","Multi-/Interdisciplinary Studies, General.",3,,,35798,"Auburn University at Montgomery",100830
+"3105","Sports, Kinesiology, and Physical Education/Fitness.",3,48382,,51429,"Auburn University at Montgomery",100830
+"4001","Physical Sciences, General.",3,,,,"Auburn University at Montgomery",100830
+"4005","Chemistry.",3,,,,"Auburn University at Montgomery",100830
+"4201","Psychology, General.",3,38914,,41393,"Auburn University at Montgomery",100830
+"4301","Criminal Justice and Corrections.",3,51941,,51363,"Auburn University at Montgomery",100830
+"4407","Social Work.",3,,,,"Auburn University at Montgomery",100830
+"4501","Social Sciences, General.",3,,,,"Auburn University at Montgomery",100830
+"4506","Economics.",3,,,,"Auburn University at Montgomery",100830
+"4507","Geography and Cartography.",3,,,,"Auburn University at Montgomery",100830
+"4510","Political Science and Government.",3,,,,"Auburn University at Montgomery",100830
+"4511","Sociology.",3,,,,"Auburn University at Montgomery",100830
+"5007","Fine and Studio Arts.",3,,,31804,"Auburn University at Montgomery",100830
+"5102","Communication Disorders Sciences and Services.",3,,,,"Auburn University at Montgomery",100830
+"5110","Clinical/Medical Laboratory Science/Research and Allied Professions.",3,,,63596,"Auburn University at Montgomery",100830
+"5138","Registered Nursing, Nursing Administration, Nursing Research and Clinical Nursing.",3,66598,64734,78282,"Auburn University at Montgomery",100830
+"5201","Business/Commerce, General.",3,,,,"Auburn University at Montgomery",100830
+"5202","Business Administration, Management and Operations.",3,51263,,55567,"Auburn University at Montgomery",100830
+"5203","Accounting and Related Services.",3,,,58430,"Auburn University at Montgomery",100830
+"5206","Business/Managerial Economics.",3,,,,"Auburn University at Montgomery",100830
+"5207","Entrepreneurial and Small Business Operations.",3,,,,"Auburn University at Montgomery",100830
+"5208","Finance and Financial Management Services.",3,47875,,,"Auburn University at Montgomery",100830
+"5210","Human Resources Management and Services.",3,,,60446,"Auburn University at Montgomery",100830
+"5211","International Business.",3,,,,"Auburn University at Montgomery",100830
+"5214","Marketing.",3,,,51899,"Auburn University at Montgomery",100830
+"5401","History.",3,,,,"Auburn University at Montgomery",100830
+"0100","Agriculture, General.",3,,,,"Auburn University",100858
+"0101","Agricultural Business and Management.",3,55521,,68658,"Auburn University",100858
+"0103","Agricultural Production Operations.",3,,,,"Auburn University",100858
+"0108","Agricultural Public Services.",3,,,,"Auburn University",100858
+"0109","Animal Sciences.",3,42366,40512,53117,"Auburn University",100858
+"0110","Food Science and Technology.",3,,,,"Auburn University",100858
+"0111","Plant Sciences.",3,55422,,52104,"Auburn University",100858
+"0301","Natural Resources Conservation and Research.",3,,,,"Auburn University",100858
+"0302","Environmental/Natural Resources Management and Policy.",3,,,40076,"Auburn University",100858
+"0305","Forestry.",3,,,64704,"Auburn University",100858
+"0306","Wildlife and Wildlands Science and Management.",3,,,54449,"Auburn University",100858
+"0402","Architecture.",3,60768,68965,72420,"Auburn University",100858
+"0404","Environmental Design.",3,,,62697,"Auburn University",100858
+"0405","Interior Architecture.",3,,,69657,"Auburn University",100858
+"0901","Communication and Media Studies.",3,46268,56162,56636,"Auburn University",100858
+"0904","Journalism.",3,,46656,44704,"Auburn University",100858
+"0909","Public Relations, Advertising, and Applied Communication.",3,47898,52015,67413,"Auburn University",100858
+"1101","Computer and Information Sciences, General.",3,,,91087,"Auburn University",100858
+"1107","Computer Science.",3,,,,"Auburn University",100858
+"1310","Special Education and Teaching.",3,,46919,55544,"Auburn University",100858
+"1312","Teacher Education and Professional Development, Specific Levels and Methods.",3,43385,43072,49258,"Auburn University",100858
+"1313","Teacher Education and Professional Development, Specific Subject Areas.",3,45077,44936,48474,"Auburn University",100858
+"1402","Aerospace, Aeronautical, and Astronautical/Space Engineering.",3,,86922,102756,"Auburn University",100858
+"1404","Architectural Engineering.",3,84916,92619,97759,"Auburn University",100858
+"1407","Chemical Engineering.",3,89746,91443,106726,"Auburn University",100858
+"1408","Civil Engineering.",3,66578,77460,79778,"Auburn University",100858
+"1409","Computer Engineering.",3,86384,101202,110927,"Auburn University",100858
+"1410","Electrical, Electronics, and Communications Engineering.",3,83128,86440,99799,"Auburn University",100858
+"1418","Materials Engineering.",3,,,,"Auburn University",100858
+"1419","Mechanical Engineering.",3,88921,80788,93246,"Auburn University",100858
+"1432","Polymer/Plastics Engineering.",3,,,,"Auburn University",100858
+"1435","Industrial Engineering.",3,83664,85993,99441,"Auburn University",100858
+"1445","Biological/Biosystems Engineering.",3,,,74411,"Auburn University",100858
+"1499","Engineering, Other.",3,,,,"Auburn University",100858
+"1605","Germanic Languages, Literatures, and Linguistics.",3,,,,"Auburn University",100858
+"1609","Romance Languages, Literatures, and Linguistics.",3,,,68939,"Auburn University",100858
+"1907","Human Development, Family Studies, and Related Services.",3,38978,38139,46242,"Auburn University",100858
+"1909","Apparel and Textiles.",3,45986,46324,62807,"Auburn University",100858
+"1999","Family and Consumer Sciences/Human Sciences, Other.",3,,,,"Auburn University",100858
+"2200","Non-Professional Legal Studies.",3,,,,"Auburn University",100858
+"2301","English Language and Literature, General.",3,44244,45434,44158,"Auburn University",100858
+"2401","Liberal Arts and Sciences, General Studies and Humanities.",3,,,,"Auburn University",100858
+"2601","Biology, General.",3,52865,61565,83053,"Auburn University",100858
+"2605","Microbiological Sciences and Immunology.",3,,,,"Auburn University",100858
+"2607","Zoology/Animal Biology.",3,,,,"Auburn University",100858
+"2608","Genetics.",3,,,,"Auburn University",100858
+"2609","Physiology, Pathology and Related Sciences.",3,,,52063,"Auburn University",100858
+"2612","Biotechnology.",3,,,,"Auburn University",100858
+"2613","Ecology, Evolution, Systematics, and Population Biology.",3,,,,"Auburn University",100858
+"2615","Neurobiology and Neurosciences.",3,,,,"Auburn University",100858
+"2701","Mathematics.",3,,,,"Auburn University",100858
+"2703","Applied Mathematics.",3,,,83741,"Auburn University",100858
+"3000","Multi-/Interdisciplinary Studies, General.",3,37597,,55331,"Auburn University",100858
+"3019","Nutrition Sciences.",3,,,56579,"Auburn University",100858
+"3801","Philosophy.",3,,,,"Auburn University",100858
+"4005","Chemistry.",3,,,,"Auburn University",100858
+"4006","Geological and Earth Sciences/Geosciences.",3,,,63298,"Auburn University",100858
+"4008","Physics.",3,,,,"Auburn University",100858
+"4201","Psychology, General.",3,42432,48636,50633,"Auburn University",100858
+"4404","Public Administration.",3,52903,,66141,"Auburn University",100858
+"4407","Social Work.",3,41060,,50156,"Auburn University",100858
+"4502","Anthropology.",3,,,,"Auburn University",100858
+"4504","Criminology.",3,,,,"Auburn University",100858
+"4506","Economics.",3,,,72617,"Auburn University",100858
+"4507","Geography and Cartography.",3,,,,"Auburn University",100858
+"4510","Political Science and Government.",3,54206,69974,63178,"Auburn University",100858
+"4511","Sociology.",3,42700,,,"Auburn University",100858
+"4901","Air Transportation.",3,,,,"Auburn University",100858
+"5004","Design and Applied Arts.",3,43341,55533,61609,"Auburn University",100858
+"5005","Drama/Theatre Arts and Stagecraft.",3,,,39566,"Auburn University",100858
+"5007","Fine and Studio Arts.",3,,,31025,"Auburn University",100858
+"5009","Music.",3,,,49555,"Auburn University",100858
+"5102","Communication Disorders Sciences and Services.",3,,,55508,"Auburn University",100858
+"5107","Health and Medical Administrative Services.",3,66121,60286,74392,"Auburn University",100858
+"5110","Clinical/Medical Laboratory Science/Research and Allied Professions.",3,,,64370,"Auburn University",100858
+"5138","Registered Nursing, Nursing Administration, Nursing Research and Clinical Nursing.",3,57076,64365,73228,"Auburn University",100858
+"5202","Business Administration, Management and Operations.",3,66294,66519,80323,"Auburn University",100858
+"5203","Accounting and Related Services.",3,59602,72618,86222,"Auburn University",100858
+"5206","Business/Managerial Economics.",3,,,,"Auburn University",100858
+"5208","Finance and Financial Management Services.",3,67513,72599,84352,"Auburn University",100858
+"5209","Hospitality Administration/Management.",3,44963,,63419,"Auburn University",100858
+"5210","Human Resources Management and Services.",3,,59646,59202,"Auburn University",100858
+"5211","International Business.",3,,,80076,"Auburn University",100858
+"5213","Management Sciences and Quantitative Methods.",3,,,,"Auburn University",100858
+"5214","Marketing.",3,56149,56881,74702,"Auburn University",100858
+"5401","History.",3,40103,45443,46133,"Auburn University",100858
+"1104","Information Science/Studies.",3,58979,74554,58915,"South University-Montgomery",101116
+"4201","Psychology, General.",3,35034,,39694,"South University-Montgomery",101116
+"4301","Criminal Justice and Corrections.",3,42615,,46322,"South University-Montgomery",101116
+"5107","Health and Medical Administrative Services.",3,38392,54727,46885,"South University-Montgomery",101116
+"5122","Public Health.",3,,,45993,"South University-Montgomery",101116
+"5138","Registered Nursing, Nursing Administration, Nursing Research and Clinical Nursing.",3,77785,81135,91363,"South University-Montgomery",101116
+"5202","Business Administration, Management and Operations.",3,47628,70211,53445,"South University-Montgomery",101116
+"5203","Accounting and Related Services.",3,,,,"South University-Montgomery",101116
+"0113","Agriculture/Veterinary Preparatory Programs.",3,,,,"Faulkner University",101189
+"0181","Veterinary Biomedical and Clinical Sciences.",3,,,,"Faulkner University",101189
+"1101","Computer and Information Sciences, General.",3,,,,"Faulkner University",101189
+"1107","Computer Science.",3,,,,"Faulkner University",101189
+"1312","Teacher Education and Professional Development, Specific Levels and Methods.",3,,,,"Faulkner University",101189
+"1313","Teacher Education and Professional Development, Specific Subject Areas.",3,,,,"Faulkner University",101189
+"2200","Non-Professional Legal Studies.",3,,,,"Faulkner University",101189
+"2301","English Language and Literature, General.",3,,,,"Faulkner University",101189
+"2401","Liberal Arts and Sciences, General Studies and Humanities.",3,,,,"Faulkner University",101189
+"2601","Biology, General.",3,,,,"Faulkner University",101189
+"2602","Biochemistry, Biophysics and Molecular Biology.",3,,,,"Faulkner University",101189
+"2701","Mathematics.",3,,,,"Faulkner University",101189
+"3000","Multi-/Interdisciplinary Studies, General.",3,,,,"Faulkner University",101189
+"3105","Sports, Kinesiology, and Physical Education/Fitness.",3,,,48561,"Faulkner University",101189
+"3902","Bible/Biblical Studies.",3,,,,"Faulkner University",101189
+"3903","Missions/Missionary Studies and Missiology.",3,,,,"Faulkner University",101189
+"3906","Theological and Ministerial Studies.",3,,,,"Faulkner University",101189
+"3907","Pastoral Counseling and Specialized Ministries.",3,,,,"Faulkner University",101189
+"4228","Clinical, Counseling and Applied Psychology.",3,,,39459,"Faulkner University",101189
+"4299","Psychology, Other.",3,,,,"Faulkner University",101189
+"4301","Criminal Justice and Corrections.",3,38173,,60384,"Faulkner University",101189
+"4501","Social Sciences, General.",3,,,,"Faulkner University",101189
+"5005","Drama/Theatre Arts and Stagecraft.",3,,,,"Faulkner University",101189
+"5009","Music.",3,,,,"Faulkner University",101189
+"5100","Health Services/Allied Health/Health Sciences, General.",3,,,,"Faulkner University",101189
+"5102","Communication Disorders Sciences and Services.",3,,,,"Faulkner University",101189
+"5111","Health/Medical Preparatory Programs.",3,,,,"Faulkner University",101189
+"5201","Business/Commerce, General.",3,,,61286,"Faulkner University",101189
+"5202","Business Administration, Management and Operations.",3,46048,,52092,"Faulkner University",101189
+"5203","Accounting and Related Services.",3,,,,"Faulkner University",101189
+"5210","Human Resources Management and Services.",3,38132,,48056,"Faulkner University",101189
+"5212","Management Information Systems and Services.",3,,,,"Faulkner University",101189
+"5213","Management Sciences and Quantitative Methods.",3,,,,"Faulkner University",101189
+"5401","History.",3,,,,"Faulkner University",101189
+"1102","Computer Programming.",3,71147,,78404,"Herzing University-Birmingham",101365
+"1110","Computer/Information Technology Administration and Management.",3,62957,,70624,"Herzing University-Birmingham",101365
+"2203","Legal Support Services.",3,44375,,,"Herzing University-Birmingham",101365
+"4301","Criminal Justice and Corrections.",3,51302,84679,69601,"Herzing University-Birmingham",101365
+"4303","Homeland Security.",3,,,,"Herzing University-Birmingham",101365
+"5100","Health Services/Allied Health/Health Sciences, General.",3,,,,"Herzing University-Birmingham",101365
+"5107","Health and Medical Administrative Services.",3,44568,60284,51098,"Herzing University-Birmingham",101365
+"5202","Business Administration, Management and Operations.",3,54927,60967,66379,"Herzing University-Birmingham",101365
+"5203","Accounting and Related Services.",3,54551,,54345,"Herzing University-Birmingham",101365
+"0901","Communication and Media Studies.",3,,,,"Huntingdon College",101435
+"1312","Teacher Education and Professional Development, Specific Levels and Methods.",3,,,,"Huntingdon College",101435
+"1313","Teacher Education and Professional Development, Specific Subject Areas.",3,,,,"Huntingdon College",101435
+"2301","English Language and Literature, General.",3,,,,"Huntingdon College",101435
+"2313","Rhetoric and Composition/Writing Studies.",3,,,,"Huntingdon College",101435
+"2601","Biology, General.",3,,,,"Huntingdon College",101435
+"2602","Biochemistry, Biophysics and Molecular Biology.",3,,,,"Huntingdon College",101435
+"2604","Cell/Cellular Biology and Anatomical Sciences.",3,,,,"Huntingdon College",101435
+"2699","Biological and Biomedical Sciences, Other.",3,,,,"Huntingdon College",101435
+"2701","Mathematics.",3,,,,"Huntingdon College",101435
+"2703","Applied Mathematics.",3,,,,"Huntingdon College",101435
+"3105","Sports, Kinesiology, and Physical Education/Fitness.",3,33029,,46746,"Huntingdon College",101435
+"3802","Religion/Religious Studies.",3,,,,"Huntingdon College",101435
+"4005","Chemistry.",3,,,,"Huntingdon College",101435
+"4201","Psychology, General.",3,,,,"Huntingdon College",101435
+"4301","Criminal Justice and Corrections.",3,,,,"Huntingdon College",101435
+"4510","Political Science and Government.",3,,,,"Huntingdon College",101435
+"5007","Fine and Studio Arts.",3,,,,"Huntingdon College",101435
+"5009","Music.",3,,,,"Huntingdon College",101435
+"5100","Health Services/Allied Health/Health Sciences, General.",3,,,,"Huntingdon College",101435
+"5201","Business/Commerce, General.",3,,,55452,"Huntingdon College",101435
+"5202","Business Administration, Management and Operations.",3,44953,69575,54784,"Huntingdon College",101435
+"5203","Accounting and Related Services.",3,,,65820,"Huntingdon College",101435
+"5401","History.",3,,,,"Huntingdon College",101435
+"3902","Bible/Biblical Studies.",3,,,,"Heritage Christian University",101453
+"0901","Communication and Media Studies.",3,39178,,43769,"Jacksonville State University",101480
+"1101","Computer and Information Sciences, General.",3,57184,,79129,"Jacksonville State University",101480
+"1104","Information Science/Studies.",3,,,,"Jacksonville State University",101480
+"1310","Special Education and Teaching.",3,,,50404,"Jacksonville State University",101480
+"1312","Teacher Education and Professional Development, Specific Levels and Methods.",3,40048,42387,47385,"Jacksonville State University",101480
+"1313","Teacher Education and Professional Development, Specific Subject Areas.",3,42159,,47830,"Jacksonville State University",101480
+"1503","Electrical/Electronic Engineering Technologies/Technicians.",3,,,,"Jacksonville State University",101480
+"1506","Industrial Production Technologies/Technicians.",3,,,,"Jacksonville State University",101480
+"1507","Quality Control and Safety Technologies/Technicians.",3,,,90850,"Jacksonville State University",101480
+"1599","Engineering/Engineering-Related Technologies/Technicians, Other.",3,,,92358,"Jacksonville State University",101480
+"1601","Linguistic, Comparative, and Related Language Studies and Services.",3,,,,"Jacksonville State University",101480
+"1901","Family and Consumer Sciences/Human Sciences, General.",3,28200,,42212,"Jacksonville State University",101480
+"2301","English Language and Literature, General.",3,39697,,42655,"Jacksonville State University",101480
+"2401","Liberal Arts and Sciences, General Studies and Humanities.",3,36250,,42864,"Jacksonville State University",101480
+"2601","Biology, General.",3,42748,,48523,"Jacksonville State University",101480
+"2701","Mathematics.",3,,,52365,"Jacksonville State University",101480
+"3101","Parks, Recreation, and Leisure Studies.",3,,,,"Jacksonville State University",101480
+"4005","Chemistry.",3,,,,"Jacksonville State University",101480
+"4201","Psychology, General.",3,31934,,39687,"Jacksonville State University",101480
+"4301","Criminal Justice and Corrections.",3,42205,,46156,"Jacksonville State University",101480
+"4303","Homeland Security.",3,,,,"Jacksonville State University",101480
+"4304","Security Science and Technology.",3,,,50281,"Jacksonville State University",101480
+"4407","Social Work.",3,39590,,45882,"Jacksonville State University",101480
+"4499","Public Administration and Social Service Professions, Other.",3,55201,,57191,"Jacksonville State University",101480
+"4506","Economics.",3,,,,"Jacksonville State University",101480
+"4507","Geography and Cartography.",3,,,46817,"Jacksonville State University",101480
+"4510","Political Science and Government.",3,,,,"Jacksonville State University",101480
+"4511","Sociology.",3,,,,"Jacksonville State University",101480
+"5005","Drama/Theatre Arts and Stagecraft.",3,,,,"Jacksonville State University",101480
+"5006","Film/Video and Photographic Arts.",3,,,,"Jacksonville State University",101480
+"5007","Fine and Studio Arts.",3,,,41659,"Jacksonville State University",101480
+"5009","Music.",3,,,47582,"Jacksonville State University",101480
+"5100","Health Services/Allied Health/Health Sciences, General.",3,35874,,46042,"Jacksonville State University",101480
+"5109","Allied Health Diagnostic, Intervention, and Treatment Professions.",3,,,71420,"Jacksonville State University",101480
+"5122","Public Health.",3,,,,"Jacksonville State University",101480
+"5138","Registered Nursing, Nursing Administration, Nursing Research and Clinical Nursing.",3,65953,67380,83984,"Jacksonville State University",101480
+"5202","Business Administration, Management and Operations.",3,43485,46193,56874,"Jacksonville State University",101480
+"5203","Accounting and Related Services.",3,50516,,62589,"Jacksonville State University",101480
+"5206","Business/Managerial Economics.",3,,,,"Jacksonville State University",101480
+"5208","Finance and Financial Management Services.",3,46228,,70025,"Jacksonville State University",101480
+"5214","Marketing.",3,39568,,47514,"Jacksonville State University",101480
+"5401","History.",3,27199,,48390,"Jacksonville State University",101480
+"0901","Communication and Media Studies.",3,,,,"University of West Alabama",101587
+"1310","Special Education and Teaching.",3,,,,"University of West Alabama",101587
+"1312","Teacher Education and Professional Development, Specific Levels and Methods.",3,,,,"University of West Alabama",101587
+"1313","Teacher Education and Professional Development, Specific Subject Areas.",3,46932,,,"University of West Alabama",101587
+"1500","Engineering Technologies/Technicians, General.",3,,,,"University of West Alabama",101587
+"1506","Industrial Production Technologies/Technicians.",3,,,,"University of West Alabama",101587
+"1599","Engineering/Engineering-Related Technologies/Technicians, Other.",3,,,,"University of West Alabama",101587
+"2301","English Language and Literature, General.",3,,,,"University of West Alabama",101587
+"2601","Biology, General.",3,,,,"University of West Alabama",101587
+"2613","Ecology, Evolution, Systematics, and Population Biology.",3,,,,"University of West Alabama",101587
+"2701","Mathematics.",3,,,,"University of West Alabama",101587
+"3001","Biological and Physical Sciences.",3,,,,"University of West Alabama",101587
+"3099","Multi/Interdisciplinary Studies, Other.",3,,,40455,"University of West Alabama",101587
+"3105","Sports, Kinesiology, and Physical Education/Fitness.",3,,,41440,"University of West Alabama",101587
+"4005","Chemistry.",3,,,,"University of West Alabama",101587
+"4201","Psychology, General.",3,,,,"University of West Alabama",101587
+"4399","Homeland Security, Law Enforcement, Firefighting and Related Protective Services, Other.",3,,,,"University of West Alabama",101587
+"4506","Economics.",3,,,,"University of West Alabama",101587
+"4511","Sociology.",3,,,,"University of West Alabama",101587
+"5009","Music.",3,,,,"University of West Alabama",101587
+"5100","Health Services/Allied Health/Health Sciences, General.",3,,,,"University of West Alabama",101587
+"5109","Allied Health Diagnostic, Intervention, and Treatment Professions.",3,,,,"University of West Alabama",101587
+"5138","Registered Nursing, Nursing Administration, Nursing Research and Clinical Nursing.",3,,,,"University of West Alabama",101587
+"5202","Business Administration, Management and Operations.",3,,,53696,"University of West Alabama",101587
+"5203","Accounting and Related Services.",3,,,58218,"University of West Alabama",101587
+"5208","Finance and Financial Management Services.",3,,,,"University of West Alabama",101587
+"5212","Management Information Systems and Services.",3,,,,"University of West Alabama",101587
+"5214","Marketing.",3,,,,"University of West Alabama",101587
+"5401","History.",3,,,,"University of West Alabama",101587
+"0301","Natural Resources Conservation and Research.",3,,,,"Miles College",101675
+"0999","Communication, Journalism, and Related Programs, Other.",3,,,,"Miles College",101675
+"1109","Computer Systems Networking and Telecommunications.",3,,,,"Miles College",101675
+"1312","Teacher Education and Professional Development, Specific Levels and Methods.",3,,,,"Miles College",101675
+"1313","Teacher Education and Professional Development, Specific Subject Areas.",3,,,,"Miles College",101675
+"1907","Human Development, Family Studies, and Related Services.",3,,,,"Miles College",101675
+"2301","English Language and Literature, General.",3,,,,"Miles College",101675
+"2601","Biology, General.",3,,,,"Miles College",101675
+"2701","Mathematics.",3,,,,"Miles College",101675
+"4005","Chemistry.",3,,,,"Miles College",101675
+"4201","Psychology, General.",3,,,,"Miles College",101675
+"4301","Criminal Justice and Corrections.",3,38334,,,"Miles College",101675
+"4407","Social Work.",3,36656,,,"Miles College",101675
+"4510","Political Science and Government.",3,,,,"Miles College",101675
+"5001","Visual and Performing Arts, General.",3,,,,"Miles College",101675
+"5009","Music.",3,,,,"Miles College",101675
+"5201","Business/Commerce, General.",3,,,,"Miles College",101675
+"5202","Business Administration, Management and Operations.",3,39847,,,"Miles College",101675
+"5203","Accounting and Related Services.",3,,,,"Miles College",101675
+"5212","Management Information Systems and Services.",3,,,,"Miles College",101675
+"5299","Business, Management, Marketing, and Related Support Services, Other.",3,,,,"Miles College",101675
+"5401","History.",3,,,,"Miles College",101675
+"0901","Communication and Media Studies.",3,,,,"University of Mobile",101693
+"0909","Public Relations, Advertising, and Applied Communication.",3,,,,"University of Mobile",101693
+"1101","Computer and Information Sciences, General.",3,,,,"University of Mobile",101693
+"1312","Teacher Education and Professional Development, Specific Levels and Methods.",3,,,45152,"University of Mobile",101693
+"1313","Teacher Education and Professional Development, Specific Subject Areas.",3,,,,"University of Mobile",101693
+"1409","Computer Engineering.",3,,,,"University of Mobile",101693
+"1907","Human Development, Family Studies, and Related Services.",3,,,,"University of Mobile",101693
+"2301","English Language and Literature, General.",3,,,,"University of Mobile",101693
+"2313","Rhetoric and Composition/Writing Studies.",3,,,,"University of Mobile",101693
+"2401","Liberal Arts and Sciences, General Studies and Humanities.",3,,,,"University of Mobile",101693
+"2601","Biology, General.",3,,,,"University of Mobile",101693
+"2613","Ecology, Evolution, Systematics, and Population Biology.",3,,,,"University of Mobile",101693
+"2701","Mathematics.",3,,,,"University of Mobile",101693
+"3023","Intercultural/Multicultural and Diversity Studies.",3,,,,"University of Mobile",101693
+"3105","Sports, Kinesiology, and Physical Education/Fitness.",3,,,49451,"University of Mobile",101693
+"3801","Philosophy.",3,,,,"University of Mobile",101693
+"3802","Religion/Religious Studies.",3,,,42196,"University of Mobile",101693
+"3905","Religious Music and Worship.",3,,,39457,"University of Mobile",101693
+"4201","Psychology, General.",3,,,46558,"University of Mobile",101693
+"4501","Social Sciences, General.",3,,,,"University of Mobile",101693
+"4504","Criminology.",3,,,,"University of Mobile",101693
+"4510","Political Science and Government.",3,,,,"University of Mobile",101693
+"4511","Sociology.",3,,,,"University of Mobile",101693
+"5004","Design and Applied Arts.",3,,,,"University of Mobile",101693
+"5005","Drama/Theatre Arts and Stagecraft.",3,,,,"University of Mobile",101693
+"5007","Fine and Studio Arts.",3,,,,"University of Mobile",101693
+"5009","Music.",3,,,,"University of Mobile",101693
+"5109","Allied Health Diagnostic, Intervention, and Treatment Professions.",3,,,,"University of Mobile",101693
+"5138","Registered Nursing, Nursing Administration, Nursing Research and Clinical Nursing.",3,,,79845,"University of Mobile",101693
+"5202","Business Administration, Management and Operations.",3,,,40469,"University of Mobile",101693
+"5203","Accounting and Related Services.",3,,,,"University of Mobile",101693
+"5210","Human Resources Management and Services.",3,,,,"University of Mobile",101693
+"5214","Marketing.",3,,,,"University of Mobile",101693
+"5401","History.",3,,,,"University of Mobile",101693
+"0301","Natural Resources Conservation and Research.",3,,,,"University of Montevallo",101709
+"0907","Radio, Television, and Digital Communication.",3,36865,,50497,"University of Montevallo",101709
+"1101","Computer and Information Sciences, General.",3,,,,"University of Montevallo",101709
+"1107","Computer Science.",3,,,,"University of Montevallo",101709
+"1312","Teacher Education and Professional Development, Specific Levels and Methods.",3,43181,43434,47823,"University of Montevallo",101709
+"1601","Linguistic, Comparative, and Related Language Studies and Services.",3,,,,"University of Montevallo",101709
+"1901","Family and Consumer Sciences/Human Sciences, General.",3,,,42038,"University of Montevallo",101709
+"2301","English Language and Literature, General.",3,35103,,35858,"University of Montevallo",101709
+"2313","Rhetoric and Composition/Writing Studies.",3,,,46767,"University of Montevallo",101709
+"2601","Biology, General.",3,,,,"University of Montevallo",101709
+"2701","Mathematics.",3,,,,"University of Montevallo",101709
+"3099","Multi/Interdisciplinary Studies, Other.",3,,,,"University of Montevallo",101709
+"3105","Sports, Kinesiology, and Physical Education/Fitness.",3,39457,,41758,"University of Montevallo",101709
+"4005","Chemistry.",3,,,,"University of Montevallo",101709
+"4201","Psychology, General.",3,34517,,40809,"University of Montevallo",101709
+"4407","Social Work.",3,36437,,43388,"University of Montevallo",101709
+"4501","Social Sciences, General.",3,,,,"University of Montevallo",101709
+"4510","Political Science and Government.",3,,,,"University of Montevallo",101709
+"4511","Sociology.",3,,,,"University of Montevallo",101709
+"5005","Drama/Theatre Arts and Stagecraft.",3,,,44624,"University of Montevallo",101709
+"5007","Fine and Studio Arts.",3,23285,,35921,"University of Montevallo",101709
+"5009","Music.",3,,,,"University of Montevallo",101709
+"5102","Communication Disorders Sciences and Services.",3,,,49979,"University of Montevallo",101709
+"5202","Business Administration, Management and Operations.",3,,,,"University of Montevallo",101709
+"5203","Accounting and Related Services.",3,55056,,57747,"University of Montevallo",101709
+"5208","Finance and Financial Management Services.",3,,,48160,"University of Montevallo",101709
+"5213","Management Sciences and Quantitative Methods.",3,,,,"University of Montevallo",101709
+"5214","Marketing.",3,,,53492,"University of Montevallo",101709
+"5401","History.",3,,,44563,"University of Montevallo",101709
+"0405","Interior Architecture.",3,,,,"University of North Alabama",101879
+"0901","Communication and Media Studies.",3,34101,,40334,"University of North Alabama",101879
+"1101","Computer and Information Sciences, General.",3,,,80423,"University of North Alabama",101879
+"1205","Culinary Arts and Related Services.",3,,,38735,"University of North Alabama",101879
+"1312","Teacher Education and Professional Development, Specific Levels and Methods.",3,41754,45671,47973,"University of North Alabama",101879
+"1500","Engineering Technologies/Technicians, General.",3,,,,"University of North Alabama",101879
+"1601","Linguistic, Comparative, and Related Language Studies and Services.",3,,,,"University of North Alabama",101879
+"1605","Germanic Languages, Literatures, and Linguistics.",3,,,,"University of North Alabama",101879
+"1609","Romance Languages, Literatures, and Linguistics.",3,,,,"University of North Alabama",101879
+"1901","Family and Consumer Sciences/Human Sciences, General.",3,39144,,42733,"University of North Alabama",101879
+"1909","Apparel and Textiles.",3,,,,"University of North Alabama",101879
+"2301","English Language and Literature, General.",3,,,47150,"University of North Alabama",101879
+"2601","Biology, General.",3,30838,,52979,"University of North Alabama",101879
+"2613","Ecology, Evolution, Systematics, and Population Biology.",3,,,,"University of North Alabama",101879
+"2701","Mathematics.",3,,,,"University of North Alabama",101879
+"3000","Multi-/Interdisciplinary Studies, General.",3,39563,,34810,"University of North Alabama",101879
+"3033","Sustainability Studies.",3,,,,"University of North Alabama",101879
+"3099","Multi/Interdisciplinary Studies, Other.",3,,,52044,"University of North Alabama",101879
+"3105","Sports, Kinesiology, and Physical Education/Fitness.",3,,,50331,"University of North Alabama",101879
+"3199","Parks, Recreation, Leisure, Fitness, and Kinesiology, Other.",3,36749,,40250,"University of North Alabama",101879
+"4005","Chemistry.",3,,,72885,"University of North Alabama",101879
+"4008","Physics.",3,,,,"University of North Alabama",101879
+"4099","Physical Sciences, Other.",3,,,78082,"University of North Alabama",101879
+"4227","Research and Experimental Psychology.",3,,,33565,"University of North Alabama",101879
+"4301","Criminal Justice and Corrections.",3,36878,,48913,"University of North Alabama",101879
+"4407","Social Work.",3,34483,,37853,"University of North Alabama",101879
+"4501","Social Sciences, General.",3,,,,"University of North Alabama",101879
+"4507","Geography and Cartography.",3,49080,,50445,"University of North Alabama",101879
+"4510","Political Science and Government.",3,,,43706,"University of North Alabama",101879
+"4511","Sociology.",3,37149,,33810,"University of North Alabama",101879
+"5005","Drama/Theatre Arts and Stagecraft.",3,,,,"University of North Alabama",101879
+"5007","Fine and Studio Arts.",3,,,39550,"University of North Alabama",101879
+"5009","Music.",3,,,41734,"University of North Alabama",101879
+"5010","Arts, Entertainment, and Media Management.",3,34353,,48020,"University of North Alabama",101879
+"5107","Health and Medical Administrative Services.",3,,,,"University of North Alabama",101879
+"5122","Public Health.",3,,,,"University of North Alabama",101879
+"5138","Registered Nursing, Nursing Administration, Nursing Research and Clinical Nursing.",3,62487,64897,74550,"University of North Alabama",101879
+"5202","Business Administration, Management and Operations.",3,42768,48296,51912,"University of North Alabama",101879
+"5203","Accounting and Related Services.",3,48684,,56814,"University of North Alabama",101879
+"5206","Business/Managerial Economics.",3,,,,"University of North Alabama",101879
+"5208","Finance and Financial Management Services.",3,,,51994,"University of North Alabama",101879
+"5209","Hospitality Administration/Management.",3,,,,"University of North Alabama",101879
+"5212","Management Information Systems and Services.",3,50483,,75870,"University of North Alabama",101879
+"5213","Management Sciences and Quantitative Methods.",3,,,,"University of North Alabama",101879
+"5214","Marketing.",3,46762,,51124,"University of North Alabama",101879
+"5401","History.",3,,,41728,"University of North Alabama",101879

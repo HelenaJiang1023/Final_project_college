@@ -229,7 +229,7 @@ library(tidyr)
 #Median earnings of pell grant reciepents 4 years after graduating = earnings_4_yr_median_pell
 #Median earnings of non pell grant reciepents 4 years after graduating = earnings_4_yr_median_nonpell
 
-url <- "https://api.data.gov/ed/collegescorecard/v1/schools?api_key=sydxfG3MlGadt1EOtAGWOSuSMnYBVFFLvkBeAFiE&latest.programs.cip_4_digit.credential.level=3&fields=id,school.name,latest.programs.cip_4_digit.code,latest.programs.cip_4_digit.title,latest.programs.cip_4_digit.credential.level,latest.programs.cip_4_digit.earnings.4_yr.overall_median_earnings,latest.programs.cip_4_digit.earnings.4_yr.pell_median_earnings,latest.programs.cip_4_digit.earnings.4_yr.nonpell_median_earnings"
+url <- "https://api.data.gov/ed/collegescorecard/v1/schools?api_key=sydxfG3MlGadt1EOtAGWOSuSMnYBVFFLvkBeAFiE&latest.programs.cip_4_digit.credential.level=3&fields=id,school.name,latest.programs.cip_4_digit.code,latest.programs.cip_4_digit.title,latest.programs.cip_4_digit.credential.level,latest.programs.cip_4_digit.earnings.4_yr.overall_median_earnings,latest.programs.cip_4_digit.earnings.4_yr.pell_median_earnings,latest.programs.cip_4_digit.earnings.4_yr.nonpell_median_earningsla,6_yrs_after_entry.median_earnings_lowest_tercile"
 
 response <- GET(url)
 
@@ -253,7 +253,7 @@ ca_clean2 <- ca_flat2 %>%
     earnings_4_yr_median_nonpell = earnings.4_yr.nonpell_median_earnings,
   )
 
-write.csv(ca_clean2, "ny_school_complete_earnings.csv", row.names = FALSE, na = "")
+write.csv(ca_clean2, "school_complete_earnings.csv", row.names = FALSE, na = "")
 
 ```
 
@@ -299,5 +299,32 @@ ggplot(top_10_tax, aes(x = reorder(program_title, privelege_percentage), y = pri
     x = "Major",
     y = "Earnings Gap (%)"
   )
+
+
+
+url <- "https://api.data.gov/ed/collegescorecard/v1/schools?api_key=sydxfG3MlGadt1EOtAGWOSuSMnYBVFFLvkBeAFiE&fields=id,school.name,latest.9_yrs_after_entry.median_earnings_lowest_tercile&per_page=100"
+
+
+
+response <- GET(url)
+
+data2 <- fromJSON(content(response, "text", encoding = "UTF-8"), flatten = TRUE)
+
+insta <- data2$results
+
+
+
+insta_clean2 <- insta %>%
+  rename(
+    school_id = id,
+    school_name = school.name,
+    med_family_income = latest.9_yrs_after_entry.median_earnings_lowest_tercile
+  )
+
+write.csv(insta_clean2, "school_complete_earnings.csv", row.names = FALSE, na = "")
+```
+
+
+
 ```
 Obeservation:The gaps in career earnings are very signifcant but its hard to detect a major trend in the types of majors with the highest gaps. Maybe some data quality issues or something cause I remember the list being different and the data table shows higher median earnings then both pell and non pell so look into that(note)
