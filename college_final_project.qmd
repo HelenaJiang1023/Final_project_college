@@ -381,9 +381,47 @@ grad_rate_costAttendance
 ```
 
 
+#Relationship between 1-year earnings and cost of attendance
+
+```{r}
+
+oneYr_earn_costAttendance<-colleges%>%
+  ggplot(aes(x=latest.cost.attendance.academic_year,
+             y=latest.earnings.1_yr_after_completion.median)
+         )+
+  geom_point()+
+  geom_smooth(method = "lm")+
+  labs(x="Cost of attendance ",
+       y="Median earnings 1 year after graduation",
+       title="Median After-One-year Earnings VS \n Cost of Attendance")+
+   consistent_theme
+
+oneYr_earn_costAttendance
+
+
+```
+
+
+#Relationship between 5-years earnings and cost of attendance 
+
+```{r}
+
+fiveYr_earn_costAttendance<-colleges%>%
+  ggplot(aes(x=latest.cost.attendance.academic_year,
+             y=latest.earnings.5_yrs_after_completion.median)
+         )+
+  geom_point()+
+  geom_smooth(method = "lm")+
+  labs(x="Cost of attendance ",
+       y="Median earnings 5 years after graduation",
+       title="Median After-Five-year Earnings VS \n Cost of Attendance")+
+   consistent_theme
+
+fiveYr_earn_costAttendance
 
 
 
+```
 
 
 
