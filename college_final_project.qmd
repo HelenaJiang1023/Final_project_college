@@ -207,3 +207,22 @@ roi_plot4
 ```
 
 ### Observation: there is a strong negative association between these variables. More expensive colleges are often more selective, with lower acceptance rates. This could mean that the cost of attendance doesn't necessarily predict outcomes, but the prestige of the institution.
+
+
+## Relationship between tuition and earnings
+
+```{r}
+# One year earnings VS In state tuition
+
+# One year earnings VS Out of state tuition 
+
+# Five year earning VS In state tuition
+
+# Five year earnings VS Out of State tuition 
+
+```
+
+
+## Relationship between tuition and graduation rate 
+
+
