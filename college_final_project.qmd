@@ -1,5 +1,5 @@
 ---
-title: "college_final_project"
+title: "Are expensive colleges more worthy?"
 format: html
 execute:
   http: true
@@ -43,6 +43,7 @@ college_request <- request("https://api.data.gov") %>%
       "latest.earnings.5_yrs_after_completion.median",
       "latest.earnings.1_yr_after_completion.median",
       "latest.repayment.2_yr_bb_fed_repayment.ugcomp.fullypaid",
+      
   sep = ","),
     per_page = 100,
     page = k,
@@ -126,6 +127,7 @@ alt_colleges <- alt_colleges %>%
 Before evaluating whether expensive colleges are worth the cost, it is important to understand how college costs vary across institutions. We first examine tuition differences by institution type, the overall distribution of tuition, and geographic patterns across the United States.
 
 ## What does "expensive" actually mean?
+
 ```{r}
 college_cost <- colleges %>%
   mutate(
@@ -159,40 +161,12 @@ boxpolot_cost <-
 ggplotly(boxpolot_cost, tooltip = "text")
 ```
 
-## Where are more expensive?
-```{r}
-state_cost <- colleges %>%
-  group_by(school.state) %>%
-  summarise(avg_tuition = mean(latest.cost.tuition.out_of_state, na.rm = TRUE)) %>%
-  mutate(region = tolower(state.name[match(school.state, state.abb)]))
-us_map <- map_data("state")
+This figure compares out-of-state tuition across different types of institutions to examine how college costs vary by ownership. Private nonprofit institutions have the highest median tuition and the greatest variation in costs, while public institutions tend to be the least expensive. These results suggest that ownership is a major determinant of college tuition.
 
-map_df <- us_map %>%
-  left_join(state_cost, by = "region")
-```
+Mentioned that although public institutions generally have lower tuition, several public universities charge tuition levels comparable to private institutions, particularly for out-of-state students.
 
-```{r}
-cost_map <- ggplot(map_df,
-            aes(
-              long,
-              lat,
-              group = group,
-              fill = avg_tuition,
-              text = paste(
-                "State:",
-                tools::toTitleCase(region),
-                "<br>Average Tuition: $",
-                round(avg_tuition)
-              )
-            )) +
-  geom_polygon(color = "white", linewidth = 0.2) +
-  coord_fixed(1.3) +
-  scale_fill_viridis_c(option = "plasma", na.value = "grey90") +
-  labs(title = "Average Out-of-State Tuition by State", fill = "Tuition ($)") +
-  theme_void()
-ggplotly(cost_map, tooltip = "text")
-```
 ## What does "expensive" actually mean?
+
 ```{r}
 
 median_tuition <- median(
@@ -226,11 +200,56 @@ ggplot(
   ) +
   theme_minimal()
 
+median_tuition
 ```
 
+This figure shows that out-of-state tuition is highly right-skewed. The median tuition is 16,369.50, meaning that most institutions charge less than 20,000 per year. However, a small number of colleges charge substantially higher tuition, creating a long right tail in the distribution. These results suggest that expensive colleges are the exception rather than the norm, motivating further investigation into whether their higher costs are associated with better outcomes.
 
-#Part 2: Do expensive colleges produce better outcomes? 
+## Where are more expensive?
 
+```{r}
+state_cost <- colleges %>%
+  group_by(school.state) %>%
+  summarise(avg_tuition = mean(latest.cost.tuition.out_of_state, na.rm = TRUE)) %>%
+  mutate(region = tolower(state.name[match(school.state, state.abb)]))
+us_map <- map_data("state")
+
+map_df <- us_map %>%
+  left_join(state_cost, by = "region")
+```
+
+```{r}
+cost_map <- ggplot(map_df,
+            aes(
+              long,
+              lat,
+              group = group,
+              fill = avg_tuition,
+              text = paste(
+                "State:",
+                tools::toTitleCase(region),
+                "<br>Average Tuition: $",
+                round(avg_tuition)
+              )
+            )) +
+  geom_polygon(color = "white", linewidth = 0.2) +
+  coord_fixed(1.3) +
+  scale_fill_viridis_c(option = "plasma", na.value = "grey90") +
+  labs(title = "Average Out-of-State Tuition by State", fill = "Tuition ($)") +
+  theme_void()
+ggplotly(cost_map, tooltip = "text")
+```
+This map displays the average out-of-state tuition for colleges in each U.S. state, allowing us to examine geographic variation in college costs.
+
+Substantial geographic variation exists in average out-of-state tuition across the United States. States in the Northeast generally exhibit higher average tuition levels than many states in the Midwest and South. Vermont appears to have the highest average out-of-state tuition in the dataset, while several states in the South and Mountain West exhibit comparatively lower average tuition levels.
+
+In addition, neighboring states often display similar tuition patterns, suggesting that regional factors may influence college pricing.
+
+The results suggest that college costs are not distributed evenly across the United States. Geographic location appears to be an important factor associated with tuition levels, with institutions in the Northeast and parts of the West Coast tending to charge higher tuition on average. These regional differences may reflect variation in institutional composition, cost of living, state funding policies, and the concentration of private nonprofit colleges.
+
+Consequently, students’ college costs may depend not only on the type of institution they attend but also on where that institution is located.
+
+# Part 2: Do expensive colleges produce better outcomes?
 
 ## Relationship between tuition and earnings
 
@@ -316,8 +335,7 @@ fiveYr_earn_outStateTuition
 
 ```
 
-
-## Relationship between tuition and graduation rate 
+## Relationship between tuition and graduation rate
 
 ```{r}
 
@@ -356,8 +374,6 @@ grad_rate_outStateTuition
 
 ```
 
-
-
 ## Relationship between cost of attendance and graduation rate
 
 ```{r}
@@ -380,16 +396,6 @@ grad_rate_costAttendance
 
 ```
 
-
-
-
-
-
-
-
-
-
-
 # Part 3: ROI
 
 ```{r}
@@ -399,7 +405,8 @@ colleges <- colleges %>%
   rename(five_yr_earnings = latest.earnings.5_yrs_after_completion.median) %>%
   rename(one_yr_earnings = latest.earnings.1_yr_after_completion.median) %>%
   rename(size = latest.student.size) %>%
-  rename(instate_tuition = latest.cost.tuition.in_state) %>%
+  r
+ename(instate_tuition = latest.cost.tuition.in_state) %>%
   rename(outstate_tuition = latest.cost.tuition.out_of_state) %>%
   rename(acceptance = latest.admissions.admission_rate.overall) %>%
   rename(avg_cost = latest.cost.attendance.academic_year) %>%
@@ -481,7 +488,5 @@ roi_plot4
 ```
 
 ### Observation: there is a strong negative association between these variables. More expensive colleges are often more selective, with lower acceptance rates. This could mean that the cost of attendance doesn't necessarily predict outcomes, but the prestige of the institution.
-<<<<<<< HEAD
 
-
-
+\<\<\<\<\<\<\< HEAD
