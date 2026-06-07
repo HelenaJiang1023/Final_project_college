@@ -3,11 +3,6 @@ title: "Are expensive colleges more worthy?"
 format: html
 execute:
   http: true
-  echo: false
-  warning: false
-  message: false
-editor_options: 
-  chunk_output_type: console
 ---
 
 ```{r}
@@ -89,20 +84,20 @@ colleges <- bind_rows(school_list)
 ```
 
 ```{r}
-alt_colleges <- read_csv("alt_college_data.csv")
+#alt_colleges <- read_csv("alt_college_data.csv")
 ```
 
 ```{r}
-alt_colleges <- alt_colleges %>%
+#alt_colleges <- alt_colleges %>%
   rename(name = INSTNM)
 
-alt_colleges <- alt_colleges %>%
+#alt_colleges <- alt_colleges %>%
   rename(id = UNITID)
 ```
 
 ```{r}
 # merged_colleges_big <- left_join(colleges, alt_colleges, by = c("school.name" = "name"))
-# merged_colleges_big <- left_join(colleges, alt_colleges, by = "id")
+#merged_colleges_big <- left_join(colleges, alt_colleges, by = "id")
 ```
 
 ```{r}
@@ -122,6 +117,14 @@ alt_colleges <- alt_colleges %>%
 #colnames(colleges)
 ```
 
+# **Introduction**
+
+Higher education is one of the largest financial investments many individuals and families make. Over the past several decades, college tuition in the United States has risen substantially, leading students to increasingly question whether attending a more expensive institution is truly worth the cost. While higher-priced colleges are often associated with greater prestige and resources, it remains unclear whether these institutions consistently provide better educational and financial outcomes for students.
+
+The primary goal of this project is to investigate the question: **Are expensive colleges worth the cost?** Specifically, we examine how college costs vary across institutions and whether higher tuition is associated with improved outcomes such as graduation rates, post-graduation earnings, and return on investment (ROI). By exploring these relationships, we aim to better understand whether the additional financial burden of attending an expensive college is justified by measurable benefits.
+
+To answer these questions, we use data from the **U.S. Department of Education College Scorecard** database, supplemented by a Kaggle version of the dataset. The data include information on thousands of colleges and universities across the United States, including tuition, institutional characteristics, student outcomes, and geographic location. Each observation in the dataset represents a single institution, while some variables additionally provide information for specific student subgroups.
+
 # Part 1 How Much More Expensive Are Expensive Colleges?
 
 Before evaluating whether expensive colleges are worth the cost, it is important to understand how college costs vary across institutions. We first examine tuition differences by institution type, the overall distribution of tuition, and geographic patterns across the United States.
@@ -129,7 +132,7 @@ Before evaluating whether expensive colleges are worth the cost, it is important
 ## What does "expensive" actually mean?
 
 ```{r}
-college_cost <- colleges %>%
+college_cost <- merged_colleges_big  %>%
   mutate(
     school.ownership = factor(
       school.ownership,
@@ -239,6 +242,7 @@ cost_map <- ggplot(map_df,
   theme_void()
 ggplotly(cost_map, tooltip = "text")
 ```
+
 This map displays the average out-of-state tuition for colleges in each U.S. state, allowing us to examine geographic variation in college costs.
 
 Substantial geographic variation exists in average out-of-state tuition across the United States. States in the Northeast generally exhibit higher average tuition levels than many states in the Midwest and South. Vermont appears to have the highest average out-of-state tuition in the dataset, while several states in the South and Mountain West exhibit comparatively lower average tuition levels.
