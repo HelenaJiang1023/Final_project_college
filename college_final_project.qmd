@@ -75,65 +75,6 @@ colleges <- bind_rows(school_list)
 
 ```
 
-```{r}
-#glimpse(colleges)
-```
-
-```{r}
-
-# not sure how accurate the apps & accept columns
-# could use this set too it has more rows:
-# https://www.kaggle.com/datasets/thedevastator/u-s-department-of-education-college-scorecard-da
-#college2 <- read_csv("College_Data.csv")
-#college2
-
-#college2 <- college2 %>%
-# rename(name = ...1)
-
-#colleges <- colleges %>%
-#  rename(name = school.name)
-```
-
-```{r}
-# merged_colleges <- left_join(college2, colleges, by = "name")
-
-# some duplicates in here
-```
-
-```{r}
-alt_colleges <- read_csv("alt_college_data.csv")
-```
-
-```{r}
-alt_colleges <- alt_colleges %>%
-  rename(name = INSTNM)
-
-alt_colleges <- alt_colleges %>%
-  rename(id = UNITID)
-```
-
-```{r}
-# merged_colleges_big <- left_join(colleges, alt_colleges, by = c("school.name" = "name"))
-# merged_colleges_big <- left_join(colleges, alt_colleges, by = "id")
-```
-
-```{r}
-# merged_colleges %>%
-#  ggplot(aes(x = Private, y = latest.cost.tuition.out_of_state)) +
-#    geom_boxplot() +
-#    coord_flip() +
-#    theme_minimal() +
-#    labs(
-#      y = "Tuition (Out of State)",
-#      x = "Private",
-#      title = "Cost of Public vs. Private Schools"
-#    )
-```
-
-```{r}
-#colnames(colleges)
-```
-
 # Part 1 How Much More Expensive Are Expensive Colleges?
 
 Before evaluating whether expensive colleges are worth the cost, it is important to understand how college costs vary across institutions. We first examine tuition differences by institution type, the overall distribution of tuition, and geographic patterns across the United States.
@@ -259,7 +200,7 @@ colleges <- colleges %>%
 
 ## Variables in question
 
-`name`: the institution name `state`: the institution's state `instate_tuition`: cost of instate tuition, before aid `outstate_tuition`: cost of out-of-state tuition, before aid `acceptance`: overall acceptance rate `graduation`: overall graduation rate, in four years `repaid_debt`: proportion of graduates who have fully repaid debt after 2 years `size:` the most recent number of undergraduate students `avg_cost:` average cost of attendance, before aid `one_yr_earnings:` median earnings of graduates after 1 year from graduation `five_yr_earnings:` median earnings of graduates after 5 years from graduation
+`name`: the institution name \n `state`: the institution's state \n `instate_tuition`: cost of instate tuition, before aid \n `outstate_tuition`: cost of out-of-state tuition, before aid \n `acceptance`: overall acceptance rate \n `graduation`: overall graduation rate, in four years \n `repaid_debt`: proportion of graduates who have fully repaid debt after 2 years \n `size:` the most recent number of undergraduate students \n `avg_cost:` average cost of attendance, before aid \n `one_yr_earnings:` median earnings of graduates after 1 year from graduation \n `five_yr_earnings:` median earnings of graduates after 5 years from graduation
 
 
 
