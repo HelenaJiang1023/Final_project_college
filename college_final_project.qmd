@@ -275,13 +275,11 @@ oneYr_earn_inStateTuition<-colleges%>%
   geom_smooth(method = "lm")+
   labs(x="In-state Tuition",
        y="Median earnings 1 year after graduation",
-       title="Median After-One-year Earnings VS \n In-state Tuition")+
+      title= "Median After-One-year Earnings VS \n In-state Tuition"
+       )+
    consistent_theme
  
   
-ggplotly(oneYr_earn_inStateTuition, tooltip = "text")
-
-
 
 # One year earnings VS Out of state tuition 
 
@@ -293,13 +291,32 @@ oneYr_earn_outStateTuition<-colleges%>%
   geom_smooth(method = "lm")+
   labs(x="Out-of-state Tuition",
        y="Median earnings 1 year after graduation",
-       title="Median After-One-year Earnings VS \n Out-of-state Tuition")+
+       title= "Median After-One-year Earnings VS \n Out-of-state Tuition"
+       )+
   consistent_theme
   
-oneYr_earn_outStateTuition
 
-ggplotly(oneYr_earn_outStateTuition, tooltip = "text")
 
+# 1 year earnings VS tuition
+subplot(
+  ggplotly(oneYr_earn_inStateTuition, tooltip = "text"),
+  ggplotly(oneYr_earn_outStateTuition, tooltip = "text"),
+  nrows = 1,
+  shareY = TRUE,
+  titleX = TRUE,
+  titleY = TRUE
+) %>%
+  layout(
+    title = list(
+      text = "<b> Median After-One-year Earnings VS \n Tuition </b>",
+      font = list(size = 24),
+      x = 0.5
+    )
+  )
+
+
+
+###############################################################################################################
 
 
 # Five year earning VS In state tuition
@@ -312,11 +329,8 @@ fiveYr_earn_inStateTuition<-colleges%>%
   geom_smooth(method = "lm")+
   labs(x="In-state Tuition",
        y="Median earnings 5 years after graduation",
-       title="Median After-Five-years Earnings VS \n In-state Tuition ")+
+       title="Median After-Five-years Earnings VS \n In-state Tuition")+
   consistent_theme
-
-
-ggplotly(fiveYr_earn_inStateTuition, tooltip = "text")
 
 
 
@@ -333,7 +347,26 @@ fiveYr_earn_outStateTuition<-colleges%>%
        title="Median After-Five-years Earnings VS \n Out-of-state Tuition")+
   consistent_theme
   
-ggplotly(fiveYr_earn_outStateTuition, tooltip = "text")
+
+
+
+subplot(
+  ggplotly(fiveYr_earn_inStateTuition, tooltip = "text"),
+  ggplotly(fiveYr_earn_outStateTuition, tooltip = "text"),
+  nrows = 1,
+  shareY = TRUE,
+  titleX = TRUE,
+  titleY = TRUE
+) %>%
+  layout(
+    title = list(
+      text = "<b> Median After-Five-year Earnings VS \n Tuition</b>",
+      font = list(size = 24),
+      x = 0.5
+    )
+  )
+
+
 
 ```
 
