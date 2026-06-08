@@ -491,7 +491,11 @@ subplot(
 
 ```
 
-## Relationship between tuition and median earnings 1 year after graduation
+
+Here, we observed a positive correlation between graduation rate and tuition (both in-state and out-of-state). This means that the higher the tuition, the higher the graduation rate. This is probably because institutions with higher tuition fee are usually better funded and thus can offer more resources to help students earn their degree. Another reason may be that students who can afford attending colleges with higher tuition usually come from a more well-off socioeconomic background and thus can get more support and resources from their family in finishing college. Moreover, students who pay more to attend colleges would feel more pressured to finish their degrees with the mind that "I can't waste this money".  
+
+
+## Relationship between tuition and median earnings 1 year after graduation 
 
 ```{r}
 
@@ -546,7 +550,9 @@ subplot(
 
 ```
 
-From the graph, there is a median strong positive relationship between the median earnings 1 year after graduation of the graduates and both the in-state and out-of-state tuition, meaning that higher the tuition, higher the income soon after graduation.
+
+From the graph, there is a median strong positive relationship between the median earnings 1 year after graduation of the graduates and both the in-state and out-of-state tuition, meaning that higher the tuition, higher the income soon after graduation. One's first year of earnings after graduation usually comes from their first job. Thus, our results show that those who attend colleges with higher tuition fee will be able to find a first job with higher earnings, indicating that the outcome is worth the cost. 
+
 
 ```{r}
 
@@ -601,6 +607,9 @@ subplot(
 
 
 ```
+
+Our graph shows that there is a even stronger positive relationship between tuition (both in-state and out-of-state) and median earnings five years after graduation compared to one year after graduation. This indicates that the trend for higher tuition higher outcome persists over time and gets even more obvious. This is probably either because as years go by, one's earnings will increase with things like promotion, or the person is able to switch to a job with higher earnings. Thus, attending college with high tuition fee will not only help graduates secure a first job with better earnings but also help people stay in this high-salary job and earn more and more over time or find another job with higher salary. 
+
 
 # Part 3: ROI
 
@@ -753,4 +762,3 @@ Observation: after 5 years, there is a slightly steeper trend line, though it's 
 
 Summary: unless you attend one of the outlier schools (MIT, Stanford, Harvey Mudd, Cal Tech), it doesn't really make a difference if you pay more. The less expensive schools probably have a better return on investment, but this perspective does not take into account financial aid.
 
-\<\<\<\<\<\<\< HEAD \>\>\>\>\>\>\> 1fec88dd11383938c8e5110ac9f36b00f368128d
