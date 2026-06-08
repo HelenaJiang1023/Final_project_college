@@ -371,7 +371,7 @@ ggplot(school_summaries, aes(x = tuiton, y = avg_privelege_tax_pct)) +
 #Observation: no clear correlation between the Pell-Grant earnings gap percentage(among the schools most popular majors) and Attendance cost, although very constrained by lack of institutional level data. The school level data is also hard to tell much from given the amount of variance, a big difficulty is the people who benefit the most from their backrounds will not file for finacial aid and thus will be excluded from our dataset. Also notably this dataset is comprised of only selective California Universities, which due to the incredibly strong public university options in the state could lead to a more evenly distributed wealth of students across schools of different tuition prices then in other states.
 
 ```{r}
-url ="https://api.data.gov/ed/collegescorecard/v1/schools?api_key=sydxfG3MlGadt1EOtAGWOSuSMnYBVFFLvkBeAFiE&&latest.admissions.admission_rate.overall__range=..0.30&latest.programs.cip_4_digit.credential.level=3&fields=id,school.name,school.enrollment.all,latest.programs.cip_4_digit.code,latest.programs.cip_4_digit.title,latest.programs.cip_4_digit.credential.level,latest.programs.cip_4_digit.earnings.1_yr.overall_median_earnings,latest.programs.cip_4_digit.earnings.4_yr.pell_median_earnings,latest.programs.cip_4_digit.earnings.4_yr.nonpell_median_earnings,latest.programs.cip_4_digit.earnings.5_yr.working_not_enrolled.overall_count,latest.cost.attendance.academic_year,latest.programs.cip_4_digit.earnings.4_yr.working_not_enrolled.pell_count,latest.programs.cip_4_digit.earnings.4_yr.working_not_enrolled.nonpell_count,latest.programs.cip_4_digit.earnings.highest.1_yr.working_not_enrolled.overall_count,latest.student.size,latest.programs.earnings.1_yr.nonpell_median_earnings,latest.programs.cip_4_digit.earnings.1_yr.pell_median_earnings&page=0&per_page=100"
+url ="https://api.data.gov/ed/collegescorecard/v1/schools?api_key=sydxfG3MlGadt1EOtAGWOSuSMnYBVFFLvkBeAFiE&&latest.admissions.admission_rate.overall__range=..0.30&latest.programs.cip_4_digit.credential.level=3&fields=id,school.name,school.enrollment.all,latest.programs.cip_4_digit.code,latest.programs.cip_4_digit.title,latest.programs.cip_4_digit.credential.level,latest.programs.cip_4_digit.earnings.1_yr.overall_median_earnings,latest.programs.cip_4_digit.earnings.4_yr.pell_median_earnings,latest.programs.cip_4_digit.earnings.4_yr.nonpell_median_earnings,latest.programs.cip_4_digit.earnings.5_yr.working_not_enrolled.overall_count,latest.cost.attendance.academic_year,latest.programs.cip_4_digit.earnings.4_yr.working_not_enrolled.pell_count,latest.programs.cip_4_digit.earnings.4_yr.working_not_enrolled.nonpell_count,latest.programs.cip_4_digit.earnings.highest.1_yr.working_not_enrolled.overall_count,latest.student.size,latest.programs.earnings.1_yr.nonpell_median_earnings,latest.programs.cip_4_digit.earnings.1_yr.pell_median_earnings,latest.programs.cip_4_digit.earnings.1_yr.nonpell_median_earnings&page=0&per_page=100"
 
 response <- GET(url)
 
@@ -451,7 +451,7 @@ ggplot(datatwiz)+
   theme_minimal() +
   labs(
     title = "Biz School Data to the Rescue?",
-    subtitle = "Difference in undergraduate Buisness School 1st year salary reports and College Scorecard 1st year Median Earnings",
+    subtitle = "Same school Difference in undergraduate Buisness School 1st year salary reports College Scorecard report",
     x = "Mean Earnings of Finacial Aid Recipient vs Overall School Average",
     y = "Average Earnings($)"
   )+
@@ -460,4 +460,6 @@ scale_y_continuous(
     limits = c(0, 100000),
     breaks = seq(0, 100000, by = 50000))
 ```
-I think this data is helpful in providing some access into the world of non finacial aid student outcomes, 
+I think this data is helpful in providing some access into the world of non finacial aid student outcomes,as the college scorecard data forces comparisons between the best and worst off of students who recieve some finacial aid, when in reality the question of if the gains of expensive colleges accrue more towards wealthy students is based on students who despite also not recieving a pellgrant, have much higher levels of family household income then anyone in the college scorecard database.I didnt intend to pick business schools, but it kind of works out perfectly in regards to selecting for people who are likely not represented proportionally in the college scorecard data.
+
+However the very weird world of finacial salaries makes the data far from fullproof, but I would imagine more accurate data would only strengthen the difference between the earnings of the average graduate from one of these programs and the earnings of the average graduate who recieved some form of finacial aid. Particurly almost all of the Buisness school data was based off starting salaries reported by students, while Gov Scorecard is likely based of tax returns at the end of the first year of work,and includes any potential bonus's recieved throughout the year. 
