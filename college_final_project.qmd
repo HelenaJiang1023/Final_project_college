@@ -3,6 +3,9 @@ title: "Are expensive colleges more worthy?"
 format: html
 execute:
   http: true
+  echo: false
+  warning: false
+  message: false
 ---
 
 ```{r}
@@ -100,10 +103,10 @@ colleges <- bind_rows(school_list)
 
 ```{r}
 #alt_colleges <- alt_colleges %>%
-  rename(name = INSTNM)
+  #rename(name = INSTNM)
 
 #alt_colleges <- alt_colleges %>%
-  rename(id = UNITID)
+  #rename(id = UNITID)
 ```
 
 ```{r}
@@ -143,7 +146,7 @@ Before evaluating whether expensive colleges are worth the cost, it is important
 ## What does "expensive" actually mean?
 
 ```{r}
-college_cost <- merged_colleges_big  %>%
+college_cost <- colleges  %>%
   mutate(
     school.ownership = factor(
       school.ownership,
@@ -420,8 +423,7 @@ colleges <- colleges %>%
   rename(five_yr_earnings = latest.earnings.5_yrs_after_completion.median) %>%
   rename(one_yr_earnings = latest.earnings.1_yr_after_completion.median) %>%
   rename(size = latest.student.size) %>%
-  r
-ename(instate_tuition = latest.cost.tuition.in_state) %>%
+  rename(instate_tuition = latest.cost.tuition.in_state) %>%
   rename(outstate_tuition = latest.cost.tuition.out_of_state) %>%
   rename(acceptance = latest.admissions.admission_rate.overall) %>%
   rename(avg_cost = latest.cost.attendance.academic_year) %>%
