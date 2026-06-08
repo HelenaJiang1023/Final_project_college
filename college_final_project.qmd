@@ -106,6 +106,296 @@ alt_colleges <- alt_colleges %>%
 #    )
 ```
 
+<<<<<<< HEAD
+=======
+```{r}
+#colnames(colleges)
+```
+
+# **Introduction**
+
+Higher education is one of the largest financial investments many individuals and families make. Over the past several decades, college tuition in the United States has risen substantially, leading students to increasingly question whether attending a more expensive institution is truly worth the cost. While higher-priced colleges are often associated with greater prestige and resources, it remains unclear whether these institutions consistently provide better educational and financial outcomes for students.
+
+The primary goal of this project is to investigate the question: **Are expensive colleges worth the cost?** Specifically, we examine how college costs vary across institutions and whether higher tuition is associated with improved outcomes such as graduation rates, post-graduation earnings, and return on investment (ROI). By exploring these relationships, we aim to better understand whether the additional financial burden of attending an expensive college is justified by measurable benefits.
+
+To answer these questions, we use data from the **U.S. Department of Education College Scorecard** database, supplemented by a Kaggle version of the dataset. The data include information on thousands of colleges and universities across the United States, including tuition, institutional characteristics, student outcomes, and geographic location. Each observation in the dataset represents a single institution, while some variables additionally provide information for specific student subgroups.
+
+# Part 1 How Much More Expensive Are Expensive Colleges?
+
+Before evaluating whether expensive colleges are worth the cost, it is important to understand how college costs vary across institutions. We first examine tuition differences by institution type, the overall distribution of tuition, and geographic patterns across the United States.
+
+## What does "expensive" actually mean?
+
+```{r}
+college_cost <- colleges  %>%
+  mutate(
+    school.ownership = factor(
+      school.ownership,
+      levels = c(1, 2, 3),
+      labels = c(
+        "Public",
+        "Private nonprofit",
+        "Private for-profit"
+      )
+    )
+  )
+
+boxpolot_cost <-
+  ggplot(
+  college_cost,
+  aes(
+    x = school.ownership,
+    y = latest.cost.tuition.out_of_state,
+    text = school.name
+  )
+) +
+  geom_boxplot() +
+  labs(
+    title = "Out-of-State Tuition by Institution Type",
+    x = "Institution Type",
+    y = "Annual Tuition and Fees ($)" )+
+  theme_minimal()
+
+ggplotly(boxpolot_cost, tooltip = "text")
+```
+
+This figure compares out-of-state tuition across different types of institutions to examine how college costs vary by ownership. Private nonprofit institutions have the highest median tuition and the greatest variation in costs, while public institutions tend to be the least expensive. These results suggest that ownership is a major determinant of college tuition.
+
+Mentioned that although public institutions generally have lower tuition, several public universities charge tuition levels comparable to private institutions, particularly for out-of-state students.
+
+## What does "expensive" actually mean?
+
+```{r}
+
+median_tuition <- median(
+
+  colleges$latest.cost.tuition.out_of_state,
+
+  na.rm = TRUE
+
+)
+ggplot(
+  colleges,
+  aes(x = latest.cost.tuition.out_of_state)
+) +
+  geom_histogram(
+    bins = 30,
+    fill = "#4C78A8",
+    color = "white"
+  ) +
+
+  geom_vline(
+
+    xintercept = median_tuition,
+
+    color = "red",
+
+    linewidth = 1)+
+  labs(
+    title = "Distribution of Out-of-State Tuition",
+    x = "Out-of-State Tuition ($)",
+    y = "Number of Institutions"
+  ) +
+  theme_minimal()
+
+median_tuition
+```
+
+This figure shows that out-of-state tuition is highly right-skewed. The median tuition is 16,369.50, meaning that most institutions charge less than 20,000 per year. However, a small number of colleges charge substantially higher tuition, creating a long right tail in the distribution. These results suggest that expensive colleges are the exception rather than the norm, motivating further investigation into whether their higher costs are associated with better outcomes.
+
+## Where are more expensive?
+
+```{r}
+state_cost <- colleges %>%
+  group_by(school.state) %>%
+  summarise(avg_tuition = mean(latest.cost.tuition.out_of_state, na.rm = TRUE)) %>%
+  mutate(region = tolower(state.name[match(school.state, state.abb)]))
+us_map <- map_data("state")
+
+map_df <- us_map %>%
+  left_join(state_cost, by = "region")
+```
+
+```{r}
+cost_map <- ggplot(map_df,
+            aes(
+              long,
+              lat,
+              group = group,
+              fill = avg_tuition,
+              text = paste(
+                "State:",
+                tools::toTitleCase(region),
+                "<br>Average Tuition: $",
+                round(avg_tuition)
+              )
+            )) +
+  geom_polygon(color = "white", linewidth = 0.2) +
+  coord_fixed(1.3) +
+  scale_fill_viridis_c(option = "plasma", na.value = "grey90") +
+  labs(title = "Average Out-of-State Tuition by State", fill = "Tuition ($)") +
+  theme_void()
+ggplotly(cost_map, tooltip = "text")
+```
+
+This map displays the average out-of-state tuition for colleges in each U.S. state, allowing us to examine geographic variation in college costs.
+
+Substantial geographic variation exists in average out-of-state tuition across the United States. States in the Northeast generally exhibit higher average tuition levels than many states in the Midwest and South. Vermont appears to have the highest average out-of-state tuition in the dataset, while several states in the South and Mountain West exhibit comparatively lower average tuition levels.
+
+In addition, neighboring states often display similar tuition patterns, suggesting that regional factors may influence college pricing.
+
+The results suggest that college costs are not distributed evenly across the United States. Geographic location appears to be an important factor associated with tuition levels, with institutions in the Northeast and parts of the West Coast tending to charge higher tuition on average. These regional differences may reflect variation in institutional composition, cost of living, state funding policies, and the concentration of private nonprofit colleges.
+
+Consequently, students’ college costs may depend not only on the type of institution they attend but also on where that institution is located.
+
+# Part 2: Do expensive colleges produce better outcomes?
+
+## Relationship between tuition and earnings
+
+```{r}
+
+library(ggplot2)
+
+ consistent_theme <-theme(
+    plot.title = element_text(size = 20, face = "bold"),
+    axis.title = element_text(size = 15),
+    legend.title= element_text(size=15),
+    legend.text = element_text(size = 14), 
+    axis.text.x = element_text(size = 14),
+    axis.text.y = element_text(size = 14)
+    )
+ 
+
+# One year earnings VS In state tuition
+
+oneYr_earn_inStateTuition<-colleges%>%
+  ggplot(aes(x=latest.cost.tuition.in_state,
+             y=latest.earnings.1_yr_after_completion.median)
+         )+
+  geom_point()+
+  geom_smooth(method = "lm")+
+  labs(x="In-state Tuition",
+       y="Median earnings 1 year after graduation",
+       title="Median After-One-year Earnings VS \n In-state Tuition")+
+   consistent_theme
+ 
+  
+oneYr_earn_inStateTuition
+
+
+# One year earnings VS Out of state tuition 
+
+oneYr_earn_outStateTuition<-colleges%>%
+  ggplot(aes(x=latest.cost.tuition.out_of_state,
+             y=latest.earnings.1_yr_after_completion.median)
+         )+
+  geom_point()+
+  geom_smooth(method = "lm")+
+  labs(x="Out-of-state Tuition",
+       y="Median earnings 1 year after graduation",
+       title="Median After-One-year Earnings VS \n Out-of-state Tuition")+
+  consistent_theme
+  
+oneYr_earn_outStateTuition
+
+
+# Five year earning VS In state tuition
+
+fiveYr_earn_inStateTuition<-colleges%>%
+  ggplot(aes(x=latest.cost.tuition.in_state,
+             y=latest.earnings.5_yrs_after_completion.median)
+         )+
+  geom_point()+
+  geom_smooth(method = "lm")+
+  labs(x="In-state Tuition",
+       y="Median earnings 5 years after graduation",
+       title="Median After-Five-years Earnings VS \n In-state Tuition ")+
+  consistent_theme
+  
+fiveYr_earn_inStateTuition
+
+
+
+# Five year earnings VS Out of State tuition 
+
+fiveYr_earn_outStateTuition<-colleges%>%
+  ggplot(aes(x=latest.cost.tuition.out_of_state,
+             y=latest.earnings.5_yrs_after_completion.median)
+         )+
+  geom_point()+
+  geom_smooth(method = "lm")+
+  labs(x="Out-of-state Tuition",
+       y="Median earnings 5 year after graduation",
+       title="Median After-Five-years Earnings VS \n Out-of-state Tuition")+
+  consistent_theme
+  
+fiveYr_earn_outStateTuition
+
+
+```
+
+## Relationship between tuition and graduation rate
+
+```{r}
+
+# Graduation rate VS In state tuition 
+
+grad_rate_inStateTuition<-colleges%>%
+  ggplot(aes(x=latest.cost.tuition.in_state,
+             y=latest.completion.completion_rate_4yr_150nt)
+         )+
+  geom_point()+
+  geom_smooth(method = "lm")+
+  labs(x="In-state Tuition",
+       y="Graduation Rate",
+       title="Graduation Rate VS In-state Tuition")+
+   consistent_theme
+ 
+  
+grad_rate_inStateTuition
+
+
+# Graduation rate VS Out of state tuition 
+
+grad_rate_outStateTuition<-colleges%>%
+  ggplot(aes(x=latest.cost.tuition.out_of_state,
+             y=latest.completion.completion_rate_4yr_150nt)
+         )+
+  geom_point()+
+  geom_smooth(method = "lm")+
+  labs(x="Out-of-state Tuition",
+       y="Graduation Rate",
+       title="Graduation Rate VS Out-of-state Tuition")+
+  consistent_theme
+  
+grad_rate_outStateTuition
+
+
+```
+
+## Relationship between cost of attendance and graduation rate
+
+```{r}
+
+
+grad_rate_costAttendance<-colleges%>%
+  ggplot(aes(x=latest.cost.attendance.academic_year,
+             y=latest.completion.completion_rate_4yr_150nt)
+         )+
+  geom_point()+
+  geom_smooth(method = "lm")+
+  labs(x="Cost of attendance",
+       y="Graduation Rate",
+       title="Graduation Rate VS Cost of Attendance")+
+   consistent_theme
+ 
+  
+grad_rate_costAttendance
+
+
+```
+
+>>>>>>> parent of a52911f (Render attempt)
 # Part 3: ROI
 
 ```{r}
