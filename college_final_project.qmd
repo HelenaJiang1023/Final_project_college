@@ -699,8 +699,8 @@ filter(as.numeric(cip_code) >= 5202 & as.numeric(cip_code) <= 5215)%>%
 group_by(school_name)
 
 
-nonscorecard<- university_salary_data%>%
-mutate(Buisnessesschool = str_replace(Institution, "\\s*\\(.*", ""))
+nonscorecard <- read_csv('university_salary_data.csv')%>%
+mutate(Buisnessesschool = str_replace(Institution, "\\s*\\(.*", ""))%>%
 bizcomparison <- inner_join(biz_clean, nonscorecard, by = c("school_name" = "Buisnessesschool"), suffix = c("Govdata","Bizscholdata"))%>%
  filter(!is.na(earnings_1_yr_median))%>%
 group_by(school_name) %>%
