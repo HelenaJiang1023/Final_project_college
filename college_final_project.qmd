@@ -218,6 +218,8 @@ roi_plot4
 
 #Part 4
 
+#What effect does income status have on the benefits recieved from a university/major?
+
 ```{r}
 
 library(httr)
@@ -320,7 +322,7 @@ ggplot(top_10_tax, aes(x = reorder(program_title, privelege_percentage), y = pri
 
 
 
-Obeservation:The gaps in career earnings are very signifcant but its hard to detect a major trend in the types of majors with the highest gaps. Maybe some data quality issues or something cause I remember the list being different and the data table shows higher median earnings then both pell and non pell so look into that(note)
+#Observation:The gaps in career earnings are very significant but its hard to detect a major trend in the types of majors with the highest gaps.I expected more meritocratic "skills based" majors to have lower gaps, while more relationships oriented majors would feature large spreads, however there is truly a variety of majors represented. Engineering in particular is featured in multiple spots in both the highest earnings gap and lowest earnings gap majors.
 
 
 
@@ -353,8 +355,7 @@ ggplot(top_10_schools, aes(x = reorder(school_name, avg_privelege_tax), y = avg_
     x = "School Name",
     y = "Average Earnings Gap ($)"
   )
-#Observation: 
-#High variance in earnings gaps even among the most high earning gap schools.
+
 
 ggplot(school_summaries, aes(x = tuiton, y = avg_privelege_tax_pct)) +
   geom_point(color = "firebrick", size = 3, alpha = 0.7) +
@@ -367,9 +368,96 @@ ggplot(school_summaries, aes(x = tuiton, y = avg_privelege_tax_pct)) +
     y = "Average Pell Earnings gap Gap ($)"
   )
 ```
-Observation: no clear correlation between the Pell-Grant earnings gap percentage(among the schools most popular majors) and Attendance cost, although very constrained by lack of institutional level data.
+#Observation: no clear correlation between the Pell-Grant earnings gap percentage(among the schools most popular majors) and Attendance cost, although very constrained by lack of institutional level data. The school level data is also hard to tell much from given the amount of variance, a big difficulty is the people who benefit the most from their backrounds will not file for finacial aid and thus will be excluded from our dataset. Also notably this dataset is comprised of only selective California Universities, which due to the incredibly strong public university options in the state could lead to a more evenly distributed wealth of students across schools of different tuition prices then in other states.
 
 ```{r}
+url ="https://api.data.gov/ed/collegescorecard/v1/schools?api_key=sydxfG3MlGadt1EOtAGWOSuSMnYBVFFLvkBeAFiE&&latest.admissions.admission_rate.overall__range=..0.30&latest.programs.cip_4_digit.credential.level=3&fields=id,school.name,school.enrollment.all,latest.programs.cip_4_digit.code,latest.programs.cip_4_digit.title,latest.programs.cip_4_digit.credential.level,latest.programs.cip_4_digit.earnings.1_yr.overall_median_earnings,latest.programs.cip_4_digit.earnings.4_yr.pell_median_earnings,latest.programs.cip_4_digit.earnings.4_yr.nonpell_median_earnings,latest.programs.cip_4_digit.earnings.5_yr.working_not_enrolled.overall_count,latest.cost.attendance.academic_year,latest.programs.cip_4_digit.earnings.4_yr.working_not_enrolled.pell_count,latest.programs.cip_4_digit.earnings.4_yr.working_not_enrolled.nonpell_count,latest.programs.cip_4_digit.earnings.highest.1_yr.working_not_enrolled.overall_count,latest.student.size,latest.programs.earnings.1_yr.nonpell_median_earnings,latest.programs.cip_4_digit.earnings.1_yr.pell_median_earnings&page=0&per_page=100"
+
+response <- GET(url)
+
+data <- fromJSON(content(response, "text", encoding = "UTF-8"), flatten = TRUE)
+
+biz_schools2 <- data$results
+biz <- biz_schools2 %>%
+  unnest(latest.programs.cip_4_digit)
+
+
+biz_clean <- biz %>%
+  rename(
+    school_id = id,
+    school_name = school.name,
+    cip_code = code,
+    program_title = title,
+    population = latest.student.size,
+    degree_level = credential.level,
+    earnings_1_yr_median = earnings.1_yr.overall_median_earnings,
+    earnings_4_yr_median_pell = earnings.4_yr.pell_median_earnings,
+    earnings_1_yr_median_pell = earnings.1_yr.pell_median_earnings,
+    earnings_4_yr_median_nonpell = earnings.4_yr.nonpell_median_earnings,
+    earnings_1_yr_median_nonpell = earnings.1_yr.nonpell_median_earnings,
+    count_5_yr_overall = earnings.5_yr.working_not_enrolled.overall_count, 
+    count_4_yr_pell = earnings.4_yr.working_not_enrolled.pell_count,       
+    count_4_yr_nonpell = earnings.4_yr.working_not_enrolled.nonpell_count,
+    count_1_year=earnings.highest.1_yr.working_not_enrolled.overall_count,
+    tuiton = latest.cost.attendance.academic_year
+  )
+biz_clean<- biz_clean%>%
+filter(as.numeric(cip_code) >= 5202 & as.numeric(cip_code) <= 5215)%>%
+group_by(school_name)
+
+
+nonscorecard<- university_salary_data%>%
+mutate(Buisnessesschool = str_replace(Institution, "\\s*\\(.*", ""))
+bizcomparison <- inner_join(biz_clean, nonscorecard, by = c("school_name" = "Buisnessesschool"), suffix = c("Govdata","Bizscholdata"))%>%
+ filter(!is.na(earnings_1_yr_median))%>%
+group_by(school_name) %>%
+  mutate(
+    totalpop = sum(count_1_year, na.rm = TRUE),
+    earnings_1_yr_average = sum((count_1_year* earnings_1_yr_median) / sum(count_1_year, na.rm = TRUE), na.rm = TRUE)
+  ) %>% 
+  ungroup()%>%
+  mutate(
+difference =(base_average_salary-earnings_1_yr_average),na.rm=TRUE)
+
+databiz<-bizcomparison%>%
+select(difference,school_name,base_average_salary,earnings_1_yr_average)%>%
+distinct(school_name, .keep_all = TRUE)%>%
+mutate(bizschool = mean(base_average_salary))%>%
+mutate(grinder= mean(earnings_1_yr_average))%>%
+mutate(meandiff = mean(difference))
 
 
 ```
+
+
+
+```{r}
+datatwiz<-databiz%>%
+select(grinder,bizschool)%>%
+distinct(grinder,bizschool)
+ggplot(databiz, aes(x=reorder(school_name,difference), y =difference))+
+  geom_col(fill = "firebrick") + 
+  coord_flip() +
+  theme_minimal() +
+  labs(
+    title = "Biz School Data to the Rescue?",
+    subtitle = "Difference in undergraduate Buisness School 1st year salary reports and College Scorecard 1st year Median Earnings",
+    x = "School Name",
+    y = "Average Earnings Gap ($)"
+  )
+ggplot(datatwiz)+
+  geom_col(aes(x = "Biz School Mean", y = bizschool), fill = "firebrick", width = 0.4) + 
+  geom_col(aes(x = "Gov Scorecard Mean", y = grinder), fill = "steelblue", width = 0.4) + 
+  theme_minimal() +
+  labs(
+    title = "Biz School Data to the Rescue?",
+    subtitle = "Difference in undergraduate Buisness School 1st year salary reports and College Scorecard 1st year Median Earnings",
+    x = "Mean Earnings of Finacial Aid Recipient vs Overall School Average",
+    y = "Average Earnings($)"
+  )+
+scale_y_continuous(
+    labels = scales::dollar_format(),
+    limits = c(0, 100000),
+    breaks = seq(0, 100000, by = 50000))
+```
+I think this data is helpful in providing some access into the world of non finacial aid student outcomes, 
