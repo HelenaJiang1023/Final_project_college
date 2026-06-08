@@ -228,15 +228,13 @@ library(tidyr)
 #Major/Field of study = Program title
 #Median earnings of pell grant reciepents 4 years after graduating = earnings_4_yr_median_pell
 #Median earnings of non pell grant reciepents 4 years after graduating = earnings_4_yr_median_nonpell
-
-url <- "https://api.data.gov/ed/collegescorecard/v1/schools?api_key=sydxfG3MlGadt1EOtAGWOSuSMnYBVFFLvkBeAFiE&latest.programs.cip_4_digit.credential.level=3&fields=id,school.name,latest.programs.cip_4_digit.code,latest.programs.cip_4_digit.title,latest.programs.cip_4_digit.credential.level,latest.programs.cip_4_digit.earnings.4_yr.overall_median_earnings,latest.programs.cip_4_digit.earnings.4_yr.pell_median_earnings,latest.programs.cip_4_digit.earnings.4_yr.nonpell_median_earningsla,6_yrs_after_entry.median_earnings_lowest_tercile"
+url ="https://api.data.gov/ed/collegescorecard/v1/schools?api_key=sydxfG3MlGadt1EOtAGWOSuSMnYBVFFLvkBeAFiE&school.state=CA&latest.admissions.admission_rate.overall__range=..0.40&latest.programs.cip_4_digit.credential.level=3&fields=id,school.name,school.enrollment.all,latest.programs.cip_4_digit.code,latest.programs.cip_4_digit.title,latest.programs.cip_4_digit.credential.level,latest.programs.cip_4_digit.earnings.4_yr.overall_median_earnings,latest.programs.cip_4_digit.earnings.4_yr.pell_median_earnings,latest.programs.cip_4_digit.earnings.4_yr.nonpell_median_earnings,latest.programs.cip_4_digit.earnings.5_yr.working_not_enrolled.overall_count,latest.cost.attendance.academic_year,latest.programs.cip_4_digit.earnings.4_yr.working_not_enrolled.pell_count,latest.programs.cip_4_digit.earnings.4_yr.working_not_enrolled.nonpell_count,latest.student.size&page=0&per_page=100"
 
 response <- GET(url)
 
 data <- fromJSON(content(response, "text", encoding = "UTF-8"), flatten = TRUE)
 
 ca_schools2 <- data$results
-
 ca_flat2 <- ca_schools2 %>%
   unnest(latest.programs.cip_4_digit)
 
@@ -247,26 +245,36 @@ ca_clean2 <- ca_flat2 %>%
     school_name = school.name,
     cip_code = code,
     program_title = title,
+    population = latest.student.size,
     degree_level = credential.level,
     earnings_4_yr_median = earnings.4_yr.overall_median_earnings,
     earnings_4_yr_median_pell = earnings.4_yr.pell_median_earnings,
     earnings_4_yr_median_nonpell = earnings.4_yr.nonpell_median_earnings,
+    count_5_yr_overall = earnings.5_yr.working_not_enrolled.overall_count, 
+    count_4_yr_pell = earnings.4_yr.working_not_enrolled.pell_count,       
+    count_4_yr_nonpell = earnings.4_yr.working_not_enrolled.nonpell_count,
+    tuiton = latest.cost.attendance.academic_year
   )
+  
 
-write.csv(ca_clean2, "school_complete_earnings.csv", row.names = FALSE, na = "")
+
+
 
 ```
 
 ```{r}
 majors<- ca_clean2%>%
-group_by(program_title)%>%
+group_by(cip_code,program_title)%>%
 summarize(
-majorearningspell = mean(earnings_4_yr_median_pell,na.rm = TRUE), majorearningsnonpell =mean(earnings_4_yr_median_nonpell,na.rm = TRUE),majorearningsoverall =mean(earnings_4_yr_median,na.rm = TRUE),.grops="drop")%>%
+total_population = sum(count_5_yr_overall, na.rm = TRUE),
+majorearningspell = mean(earnings_4_yr_median_pell,na.rm = TRUE), majorearningsnonpell =mean(earnings_4_yr_median_nonpell,na.rm = TRUE),majorearningsoverall =mean(earnings_4_yr_median,na.rm = TRUE),.groups="drop")%>%
 mutate(privelege_tax = (majorearningsnonpell - majorearningspell)
   ,privelege_percentage = (privelege_tax/majorearningsoverall))
   top_10_tax <-majors %>%
+  filter(total_population>100)%>%
   slice_max(order_by = privelege_tax, n = 10)
   not_10_tax <-majors %>%
+    filter(total_population>100)%>%
   slice_min(order_by = privelege_tax, n = 10)
 ggplot(top_10_tax, aes(x = reorder(program_title, privelege_tax), y = privelege_tax)) +
   geom_col(fill = "firebrick") +
@@ -302,29 +310,57 @@ ggplot(top_10_tax, aes(x = reorder(program_title, privelege_percentage), y = pri
 
 
 
-url <- "https://api.data.gov/ed/collegescorecard/v1/schools?api_key=sydxfG3MlGadt1EOtAGWOSuSMnYBVFFLvkBeAFiE&fields=id,school.name,latest.9_yrs_after_entry.median_earnings_lowest_tercile&per_page=100"
+
+
+```
 
 
 
-response <- GET(url)
-
-data2 <- fromJSON(content(response, "text", encoding = "UTF-8"), flatten = TRUE)
-
-insta <- data2$results
+Obeservation:The gaps in career earnings are very signifcant but its hard to detect a major trend in the types of majors with the highest gaps. Maybe some data quality issues or something cause I remember the list being different and the data table shows higher median earnings then both pell and non pell so look into that(note)
 
 
 
-insta_clean2 <- insta %>%
-  rename(
-    school_id = id,
-    school_name = school.name,
-    med_family_income = latest.9_yrs_after_entry.median_earnings_lowest_tercile
+```{r}
+
+popular_majors <- ca_clean2 %>%
+  filter(!is.na(count_5_yr_overall), population > 0,tuiton>0) %>%
+  group_by(school_name) %>%
+  slice_max(order_by = count_5_yr_overall, n = 5, with_ties = FALSE) %>%
+  mutate(privelege_tax = earnings_4_yr_median_nonpell - earnings_4_yr_median_pell,privelege_tax_pct = (privelege_tax / earnings_4_yr_median_nonpell) * 100)
+
+school_summaries <- popular_majors %>%
+  summarize(
+    tuiton = first(tuiton),
+    avg_privelege_tax = mean(privelege_tax, na.rm = TRUE),
+    avg_privelege_tax_pct = mean(privelege_tax_pct,na.rm=TRUE),
+    .groups = "drop"
   )
 
-write.csv(insta_clean2, "school_complete_earnings.csv", row.names = FALSE, na = "")
+top_10_schools <- school_summaries %>%
+  slice_max(order_by = avg_privelege_tax, n = 10)
+
+ggplot(top_10_schools, aes(x = reorder(school_name, avg_privelege_tax), y = avg_privelege_tax)) +
+  geom_col(fill = "firebrick") + 
+  coord_flip() +
+  theme_minimal() +
+  labs(
+    title = "Top 10 Selective California Schools Pell Earning Gaps",
+    subtitle = "Average difference in Non-Pell vs Pell earnings across the 5 most popular majors",
+    x = "School Name",
+    y = "Average Earnings Gap ($)"
+  )
+Observation: 
+High variance in earnings gaps even among the most high earning gap schools.
+
+ggplot(school_summaries, aes(x = tuiton, y = avg_privelege_tax_pct)) +
+  geom_point(color = "firebrick", size = 3, alpha = 0.7) +
+  geom_smooth(method = "lm", formula = y ~ x, color = "black", se = TRUE, fill = "gray80") +
+  theme_minimal() +
+  labs(
+    title = "Tuition Cost vs. Pell Earnings Gap",
+    subtitle = " regression of total academic year cost against average percent difference between Pell earnings",
+    x = "Cost of Attendance ($)",
+    y = "Average Pell Earnings gap Gap ($)"
+  )
 ```
-
-
-
-```
-Obeservation:The gaps in career earnings are very signifcant but its hard to detect a major trend in the types of majors with the highest gaps. Maybe some data quality issues or something cause I remember the list being different and the data table shows higher median earnings then both pell and non pell so look into that(note)
+Observation: no correlation between the Pell earnings gap and Attendance cost.
