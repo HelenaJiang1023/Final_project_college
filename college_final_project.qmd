@@ -281,7 +281,7 @@ ggplot(top_10_tax, aes(x = reorder(program_title, privelege_tax), y = privelege_
   coord_flip() +
   theme_minimal() +
   labs(
-    title = "Top 10 Majors by Earnings 'Privilege Tax'",
+    title = "Top 10 Majors by Earnings difference between Pell and non Pell recipients.",
     subtitle = "Amount less earned by Pell Grant Recipients",
     x = "Major",
     y = "Earnings Gap ($)"
@@ -291,7 +291,7 @@ ggplot(not_10_tax, aes(x = reorder(program_title, privelege_tax), y = privelege_
   coord_flip() +
   theme_minimal() +
   labs(
-    title = "Top 10 Majors by Earnings 'Privilege Tax'",
+    title = "Top 10 Majors by Earnings difference between Pell and non Pell recipients.",
     subtitle = "Amount less earned by Pell Grant Recipients",
     x = "Major",
     y = "Earnings Gap ($)"
@@ -302,7 +302,7 @@ ggplot(top_10_tax, aes(x = reorder(program_title, privelege_percentage), y = pri
   coord_flip() +
   theme_minimal() +
   labs(
-    title = "Top 10 Majors by Earnings 'Privilege Tax'",
+    title = "Top 10 Majors by Earnings difference between Pell Grant Status",
     subtitle = "Percent less earned by Pell Grant Recipients",
     x = "Major",
     y = "Earnings Gap (%)"
@@ -349,8 +349,8 @@ ggplot(top_10_schools, aes(x = reorder(school_name, avg_privelege_tax), y = avg_
     x = "School Name",
     y = "Average Earnings Gap ($)"
   )
-Observation: 
-High variance in earnings gaps even among the most high earning gap schools.
+#Observation: 
+#High variance in earnings gaps even among the most high earning gap schools.
 
 ggplot(school_summaries, aes(x = tuiton, y = avg_privelege_tax_pct)) +
   geom_point(color = "firebrick", size = 3, alpha = 0.7) +
