@@ -420,7 +420,6 @@ group_by(school_name) %>%
 difference =(base_average_salary-earnings_1_yr_average),na.rm=TRUE)
 
 databiz<-bizcomparison%>%
-select(difference,school_name,base_average_salary,earnings_1_yr_average)%>%
 distinct(school_name, .keep_all = TRUE)%>%
 mutate(bizschool = mean(base_average_salary))%>%
 mutate(grinder= mean(earnings_1_yr_average))%>%
@@ -433,9 +432,10 @@ mutate(meandiff = mean(difference))
 
 ```{r}
 datatwiz<-databiz%>%
-select(grinder,bizschool)%>%
 distinct(grinder,bizschool)
-ggplot(databiz, aes(x=reorder(school_name,difference), y =difference))+
+p <-ggplot(databiz, aes(x=reorder(school_name,difference), y =difference,text=paste0(
+        "Tuition:  ", tuiton,
+        " <br> Earnings Difference<br>", difference,"<br> First Year Median Finacial Aid Recipient,Pell Grant Recipient earnings::",earnings_1_yr_median_pell,"<br> First Year Median Finacial Aid Recipient, Non-Pell Grant Recipient earnings:",earnings_4_yr_median_nonpell)))+
   geom_col(fill = "firebrick") + 
   coord_flip() +
   theme_minimal() +
@@ -444,7 +444,9 @@ ggplot(databiz, aes(x=reorder(school_name,difference), y =difference))+
     subtitle = "Difference in undergraduate Buisness School 1st year salary reports and College Scorecard 1st year Median Earnings",
     x = "School Name",
     y = "Average Earnings Gap ($)"
-  )
+  )+
+  theme(legend.position ="right")
+ggplotly(p, tooltip = "text")
 ggplot(datatwiz)+
   geom_col(aes(x = "Biz School Mean", y = bizschool), fill = "firebrick", width = 0.4) + 
   geom_col(aes(x = "Gov Scorecard Mean", y = grinder), fill = "steelblue", width = 0.4) + 
@@ -460,6 +462,4 @@ scale_y_continuous(
     limits = c(0, 100000),
     breaks = seq(0, 100000, by = 50000))
 ```
-I think this data is helpful in providing some access into the world of non finacial aid student outcomes,as the college scorecard data forces comparisons between the best and worst off of students who recieve some finacial aid, when in reality the question of if the gains of expensive colleges accrue more towards wealthy students is based on students who despite also not recieving a pellgrant, have much higher levels of family household income then anyone in the college scorecard database.I didnt intend to pick business schools, but it kind of works out perfectly in regards to selecting for people who are likely not represented proportionally in the college scorecard data.
-
-However the very weird world of finacial salaries makes the data far from fullproof, but I would imagine more accurate data would only strengthen the difference between the earnings of the average graduate from one of these programs and the earnings of the average graduate who recieved some form of finacial aid. Particurly almost all of the Buisness school data was based off starting salaries reported by students, while Gov Scorecard is likely based of tax returns at the end of the first year of work,and includes any potential bonus's recieved throughout the year. 
+# Observation: As you can the mean/median earnings of all graduates from this subset of Buisness schools who reported salary statistics(some variance in which statistic was reported) is significantly higher then the median from college scorecard among students in the same programs at the same schools.I think this data is helpful in providing some access into the world of non finacial aid student outcomes,as the college scorecard data forces comparisons between the best and worst off of students who recieve some finacial aid, when in reality the question of if the gains of expensive colleges accrue more towards wealthy students is based on students who despite also not recieving a pellgrant, have much higher levels of family household income then anyone in the college scorecard database.I didnt intend to pick business schools, but it kind of works out perfectly in regards to selecting for people who are likely not represented proportionally in the college scorecard data.However the very weird world of finacial salaries makes the data far from fullproof, but I would imagine more accurate data would only strengthen the difference between the earnings of the average graduate from one of these programs and the earnings of the average graduate who recieved some form of finacial aid. Particurly the fact that almost all of the Buisness school data was based off starting salaries reported by students, while Gov Scorecard is likely based of tax returns at the end of the first year of work,and includes any potential bonus's/raises recieved throughout the year. 
