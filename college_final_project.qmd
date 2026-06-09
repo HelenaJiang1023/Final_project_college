@@ -6,7 +6,6 @@ execute:
 ---
 
 ```{r}
-# install.packages("httr2")
 library(httr2)
 library(tidyverse)
 library(plotly)
@@ -38,79 +37,13 @@ college_request <- request("https://api.data.gov") %>%
     break
   }
 }
-# install.packages("janitor")
 
-# college_tbl <- college_response %>%
-  # resp_body_json(simplifyVector = TRUE) %>%
-  # pluck("results") %>%
-  # as_tibble()
-
-# college_tbl
 
 colleges <- bind_rows(school_list)
 
 ```
 
-```{r}
-# colnames(colleges)
-```
 
-```{r}
-
-# not sure how accurate the apps & accept columns
-# could use this set too it has more rows:
-# https://www.kaggle.com/datasets/thedevastator/u-s-department-of-education-college-scorecard-da
-#college2 <- read_csv("College_Data.csv")
-#college2
-
-#college2 <- college2 %>%
-# rename(name = ...1)
-
-#colleges <- colleges %>%
-#  rename(name = school.name)
-```
-
-```{r}
-# merged_colleges <- left_join(college2, colleges, by = "name")
-
-# some duplicates in here
-```
-
-```{r}
-alt_colleges <- read_csv("alt_college_data.csv")
-```
-
-```{r}
-alt_colleges <- alt_colleges %>%
-  rename(name = INSTNM)
-
-alt_colleges <- alt_colleges %>%
-  rename(id = UNITID)
-```
-
-```{r}
-# merged_colleges_big <- left_join(colleges, alt_colleges, by = c("school.name" = "name"))
-# merged_colleges_big <- left_join(colleges, alt_colleges, by = "id")
-```
-
-```{r}
-# merged_colleges %>%
-#  ggplot(aes(x = Private, y = latest.cost.tuition.out_of_state)) +
-#    geom_boxplot() +
-#    coord_flip() +
-#    theme_minimal() +
-#    labs(
-#      y = "Tuition (Out of State)",
-#      x = "Private",
-#      title = "Cost of Public vs. Private Schools"
-#    )
-```
-
-<<<<<<< HEAD
-=======
-```{r}
-#colnames(colleges)
-```
 
 # **Introduction**
 
@@ -250,156 +183,7 @@ Consequently, students’ college costs may depend not only on the type of insti
 
 # Part 2: Do expensive colleges produce better outcomes?
 
-## Relationship between tuition and earnings
-
-```{r}
-
-library(ggplot2)
-
- consistent_theme <-theme(
-    plot.title = element_text(size = 20, face = "bold"),
-    axis.title = element_text(size = 15),
-    legend.title= element_text(size=15),
-    legend.text = element_text(size = 14), 
-    axis.text.x = element_text(size = 14),
-    axis.text.y = element_text(size = 14)
-    )
- 
-
-# One year earnings VS In state tuition
-
-oneYr_earn_inStateTuition<-colleges%>%
-  ggplot(aes(x=latest.cost.tuition.in_state,
-             y=latest.earnings.1_yr_after_completion.median)
-         )+
-  geom_point()+
-  geom_smooth(method = "lm")+
-  labs(x="In-state Tuition",
-       y="Median earnings 1 year after graduation",
-       title="Median After-One-year Earnings VS \n In-state Tuition")+
-   consistent_theme
- 
-  
-oneYr_earn_inStateTuition
-
-
-# One year earnings VS Out of state tuition 
-
-oneYr_earn_outStateTuition<-colleges%>%
-  ggplot(aes(x=latest.cost.tuition.out_of_state,
-             y=latest.earnings.1_yr_after_completion.median)
-         )+
-  geom_point()+
-  geom_smooth(method = "lm")+
-  labs(x="Out-of-state Tuition",
-       y="Median earnings 1 year after graduation",
-       title="Median After-One-year Earnings VS \n Out-of-state Tuition")+
-  consistent_theme
-  
-oneYr_earn_outStateTuition
-
-
-# Five year earning VS In state tuition
-
-fiveYr_earn_inStateTuition<-colleges%>%
-  ggplot(aes(x=latest.cost.tuition.in_state,
-             y=latest.earnings.5_yrs_after_completion.median)
-         )+
-  geom_point()+
-  geom_smooth(method = "lm")+
-  labs(x="In-state Tuition",
-       y="Median earnings 5 years after graduation",
-       title="Median After-Five-years Earnings VS \n In-state Tuition ")+
-  consistent_theme
-  
-fiveYr_earn_inStateTuition
-
-
-
-# Five year earnings VS Out of State tuition 
-
-fiveYr_earn_outStateTuition<-colleges%>%
-  ggplot(aes(x=latest.cost.tuition.out_of_state,
-             y=latest.earnings.5_yrs_after_completion.median)
-         )+
-  geom_point()+
-  geom_smooth(method = "lm")+
-  labs(x="Out-of-state Tuition",
-       y="Median earnings 5 year after graduation",
-       title="Median After-Five-years Earnings VS \n Out-of-state Tuition")+
-  consistent_theme
-  
-fiveYr_earn_outStateTuition
-
-
-```
-
-## Relationship between tuition and graduation rate
-
-```{r}
-
-# Graduation rate VS In state tuition 
-
-grad_rate_inStateTuition<-colleges%>%
-  ggplot(aes(x=latest.cost.tuition.in_state,
-             y=latest.completion.completion_rate_4yr_150nt)
-         )+
-  geom_point()+
-  geom_smooth(method = "lm")+
-  labs(x="In-state Tuition",
-       y="Graduation Rate",
-       title="Graduation Rate VS In-state Tuition")+
-   consistent_theme
- 
-  
-grad_rate_inStateTuition
-
-
-# Graduation rate VS Out of state tuition 
-
-grad_rate_outStateTuition<-colleges%>%
-  ggplot(aes(x=latest.cost.tuition.out_of_state,
-             y=latest.completion.completion_rate_4yr_150nt)
-         )+
-  geom_point()+
-  geom_smooth(method = "lm")+
-  labs(x="Out-of-state Tuition",
-       y="Graduation Rate",
-       title="Graduation Rate VS Out-of-state Tuition")+
-  consistent_theme
-  
-grad_rate_outStateTuition
-
-
-```
-
-## Relationship between cost of attendance and graduation rate
-
-```{r}
-
-
-grad_rate_costAttendance<-colleges%>%
-  ggplot(aes(x=latest.cost.attendance.academic_year,
-             y=latest.completion.completion_rate_4yr_150nt)
-         )+
-  geom_point()+
-  geom_smooth(method = "lm")+
-  labs(x="Cost of attendance",
-       y="Graduation Rate",
-       title="Graduation Rate VS Cost of Attendance")+
-   consistent_theme
- 
-  
-grad_rate_costAttendance
-
-
-```
-
-<<<<<<< HEAD
->>>>>>> parent of a52911f (Render attempt)
-=======
->>>>>>> parent of a52911f (Render attempt)
-# Part 3: ROI
+In this part, we investigate whether more expensive colleges are worth the cost by producing better outcomes, that is, leading to higher graduation rate and higher income after graduation. For income after graduation, we examined the median income one years after graduation and five years after graduation to see whether the trend persists over time.
 
 ```{r}
 colleges <- colleges %>%
@@ -414,7 +198,195 @@ colleges <- colleges %>%
   rename(avg_cost = latest.cost.attendance.academic_year) %>%
   rename(graduation = latest.completion.completion_rate_4yr_150nt) %>%
   rename(repaid_debt = latest.repayment.2_yr_bb_fed_repayment.ugcomp.fullypaid)
+
+
+ consistent_theme <-theme(
+    plot.title = element_text(size = 20, face = "bold"),
+    axis.title = element_text(size = 15),
+    legend.title= element_text(size=15),
+    legend.text = element_text(size = 14), 
+    axis.text.x = element_text(size = 14),
+    axis.text.y = element_text(size = 14)
+    )
+
 ```
+
+
+## Relationship between tuition and graduation rate
+
+
+```{r}
+
+# Graduation rate VS In state tuition 
+
+grad_rate_inStateTuition<-colleges%>%
+  ggplot(aes(x=instate_tuition,
+             y=graduation)
+         )+
+  geom_point(aes(text = name))+
+  geom_smooth(method = "lm")+
+  labs(x="In-state Tuition",
+       y="Graduation Rate",
+       title="Graduation Rate VS In-state Tuition")+
+   consistent_theme
+ 
+
+
+# Graduation rate VS Out of state tuition 
+
+grad_rate_outStateTuition<-colleges%>%
+  ggplot(aes(x=outstate_tuition,
+             y=graduation)
+         )+
+  geom_point(aes(text = name))+
+  geom_smooth(method = "lm")+
+  labs(x="Out-of-state Tuition",
+       y="Graduation Rate",
+       title="Graduation Rate VS Out-of-state Tuition")+
+  consistent_theme
+  
+
+# Combine the two plots into one and add interactives
+
+subplot(
+  ggplotly(grad_rate_inStateTuition, tooltip = "text"),
+  ggplotly(grad_rate_outStateTuition, tooltip = "text"),
+  nrows = 1,
+  shareY = TRUE,
+  titleX = TRUE,
+  titleY = TRUE
+) %>%
+  layout(
+    title = list(
+      text = "<b>Graduation Rate vs Tuition</b>",
+      font = list(size = 24),
+      x = 0.5
+    )
+  )
+
+
+```
+
+Here, we observed a positive correlation between graduation rate and tuition (both in-state and out-of-state). This means that the higher the tuition, the higher the graduation rate. This is probably because institutions with higher tuition fee are usually better funded and thus can offer more resources to help students earn their degree. Another reason may be that students who can afford attending colleges with higher tuition usually come from a more well-off socioeconomic background and thus can get more support and resources from their family in finishing college. Moreover, students who pay more to attend colleges would feel more pressured to finish their degrees with the mind that “I can’t waste this money”.
+
+
+
+## Relationship between tuition and median earnings 1 year after graduation
+
+```{r}
+
+# One year earnings VS In state tuition
+
+oneYr_earn_inStateTuition <- colleges %>%
+  ggplot(aes(
+      x = instate_tuition,
+      y = one_yr_earnings
+    )
+  ) +
+  geom_point(aes(text = name)) +
+  geom_smooth(method = "lm") +
+  labs(x = "In-state Tuition",
+       y = "Median earnings 1 year after graduation",
+       title = "Median After-One-Year Earnings vs.\nIn-State Tuition"
+  ) +
+  consistent_theme
+
+
+# One year earnings VS Out of state tuition 
+
+oneYr_earn_outStateTuition<-colleges%>%
+  ggplot(aes(x=outstate_tuition,
+             y=one_yr_earnings)
+         )+  
+  geom_point(aes(text = name))+
+  geom_smooth(method = "lm")+
+  labs(x="Out-of-state Tuition",
+       y="Median earnings 1 year after graduation",
+       title="Median After-One-year Earnings VS \n Out-of-state Tuition")+
+  consistent_theme
+  
+
+# Combine the two plots into one and add interactives
+subplot(
+  ggplotly(oneYr_earn_inStateTuition, tooltip = "text"),
+  ggplotly(oneYr_earn_outStateTuition, tooltip = "text"),
+  nrows = 1,
+  shareY = TRUE,
+  titleX = TRUE,
+  titleY = TRUE
+) %>%
+  layout(
+    title = list(
+      text = "<b> Median After-One-year Earnings VS \n Tuition </b>",
+      font = list(size = 24),
+      x = 0.5
+    )
+  )
+
+
+
+```
+
+From the graph, there is a median strong positive relationship between the median earnings 1 year after graduation of the graduates and both the in-state and out-of-state tuition, meaning that higher the tuition, higher the income soon after graduation. One’s first year of earnings after graduation usually comes from their first job. Thus, our results show that those who attend colleges with higher tuition fee will be able to find a first job with higher earnings, indicating that the outcome is worth the cost.
+
+
+
+## Relationship between tuition and median earnings 5 years after graduation
+
+```{r}
+# Five year earning VS In state tuition
+
+fiveYr_earn_inStateTuition<-colleges%>%
+  ggplot(aes(x=instate_tuition,
+             y=five_yr_earnings)
+         )+
+  geom_point(aes(text = name))+
+  geom_smooth(method = "lm")+
+  labs(x="In-state Tuition",
+       y="Median earnings 5 years after graduation",
+       title="Median After-Five-years Earnings VS \n In-state Tuition ")+
+  consistent_theme
+  
+
+# Five year earnings VS Out of State tuition 
+
+fiveYr_earn_outStateTuition<-colleges%>%
+  ggplot(aes(x=outstate_tuition,
+             y=five_yr_earnings)
+         )+
+  geom_point(aes(text = name))+
+  geom_smooth(method = "lm")+
+  labs(x="Out-of-state Tuition",
+       y="Median earnings 5 year after graduation",
+       title="Median After-Five-years Earnings VS \n Out-of-state Tuition")+
+  consistent_theme
+  
+
+
+# Combine the two plots into one and add interactives
+subplot(
+  ggplotly(fiveYr_earn_inStateTuition, tooltip = "text"),
+  ggplotly(fiveYr_earn_outStateTuition, tooltip = "text"),
+  nrows = 1,
+  shareY = TRUE,
+  titleX = TRUE,
+  titleY = TRUE
+) %>%
+  layout(
+    title = list(
+      text = "<b> Median After-Five-year Earnings VS \n Tuition</b>",
+      font = list(size = 24),
+      x = 0.5
+    )
+  )
+
+```
+
+Our graph shows that there is a even stronger positive relationship between tuition (both in-state and out-of-state) and median earnings five years after graduation compared to one year after graduation. This indicates that the trend for higher tuition higher outcome persists over time and gets even more obvious. This is probably either because as years go by, one’s earnings will increase with things like promotion, or the person is able to switch to a job with higher earnings. Thus, attending college with high tuition fee will not only help graduates secure a first job with better earnings but also help people stay in this high-salary job and earn more and more over time or find another job with higher salary.
+
+
+# Part 3: ROI
+
 
 ## Variables in question
 
