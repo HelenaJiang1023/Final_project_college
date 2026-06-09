@@ -6,6 +6,7 @@ Acquire:
 1. We acquired our first dataset from the official website of U.S Department of Education College Scorecard using API. This data set is very reliable since it is from an official US government website. The dataset contains real data about almost all colleges and universities in the United States (last updated March 23, 2026). The reliability and wealth of variables of this dataset are the two main reasons for our choice. 
  
 <<<<<<< HEAD
+<<<<<<< HEAD
 2. We acquired our second data set `clean_top_colleges.csv` from the kaggle.com, which is a quite reliable website by Google for obtaining csv dataset . We downloaded this second dataset, which contains a list of top colleges in America in 2022, as a csv and imported it into R. We chose this dataset because it provided information about the ranking of the colleges, which is very useful if we want to narrow down our range of analysis and take a closer look at the relationship between graduates outcomes and cost of colleges people want to attend the most. The ranking of college is a potential way to show how much people want to attend the college.      
 
 Wrangle: We used `left_join` to combine the dataset obtained through API and the `clean_top_colleges.csv` dataset.  With this new combined dataset, we can narrow our analysis down to the top colleges which parents and students want to attend the most and investigate how rank of a college is associated with cost and outcomes. 
@@ -17,6 +18,11 @@ Wrangle: We used `left_join` to combine the dataset obtained through API and the
 
 Wrangle: We used `left_join` to combine the dataset obtained through API and the `clean_top_colleges.csv` dataset.  With this new combined dataset, we can narrow our analysis down to the top colleges which parents and students want to attend the most and investigate how rank of a college is associated with cost and outcomes. For the college graduation earnings data we used regex to change the existing variable names to allign with the corresponding variable names in the original dataset,then used `inner_join` to obtain a dataset that allowed us to directly compare the difference in outcomes between students at the same universities enrolled in the same programs with different finacial aid status's.
 >>>>>>> parent of 0d7597d (Merge branch 'main' of https://github.com/HelenaJiang1023/Final_project_college)
+=======
+2. We acquired our second data set from the kaggle.com, which is a quite reliable website by Google for obtaining csv dataset . We downloaded this second dataset, which contains a list of top colleges in America in 2022, as a csv and imported it into R. We chose this dataset because it provided information about the ranking of the colleges, which is very useful if we want to narrow down our range of analysis and take a closer look at the relationship between graduates outcomes and cost of colleges people want to attend the most. The ranking of college is a potential way to show how much people want to attend the college.      
+
+Wrangle: We used `left_join` to combine the dataset obtained through API and the `clean_top_colleges.s` dataset.  With this new combined dataset, we can narrow our analysis down to the top colleges which parents and students want to attend the most and investigate how rank of a college is associated with cost and outcomes. 
+>>>>>>> parent of df32b53 (Merge branch 'main' of https://github.com/HelenaJiang1023/Final_project_college)
 
 Visualize: For each part of our research questions, we created multiple graphs using ggplot and add interactives through plotly. 
 
