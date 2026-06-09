@@ -1,0 +1,822 @@
+---
+title: "college_final_project"
+format: html
+execute:
+  http: true
+---
+
+```{r}
+library(httr2)
+library(tidyverse)
+library(plotly)
+```
+
+```{r}
+school_list <- list()
+
+for (k in 1:500) {
+college_request <- request("https://api.data.gov") %>% 
+  req_url_path_append("ed") %>% 
+  req_url_path_append("collegescorecard") %>% 
+  req_url_path_append("v1") %>% 
+  req_url_path_append("schools") %>% 
+  req_url_query(
+    api_key = "sXz5twfrusSSiWtD5EQ35d4e3XNzfiw3m4yHiMuv",
+    fields = "id,school.name,latest.student.size,school.state,latest.cost.tuition.in_state,latest.cost.tuition.out_of_state,latest.admissions.admission_rate.overall,latest.cost.attendance.academic_year,latest.completion.completion_rate_4yr_150nt,latest.repayment.2_yr_bb_fed_repayment.ugcomp.fullypaid,latest.earnings.1_yr_after_completion.median,latest.earnings.5_yrs_after_completion.median" ,
+    per_page = 100,
+    page = k,
+  )
+
+
+  college_response <- req_perform(college_request)
+  data <- college_response %>% resp_body_json(simplifyVector = TRUE)
+  results <- data$results
+  school_list[[k]] <- results
+  
+  if (nrow(results) < 100) {
+    break
+  }
+}
+
+
+colleges <- bind_rows(school_list)
+
+```
+
+
+
+# **Introduction**
+
+Higher education is one of the largest financial investments many individuals and families make. Over the past several decades, college tuition in the United States has risen substantially, leading students to increasingly question whether attending a more expensive institution is truly worth the cost. While higher-priced colleges are often associated with greater prestige and resources, it remains unclear whether these institutions consistently provide better educational and financial outcomes for students.
+
+The primary goal of this project is to investigate the question: **Are expensive colleges worth the cost?** Specifically, we examine how college costs vary across institutions and whether higher tuition is associated with improved outcomes such as graduation rates, post-graduation earnings, and return on investment (ROI). By exploring these relationships, we aim to better understand whether the additional financial burden of attending an expensive college is justified by measurable benefits.
+
+To answer these questions, we use data from the **U.S. Department of Education College Scorecard** database, supplemented by a Kaggle version of the dataset. The data include information on thousands of colleges and universities across the United States, including tuition, institutional characteristics, student outcomes, and geographic location. Each observation in the dataset represents a single institution, while some variables additionally provide information for specific student subgroups.
+
+# Part 1 How Much More Expensive Are Expensive Colleges?
+
+Before evaluating whether expensive colleges are worth the cost, it is important to understand how college costs vary across institutions. We first examine tuition differences by institution type, the overall distribution of tuition, and geographic patterns across the United States.
+
+## What does "expensive" actually mean?
+
+```{r}
+college_cost <- colleges  %>%
+  mutate(
+    school.ownership = factor(
+      school.ownership,
+      levels = c(1, 2, 3),
+      labels = c(
+        "Public",
+        "Private nonprofit",
+        "Private for-profit"
+      )
+    )
+  )
+
+boxpolot_cost <-
+  ggplot(
+  college_cost,
+  aes(
+    x = school.ownership,
+    y = latest.cost.tuition.out_of_state,
+    text = school.name
+  )
+) +
+  geom_boxplot() +
+  labs(
+    title = "Out-of-State Tuition by Institution Type",
+    x = "Institution Type",
+    y = "Annual Tuition and Fees ($)" )+
+  theme_minimal()
+
+ggplotly(boxpolot_cost, tooltip = "text")
+```
+
+This figure compares out-of-state tuition across different types of institutions to examine how college costs vary by ownership. Private nonprofit institutions have the highest median tuition and the greatest variation in costs, while public institutions tend to be the least expensive. These results suggest that ownership is a major determinant of college tuition.
+
+Mentioned that although public institutions generally have lower tuition, several public universities charge tuition levels comparable to private institutions, particularly for out-of-state students.
+
+## What does "expensive" actually mean?
+
+```{r}
+
+median_tuition <- median(
+
+  colleges$latest.cost.tuition.out_of_state,
+
+  na.rm = TRUE
+
+)
+ggplot(
+  colleges,
+  aes(x = latest.cost.tuition.out_of_state)
+) +
+  geom_histogram(
+    bins = 30,
+    fill = "#4C78A8",
+    color = "white"
+  ) +
+
+  geom_vline(
+
+    xintercept = median_tuition,
+
+    color = "red",
+
+    linewidth = 1)+
+  labs(
+    title = "Distribution of Out-of-State Tuition",
+    x = "Out-of-State Tuition ($)",
+    y = "Number of Institutions"
+  ) +
+  theme_minimal()
+
+median_tuition
+```
+
+This figure shows that out-of-state tuition is highly right-skewed. The median tuition is 16,369.50, meaning that most institutions charge less than 20,000 per year. However, a small number of colleges charge substantially higher tuition, creating a long right tail in the distribution. These results suggest that expensive colleges are the exception rather than the norm, motivating further investigation into whether their higher costs are associated with better outcomes.
+
+## Where are more expensive?
+
+```{r}
+state_cost <- colleges %>%
+  group_by(school.state) %>%
+  summarise(avg_tuition = mean(latest.cost.tuition.out_of_state, na.rm = TRUE)) %>%
+  mutate(region = tolower(state.name[match(school.state, state.abb)]))
+us_map <- map_data("state")
+
+map_df <- us_map %>%
+  left_join(state_cost, by = "region")
+```
+
+```{r}
+cost_map <- ggplot(map_df,
+            aes(
+              long,
+              lat,
+              group = group,
+              fill = avg_tuition,
+              text = paste(
+                "State:",
+                tools::toTitleCase(region),
+                "<br>Average Tuition: $",
+                round(avg_tuition)
+              )
+            )) +
+  geom_polygon(color = "white", linewidth = 0.2) +
+  coord_fixed(1.3) +
+  scale_fill_viridis_c(option = "plasma", na.value = "grey90") +
+  labs(title = "Average Out-of-State Tuition by State", fill = "Tuition ($)") +
+  theme_void()
+ggplotly(cost_map, tooltip = "text")
+```
+
+This map displays the average out-of-state tuition for colleges in each U.S. state, allowing us to examine geographic variation in college costs.
+
+Substantial geographic variation exists in average out-of-state tuition across the United States. States in the Northeast generally exhibit higher average tuition levels than many states in the Midwest and South. Vermont appears to have the highest average out-of-state tuition in the dataset, while several states in the South and Mountain West exhibit comparatively lower average tuition levels.
+
+In addition, neighboring states often display similar tuition patterns, suggesting that regional factors may influence college pricing.
+
+The results suggest that college costs are not distributed evenly across the United States. Geographic location appears to be an important factor associated with tuition levels, with institutions in the Northeast and parts of the West Coast tending to charge higher tuition on average. These regional differences may reflect variation in institutional composition, cost of living, state funding policies, and the concentration of private nonprofit colleges.
+
+Consequently, students’ college costs may depend not only on the type of institution they attend but also on where that institution is located.
+
+
+# Part 2: Do expensive colleges produce better outcomes?
+
+In this part, we investigate whether more expensive colleges are worth the cost by producing better outcomes, that is, leading to higher graduation rate and higher income after graduation. For income after graduation, we examined the median income one years after graduation and five years after graduation to see whether the trend persists over time.
+
+```{r}
+colleges <- colleges %>%
+  rename(name = school.name) %>%
+  rename(state = school.state) %>%
+  rename(five_yr_earnings = latest.earnings.5_yrs_after_completion.median) %>%
+  rename(one_yr_earnings = latest.earnings.1_yr_after_completion.median) %>%
+  rename(size = latest.student.size) %>%
+  rename(instate_tuition = latest.cost.tuition.in_state) %>%
+  rename(outstate_tuition = latest.cost.tuition.out_of_state) %>%
+  rename(acceptance = latest.admissions.admission_rate.overall) %>%
+  rename(avg_cost = latest.cost.attendance.academic_year) %>%
+  rename(graduation = latest.completion.completion_rate_4yr_150nt) %>%
+  rename(repaid_debt = latest.repayment.2_yr_bb_fed_repayment.ugcomp.fullypaid)
+
+
+ consistent_theme <-theme(
+    plot.title = element_text(size = 20, face = "bold"),
+    axis.title = element_text(size = 15),
+    legend.title= element_text(size=15),
+    legend.text = element_text(size = 14), 
+    axis.text.x = element_text(size = 14),
+    axis.text.y = element_text(size = 14)
+    )
+
+```
+
+
+## Relationship between tuition and graduation rate
+
+
+```{r}
+
+# Graduation rate VS In state tuition 
+
+grad_rate_inStateTuition<-colleges%>%
+  ggplot(aes(x=instate_tuition,
+             y=graduation)
+         )+
+  geom_point(aes(text = name))+
+  geom_smooth(method = "lm")+
+  labs(x="In-state Tuition",
+       y="Graduation Rate",
+       title="Graduation Rate VS In-state Tuition")+
+   consistent_theme
+ 
+
+
+# Graduation rate VS Out of state tuition 
+
+grad_rate_outStateTuition<-colleges%>%
+  ggplot(aes(x=outstate_tuition,
+             y=graduation)
+         )+
+  geom_point(aes(text = name))+
+  geom_smooth(method = "lm")+
+  labs(x="Out-of-state Tuition",
+       y="Graduation Rate",
+       title="Graduation Rate VS Out-of-state Tuition")+
+  consistent_theme
+  
+
+# Combine the two plots into one and add interactives
+
+subplot(
+  ggplotly(grad_rate_inStateTuition, tooltip = "text"),
+  ggplotly(grad_rate_outStateTuition, tooltip = "text"),
+  nrows = 1,
+  shareY = TRUE,
+  titleX = TRUE,
+  titleY = TRUE
+) %>%
+  layout(
+    title = list(
+      text = "<b>Graduation Rate vs Tuition</b>",
+      font = list(size = 24),
+      x = 0.5
+    )
+  )
+
+
+```
+
+Here, we observed a positive correlation between graduation rate and tuition (both in-state and out-of-state). This means that the higher the tuition, the higher the graduation rate. This is probably because institutions with higher tuition fee are usually better funded and thus can offer more resources to help students earn their degree. Another reason may be that students who can afford attending colleges with higher tuition usually come from a more well-off socioeconomic background and thus can get more support and resources from their family in finishing college. Moreover, students who pay more to attend colleges would feel more pressured to finish their degrees with the mind that “I can’t waste this money”.
+
+
+
+## Relationship between tuition and median earnings 1 year after graduation
+
+```{r}
+
+# One year earnings VS In state tuition
+
+oneYr_earn_inStateTuition <- colleges %>%
+  ggplot(aes(
+      x = instate_tuition,
+      y = one_yr_earnings
+    )
+  ) +
+  geom_point(aes(text = name)) +
+  geom_smooth(method = "lm") +
+  labs(x = "In-state Tuition",
+       y = "Median earnings 1 year after graduation",
+       title = "Median After-One-Year Earnings vs.\nIn-State Tuition"
+  ) +
+  consistent_theme
+
+
+# One year earnings VS Out of state tuition 
+
+oneYr_earn_outStateTuition<-colleges%>%
+  ggplot(aes(x=outstate_tuition,
+             y=one_yr_earnings)
+         )+  
+  geom_point(aes(text = name))+
+  geom_smooth(method = "lm")+
+  labs(x="Out-of-state Tuition",
+       y="Median earnings 1 year after graduation",
+       title="Median After-One-year Earnings VS \n Out-of-state Tuition")+
+  consistent_theme
+  
+
+# Combine the two plots into one and add interactives
+subplot(
+  ggplotly(oneYr_earn_inStateTuition, tooltip = "text"),
+  ggplotly(oneYr_earn_outStateTuition, tooltip = "text"),
+  nrows = 1,
+  shareY = TRUE,
+  titleX = TRUE,
+  titleY = TRUE
+) %>%
+  layout(
+    title = list(
+      text = "<b> Median After-One-year Earnings VS \n Tuition </b>",
+      font = list(size = 24),
+      x = 0.5
+    )
+  )
+
+
+
+```
+
+From the graph, there is a median strong positive relationship between the median earnings 1 year after graduation of the graduates and both the in-state and out-of-state tuition, meaning that higher the tuition, higher the income soon after graduation. One’s first year of earnings after graduation usually comes from their first job. Thus, our results show that those who attend colleges with higher tuition fee will be able to find a first job with higher earnings, indicating that the outcome is worth the cost.
+
+
+
+## Relationship between tuition and median earnings 5 years after graduation
+
+```{r}
+# Five year earning VS In state tuition
+
+fiveYr_earn_inStateTuition<-colleges%>%
+  ggplot(aes(x=instate_tuition,
+             y=five_yr_earnings)
+         )+
+  geom_point(aes(text = name))+
+  geom_smooth(method = "lm")+
+  labs(x="In-state Tuition",
+       y="Median earnings 5 years after graduation",
+       title="Median After-Five-years Earnings VS \n In-state Tuition ")+
+  consistent_theme
+  
+
+# Five year earnings VS Out of State tuition 
+
+fiveYr_earn_outStateTuition<-colleges%>%
+  ggplot(aes(x=outstate_tuition,
+             y=five_yr_earnings)
+         )+
+  geom_point(aes(text = name))+
+  geom_smooth(method = "lm")+
+  labs(x="Out-of-state Tuition",
+       y="Median earnings 5 year after graduation",
+       title="Median After-Five-years Earnings VS \n Out-of-state Tuition")+
+  consistent_theme
+  
+
+
+# Combine the two plots into one and add interactives
+subplot(
+  ggplotly(fiveYr_earn_inStateTuition, tooltip = "text"),
+  ggplotly(fiveYr_earn_outStateTuition, tooltip = "text"),
+  nrows = 1,
+  shareY = TRUE,
+  titleX = TRUE,
+  titleY = TRUE
+) %>%
+  layout(
+    title = list(
+      text = "<b> Median After-Five-year Earnings VS \n Tuition</b>",
+      font = list(size = 24),
+      x = 0.5
+    )
+  )
+
+```
+
+Our graph shows that there is a even stronger positive relationship between tuition (both in-state and out-of-state) and median earnings five years after graduation compared to one year after graduation. This indicates that the trend for higher tuition higher outcome persists over time and gets even more obvious. This is probably either because as years go by, one’s earnings will increase with things like promotion, or the person is able to switch to a job with higher earnings. Thus, attending college with high tuition fee will not only help graduates secure a first job with better earnings but also help people stay in this high-salary job and earn more and more over time or find another job with higher salary.
+
+
+# Part 3: ROI
+
+
+## Variables in question
+
+`name`: the institution name
+`state`: the institution's state
+`instate_tuition`: cost of instate tuition, before aid
+`outstate_tuition`: cost of out-of-state tuition, before aid
+`acceptance`: overall acceptance rate
+`graduation`: overall graduation rate, in four years
+`repaid_debt`: proportion of graduates who have fully repaid debt after 2 years
+`size:` the most recent number of undergraduate students
+`avg_cost:` average cost of attendance, before aid
+`one_yr_earnings:` median earnings of graduates after 1 year from graduation
+`five_yr_earnings:` median earnings of graduates after 5 years from graduation
+
+## Charts
+
+```{r}
+roi_plot1 <- colleges %>%
+  ggplot(aes(x = avg_cost, y = graduation, color = acceptance)) +
+    geom_point(aes(text = name)) +
+    geom_smooth(method = "lm", se = FALSE, color = "purple") +
+    theme_minimal() +
+    labs(
+      x = "Average Cost of Attendance",
+      y = "Graduation Rate",
+      color = "Acceptance Rate",
+      title = "Graduation Rates vs. Cost of Attendance"
+    )
+ggplotly(roi_plot1, tooltip = "text")
+```
+
+### Observation: there is a clear positive trend between the two variables. This suggests that more expensive colleges might be worth it because there is a higher chance of graduating with a degree.
+
+```{r}
+roi_plot2 <- colleges %>%
+  ggplot(aes(x = avg_cost, y = one_yr_earnings, color = acceptance)) +
+    geom_point(aes(text = name)) +
+    geom_smooth(method = "lm", se = FALSE, color = "purple") +
+    theme_minimal() +
+    labs(
+      x = "Average Cost of Attendance",
+      y = "Median Earnings After 1 Year",
+      color = "Acceptance Rate",
+      title = "Median Earnings vs. Cost of Attendance",
+      subtitle = "After 1 Year"
+    )
+ggplotly(roi_plot2, tooltip = "text")
+```
+
+### Observation: there is a slight positive trend, but it is almost flat. This suggests that a more expensive college might not be worth it in the short-term, using 1-year median earnings as a marker of ROI.
+
+```{r}
+roi_plot3 <- colleges %>%
+  ggplot(aes(x = avg_cost, y = five_yr_earnings, color = acceptance)) +
+    geom_point(aes(text = name)) +
+    geom_smooth(method = "lm", se = FALSE, color = "purple") +
+    theme_minimal() +
+    labs(
+      x = "Average Cost of Attendance",
+      y = "Median Earnings After 5 Years",
+      color = "Acceptance Rate",
+      title = "Median Earnings vs. Cost of Attendance",
+      subtitle = "After 5 Years"
+    )
+ggplotly(roi_plot3, tooltip = "text")
+```
+
+### Observation: the trend is more significant after 5 years. This gives evidence that a more expensive college might be worth it in the long-term, as they can lead to higher-paying careers. 
+
+```{r}
+roi_plot4 <- colleges %>%
+  ggplot(aes(x = avg_cost, y = acceptance)) +
+    geom_point() +
+    geom_smooth(method = "lm", se = FALSE, color = "purple") +
+    theme_minimal() +
+    labs(
+      x = "Average Cost of Attendance",
+      y = "Acceptance Rate",
+      title = "Acceptance Rate vs. Cost of Attendance",
+    )
+roi_plot4
+```
+
+ ggplot(aes(x = avg_cost, y = repaid_debt, color = acceptance)) +
+    geom_point(aes(text = name)) +
+    geom_smooth(method = "lm", se = FALSE, color = "purple") +
+    theme_minimal() +
+    labs(
+      x = "Average Cost of Attendance",
+      y = "Proportion of Graduates with Repaid Debt",
+      color = "Acceptance Rate",
+      title = "Repaid Debt vs. Cost of Attendance",
+    )
+ggplotly(roi_plot4, tooltip = "text")
+```
+
+Observation: there is a trend of higher-costing colleges yielding better results for debt repayment. However, this is influenced by some of the outliers on the top right, which blurs the results.
+
+```{r}
+roi_plot5 <- colleges %>%
+  ggplot(aes(x = avg_cost, y = acceptance)) +
+    geom_point() +
+    geom_smooth(method = "lm", se = FALSE, color = "purple") +
+
+@@ -399,11 +420,67 @@ roi_plot4 <- colleges %>%
+      y = "Acceptance Rate",
+      title = "Acceptance Rate vs. Cost of Attendance",
+    )
+roi_plot4
+roi_plot5
+```
+
+### Observation: there is a strong negative association between these variables. More expensive colleges are often more selective, with lower acceptance rates. This could mean that the cost of attendance doesn't necessarily predict outcomes, but the prestige of the institution.
+<<<<<<< HEAD
+Observation: there is a strong negative association between these variables. More expensive colleges are often more selective, with lower acceptance rates. This could mean that the cost of attendance doesn't necessarily predict outcomes, but the prestige of the institution.
+
+## Looking at top 500 college data
+
+```{r}
+library(stringr)
+top_colleges <- read_csv("clean_top_colleges.csv")
+```
+  
+```{r}
+ranked_colleges <- top_colleges %>%
+  left_join(colleges, by = "name")
+
+ranked_colleges <- ranked_colleges %>%
+  select(c("name", "rank", "state", "acceptance", "graduation", "avg_cost", "one_yr_earnings", "five_yr_earnings"))
+```
+
+The new data set, `ranked_colleges`, contains the information from the College Scorecard API for just the top 500 colleges, according to this ranking of colleges from 2022. 
+
+### Charts
+
+```{r}
+roi_pt2_plot1 <- ranked_colleges %>%
+  ggplot(aes(x = avg_cost, y = one_yr_earnings, color = rank)) +
+    geom_point(aes(text = name)) +
+    geom_smooth(method = "lm", se = FALSE, color = "purple") +
+    theme_minimal() +
+    labs(
+      x = "Average Cost of Attendance",
+      y = "Median Earnings After 1 Year",
+      color = "Rank",
+      title = "Median Earnings After 1 Year vs. Cost of Attendance",
+      subtitle = "For Top 500 Schools"
+    )
+ggplotly(roi_pt2_plot1, tooltip = "text")
+```
+
+Observation: there is not a clear trend here, though the line of best fit is slightly positive. There are also two clear clusters here, likely public schools on the left (cheaper) and private schools on the right (more expensive). 
+
+```{r}
+roi_pt2_plot2 <- ranked_colleges %>%
+  ggplot(aes(x = avg_cost, y = five_yr_earnings, color = rank)) +
+    geom_point(aes(text = name)) +
+    geom_smooth(method = "lm", se = FALSE, color = "purple") +
+    theme_minimal() +
+    labs(
+      x = "Average Cost of Attendance",
+      y = "Median Earnings After 5 Years",
+      color = "Rank",
+      title = "Median Earnings After 5 Years vs. Cost of Attendance",
+      subtitle = "For Top 500 Schools"
+    )
+ggplotly(roi_pt2_plot2, tooltip = "text")
+```
+
+Observation: after 5 years, there is a slightly steeper trend line, though it's not clear. This is likely influenced by outliers on the upper right hand side of the graph. Other than those schools, the trend is basically flat, suggesting less expensive schools might be worth it because the outcomes are similar for schools across cost.
+
+Summary: unless you attend one of the outlier schools (MIT, Stanford, Harvey Mudd, Cal Tech), it doesn't really make a difference if you pay more. The less expensive schools probably have a better return on investment, but this perspective does not take into account financial aid.
+
+<<<<<<< HEAD
+
+
+
+
+
+### Observation: there is a strong negative association between these variables. More expensive colleges are often more selective, with lower acceptance rates. This could mean that the cost of attendance doesn't necessarily predict outcomes, but the prestige of the institution.
+
+
+
+
+#Part 4
+
+#What effect does income status have on the benefits recieved from a university/major?
+
+```{r}
+
+library(httr)
+library(jsonlite)
+library(dplyr)
+library(tidyr)
+
+#Variables in question:
+#Major/Field of study = Program title
+#Median earnings of pell grant recipients 4 years after graduating = earnings_4_yr_median_pell
+#Median earnings of non pell grant recipients 4 years after graduating = earnings_4_yr_median_nonpell
+
+
+
+url ="https://api.data.gov/ed/collegescorecard/v1/schools?api_key=sydxfG3MlGadt1EOtAGWOSuSMnYBVFFLvkBeAFiE&school.state=CA&latest.admissions.admission_rate.overall__range=..0.40&latest.programs.cip_4_digit.credential.level=3&fields=id,school.name,school.enrollment.all,latest.programs.cip_4_digit.code,latest.programs.cip_4_digit.title,latest.programs.cip_4_digit.credential.level,latest.programs.cip_4_digit.earnings.4_yr.overall_median_earnings,latest.programs.cip_4_digit.earnings.4_yr.pell_median_earnings,latest.programs.cip_4_digit.earnings.4_yr.nonpell_median_earnings,latest.programs.cip_4_digit.earnings.5_yr.working_not_enrolled.overall_count,latest.cost.attendance.academic_year,latest.programs.cip_4_digit.earnings.4_yr.working_not_enrolled.pell_count,latest.programs.cip_4_digit.earnings.4_yr.working_not_enrolled.nonpell_count,latest.student.size&page=0&per_page=100"
+
+response <- GET(url)
+
+data <- fromJSON(content(response, "text", encoding = "UTF-8"), flatten = TRUE)
+
+ca_schools2 <- data$results
+ca_flat2 <- ca_schools2 %>%
+  unnest(latest.programs.cip_4_digit)
+
+
+ca_clean2 <- ca_flat2 %>%
+  rename(
+    school_id = id,
+    school_name = school.name,
+    cip_code = code,
+    program_title = title,
+    population = latest.student.size,
+    degree_level = credential.level,
+    earnings_4_yr_median = earnings.4_yr.overall_median_earnings,
+    earnings_4_yr_median_pell = earnings.4_yr.pell_median_earnings,
+    earnings_4_yr_median_nonpell = earnings.4_yr.nonpell_median_earnings,
+    count_5_yr_overall = earnings.5_yr.working_not_enrolled.overall_count, 
+    count_4_yr_pell = earnings.4_yr.working_not_enrolled.pell_count,       
+    count_4_yr_nonpell = earnings.4_yr.working_not_enrolled.nonpell_count,
+    tuiton = latest.cost.attendance.academic_year
+  )
+  
+
+
+
+
+```
+
+```{r}
+majors<- ca_clean2%>%
+group_by(cip_code,program_title)%>%
+summarize(
+total_population = sum(count_5_yr_overall, na.rm = TRUE),
+majorearningspell = mean(earnings_4_yr_median_pell,na.rm = TRUE), majorearningsnonpell =mean(earnings_4_yr_median_nonpell,na.rm = TRUE),majorearningsoverall =mean(earnings_4_yr_median,na.rm = TRUE),.groups="drop")%>%
+mutate(privelege_tax = (majorearningsnonpell - majorearningspell)
+  ,privelege_percentage = (privelege_tax/majorearningsoverall))
+  top_10_tax <-majors %>%
+  filter(total_population>100)%>%
+  slice_max(order_by = privelege_tax, n = 10)
+  not_10_tax <-majors %>%
+    filter(total_population>100)%>%
+  slice_min(order_by = privelege_tax, n = 10)
+ggplot(top_10_tax, aes(x = reorder(program_title, privelege_tax), y = privelege_tax)) +
+  geom_col(fill = "firebrick") +
+  coord_flip() +
+  theme_minimal() +
+  labs(
+    title = "Top 10 Majors by Earnings difference between Pell and non Pell recipients.",
+    subtitle = "Amount less earned by Pell Grant Recipients",
+    x = "Major",
+    y = "Earnings Gap ($)"
+  )
+ggplot(not_10_tax, aes(x = reorder(program_title, privelege_tax), y = privelege_tax)) +
+  geom_col(fill = "firebrick") + 
+  coord_flip() +
+  theme_minimal() +
+  labs(
+    title = "Top 10 Majors by Earnings difference between Pell and non Pell recipients.",
+    subtitle = "Amount less earned by Pell Grant Recipients",
+    x = "Major",
+    y = "Earnings Gap ($)"
+  )
+
+ggplot(top_10_tax, aes(x = reorder(program_title, privelege_percentage), y = privelege_percentage*100)) +
+  geom_col(fill = "firebrick") +
+  coord_flip() +
+  theme_minimal() +
+  labs(
+    title = "Top 10 Majors by least earnings difference between Non Pell and Pell students",
+    subtitle = "Percent less earned by Pell Grant Recipients",
+    x = "Major",
+    y = "Earnings Gap (%)"
+  )
+
+
+
+
+
+```
+
+
+
+#Observation:The gaps in career earnings are very significant but its hard to detect a major trend in the types of majors with the highest gaps.I expected more meritocratic "skills based" majors to have lower gaps, while more relationships oriented majors would feature large spreads, however there is truly a variety of majors represented. Engineering in particular is featured in multiple spots in both the highest earnings gap and lowest earnings gap majors.
+
+
+
+```{r}
+
+popular_majors <- ca_clean2 %>%
+  filter(!is.na(count_5_yr_overall), population > 0,tuiton>0) %>%
+  group_by(school_name) %>%
+  slice_max(order_by = count_5_yr_overall, n = 5, with_ties = FALSE) %>%
+  mutate(privelege_tax = earnings_4_yr_median_nonpell - earnings_4_yr_median_pell,privelege_tax_pct = (privelege_tax / earnings_4_yr_median_nonpell) * 100)
+
+school_summaries <- popular_majors %>%
+  summarize(
+    tuiton = first(tuiton),
+    avg_privelege_tax = mean(privelege_tax, na.rm = TRUE),
+    avg_privelege_tax_pct = mean(privelege_tax_pct,na.rm=TRUE),
+    .groups = "drop"
+  )
+
+top_10_schools <- school_summaries %>%
+  slice_max(order_by = avg_privelege_tax, n = 10)
+
+ggplot(top_10_schools, aes(x = reorder(school_name, avg_privelege_tax), y = avg_privelege_tax)) +
+  geom_col(fill = "firebrick") + 
+  coord_flip() +
+  theme_minimal() +
+  labs(
+    title = "Top 10 Selective California Schools Pell Earning Gaps",
+    subtitle = "Average difference in Non-Pell vs Pell earnings across the 5 most popular majors",
+    x = "School Name",
+    y = "Average Earnings Gap ($)"
+  )
+
+
+ggplot(school_summaries, aes(x = tuiton, y = avg_privelege_tax_pct)) +
+  geom_point(color = "firebrick", size = 3, alpha = 0.7) +
+  geom_smooth(method = "lm", formula = y ~ x, color = "black", se = TRUE, fill = "gray80") +
+  theme_minimal() +
+  labs(
+    title = "Tuition Cost vs. Pell Earnings Gap",
+    subtitle = " regression of total academic year cost against average percent difference between Pell earnings",
+    x = "Cost of Attendance ($)",
+    y = "Average Pell Earnings gap Gap ($)"
+  )
+```
+#Observation: no clear correlation between the Pell-Grant earnings gap percentage(among the schools most popular majors) and Attendance cost, although very constrained by lack of institutional level data. The school level data is also hard to tell much from given the amount of variance, a big difficulty is the people who benefit the most from their backrounds will not file for finacial aid and thus will be excluded from our dataset. Also notably this dataset is comprised of only selective California Universities, which due to the incredibly strong public university options in the state could lead to a more evenly distributed wealth of students across schools of different tuition prices then in other states.
+
+```{r}
+url ="https://api.data.gov/ed/collegescorecard/v1/schools?api_key=sydxfG3MlGadt1EOtAGWOSuSMnYBVFFLvkBeAFiE&&latest.admissions.admission_rate.overall__range=..0.30&latest.programs.cip_4_digit.credential.level=3&fields=id,school.name,school.enrollment.all,latest.programs.cip_4_digit.code,latest.programs.cip_4_digit.title,latest.programs.cip_4_digit.credential.level,latest.programs.cip_4_digit.earnings.1_yr.overall_median_earnings,latest.programs.cip_4_digit.earnings.4_yr.pell_median_earnings,latest.programs.cip_4_digit.earnings.4_yr.nonpell_median_earnings,latest.programs.cip_4_digit.earnings.5_yr.working_not_enrolled.overall_count,latest.cost.attendance.academic_year,latest.programs.cip_4_digit.earnings.4_yr.working_not_enrolled.pell_count,latest.programs.cip_4_digit.earnings.4_yr.working_not_enrolled.nonpell_count,latest.programs.cip_4_digit.earnings.highest.1_yr.working_not_enrolled.overall_count,latest.student.size,latest.programs.earnings.1_yr.nonpell_median_earnings,latest.programs.cip_4_digit.earnings.1_yr.pell_median_earnings,latest.programs.cip_4_digit.earnings.1_yr.nonpell_median_earnings&page=0&per_page=100"
+
+response <- GET(url)
+
+data <- fromJSON(content(response, "text", encoding = "UTF-8"), flatten = TRUE)
+
+biz_schools2 <- data$results
+biz <- biz_schools2 %>%
+  unnest(latest.programs.cip_4_digit)
+
+
+biz_clean <- biz %>%
+  rename(
+    school_id = id,
+    school_name = school.name,
+    cip_code = code,
+    program_title = title,
+    population = latest.student.size,
+    degree_level = credential.level,
+    earnings_1_yr_median = earnings.1_yr.overall_median_earnings,
+    earnings_4_yr_median_pell = earnings.4_yr.pell_median_earnings,
+    earnings_1_yr_median_pell = earnings.1_yr.pell_median_earnings,
+    earnings_4_yr_median_nonpell = earnings.4_yr.nonpell_median_earnings,
+    earnings_1_yr_median_nonpell = earnings.1_yr.nonpell_median_earnings,
+    count_5_yr_overall = earnings.5_yr.working_not_enrolled.overall_count, 
+    count_4_yr_pell = earnings.4_yr.working_not_enrolled.pell_count,       
+    count_4_yr_nonpell = earnings.4_yr.working_not_enrolled.nonpell_count,
+    count_1_year=earnings.highest.1_yr.working_not_enrolled.overall_count,
+    tuiton = latest.cost.attendance.academic_year
+  )
+biz_clean<- biz_clean%>%
+filter(as.numeric(cip_code) >= 5202 & as.numeric(cip_code) <= 5215)%>%
+group_by(school_name)
+
+
+nonscorecard <- read_csv('university_salary_data.csv')%>%
+mutate(Buisnessesschool = str_replace(Institution, "\\s*\\(.*", ""))%>%
+bizcomparison <- inner_join(biz_clean, nonscorecard, by = c("school_name" = "Buisnessesschool"), suffix = c("Govdata","Bizscholdata"))%>%
+ filter(!is.na(earnings_1_yr_median))%>%
+group_by(school_name) %>%
+  mutate(
+    totalpop = sum(count_1_year, na.rm = TRUE),
+    earnings_1_yr_average = sum((count_1_year* earnings_1_yr_median) / sum(count_1_year, na.rm = TRUE), na.rm = TRUE)
+  ) %>% 
+  ungroup()%>%
+  mutate(
+difference =(base_average_salary-earnings_1_yr_average),na.rm=TRUE)
+
+databiz<-bizcomparison%>%
+select(difference,school_name,base_average_salary,earnings_1_yr_average)%>%
+distinct(school_name, .keep_all = TRUE)%>%
+mutate(bizschool = mean(base_average_salary))%>%
+mutate(grinder= mean(earnings_1_yr_average))%>%
+mutate(meandiff = mean(difference))
+
+
+```
+
+
+
+```{r}
+datatwiz<-databiz%>%
+select(grinder,bizschool)%>%
+distinct(grinder,bizschool)
+ggplot(databiz, aes(x=reorder(school_name,difference), y =difference))+
+  geom_col(fill = "firebrick") + 
+  coord_flip() +
+  theme_minimal() +
+  labs(
+    title = "Biz School Data to the Rescue?",
+    subtitle = "Difference in undergraduate Buisness School 1st year salary reports and College Scorecard 1st year Median Earnings",
+    x = "School Name",
+    y = "Average Earnings Gap ($)"
+  )
+ggplot(datatwiz)+
+  geom_col(aes(x = "Biz School Mean", y = bizschool), fill = "firebrick", width = 0.4) + 
+  geom_col(aes(x = "Gov Scorecard Mean", y = grinder), fill = "steelblue", width = 0.4) + 
+  theme_minimal() +
+  labs(
+    title = "Biz School Data to the Rescue?",
+    subtitle = "Same school Difference in undergraduate Buisness School 1st year salary reports College Scorecard report",
+    x = "Mean Earnings of Finacial Aid Recipient vs Overall School Average",
+    y = "Average Earnings($)"
+  )+
+scale_y_continuous(
+    labels = scales::dollar_format(),
+    limits = c(0, 100000),
+    breaks = seq(0, 100000, by = 50000))
+```
+I think this data is helpful in providing some access into the world of non finacial aid student outcomes,as the college scorecard data forces comparisons between the best and worst off of students who recieve some finacial aid, when in reality the question of if the gains of expensive colleges accrue more towards wealthy students is based on students who despite also not recieving a pellgrant, have much higher levels of family household income then anyone in the college scorecard database.I didnt intend to pick business schools, but it kind of works out perfectly in regards to selecting for people who are likely not represented proportionally in the college scorecard data.
+
+However the very weird world of finacial salaries makes the data far from fullproof, but I would imagine more accurate data would only strengthen the difference between the earnings of the average graduate from one of these programs and the earnings of the average graduate who recieved some form of finacial aid. Particurly almost all of the Buisness school data was based off starting salaries reported by students, while Gov Scorecard is likely based of tax returns at the end of the first year of work,and includes any potential bonus's recieved throughout the year. 
