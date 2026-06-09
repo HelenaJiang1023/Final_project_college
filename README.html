@@ -361,9 +361,8 @@ set is very reliable since it is from an official US government website.
 The dataset contains real data about almost all colleges and
 universities in the United States (last updated March 23, 2026). The
 reliability and wealth of variables of this dataset are the two main
-reasons for our choice.</p>
-<ol start="2" style="list-style-type: decimal">
-<li>We acquired our second data set from the kaggle.com, which is a
+reasons for our choice. 2. We acquired our second data set
+<code>clean_top_colleges.csv</code> from the kaggle.com, which is a
 quite reliable website by Google for obtaining csv dataset . We
 downloaded this second dataset, which contains a list of top colleges in
 America in 2022, as a csv and imported it into R. We chose this dataset
@@ -371,22 +370,38 @@ because it provided information about the ranking of the colleges, which
 is very useful if we want to narrow down our range of analysis and take
 a closer look at the relationship between graduates outcomes and cost of
 colleges people want to attend the most. The ranking of college is a
-potential way to show how much people want to attend the college.</li>
-</ol>
-<p>Wrangle: We used <code>left_join</code> to combine the dataset
-obtained through API and the dataset obtained by CSV. With this new
-combined dataset, we can narrow our analysis down to the top colleges
-which parents and students want to attend the most and investigate how
-rank of a college is associated with cost and outcomes.</p>
+potential way to show how much people want to attend the college.</p>
+<p>Wrangle: 1. We used <code>left_join</code> to combine the dataset
+obtained through API and the <code>clean_top_colleges.csv</code>
+dataset. With this new combined dataset, we can narrow our analysis down
+to the top colleges which parents and students want to attend the most
+and investigate how rank of a college is associated with cost and
+outcomes. 2. We acquired our second data set from the kaggle.com, which
+is a quite reliable website by Google for obtaining csv dataset . We
+downloaded this second dataset, which contains a list of top colleges in
+America in 2022, as a csv and imported it into R. We chose this dataset
+because it provided information about the ranking of the colleges, which
+is very useful if we want to narrow down our range of analysis and take
+a closer look at the relationship between graduates outcomes and cost of
+colleges people want to attend the most. The ranking of college is a
+potential way to show how much people want to attend the college. 3. We
+compiled a dataset of Undergraduate Business department graduating
+senior earning reports, to contrast with CollegeScorecards earnings
+numbers, which are based entirely on the earnings of the recipients of
+some form of federal finacial aid. This dataset allowed us to contrast
+the earnings and outcomes of students with varrying backrounds at a
+subset of prestigious universities, and interogate the questions of if
+certain schools provide more of a benefit to students of wealthier
+backrounds then they do to other types of students.</p>
 <p>Visualize: For each part of our research questions, we created
 multiple graphs using ggplot and add interactives through plotly.</p>
 <p>Communicate: For each part of our research questions, we provide
 write-ups to explain the trend shown in the graphs and the associated
 implications.</p>
-<p><strong>3 How to nativigate the repo</strong></p>
-<p><code>college_final_project. html</code>: the final project output
-<code>college_final_project. qmd</code>: Contain all the codes used to
-generate output</p>
+<p><strong>3 How to navigate the repo</strong></p>
+<p><code>another_try.html</code>: the final project output
+<code>another_try.qmd</code>: Contain all the codes used to generate
+output</p>
 
 
 

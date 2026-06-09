@@ -3,6 +3,9 @@ title: "college_final_project"
 format: html
 execute:
   http: true
+  warning: false
+  message: false
+  echo: false
 ---
 
 ```{r}
@@ -22,7 +25,7 @@ college_request <- request("https://api.data.gov") %>%
   req_url_path_append("schools") %>% 
   req_url_query(
     api_key = "sXz5twfrusSSiWtD5EQ35d4e3XNzfiw3m4yHiMuv",
-    fields = "id,school.name,latest.student.size,school.state,latest.cost.tuition.in_state,latest.cost.tuition.out_of_state,latest.admissions.admission_rate.overall,latest.cost.attendance.academic_year,latest.completion.completion_rate_4yr_150nt,latest.repayment.2_yr_bb_fed_repayment.ugcomp.fullypaid,latest.earnings.1_yr_after_completion.median,latest.earnings.5_yrs_after_completion.median" ,
+    fields = "id,school.name,school.ownership,latest.student.size,school.state,latest.cost.tuition.in_state,latest.cost.tuition.out_of_state,latest.admissions.admission_rate.overall,latest.cost.attendance.academic_year,latest.completion.completion_rate_4yr_150nt,latest.repayment.2_yr_bb_fed_repayment.ugcomp.fullypaid,latest.earnings.1_yr_after_completion.median,latest.earnings.5_yrs_after_completion.median" ,
     per_page = 100,
     page = k,
   )
@@ -51,7 +54,9 @@ Higher education is one of the largest financial investments many individuals an
 
 The primary goal of this project is to investigate the question: **Are expensive colleges worth the cost?** Specifically, we examine how college costs vary across institutions and whether higher tuition is associated with improved outcomes such as graduation rates, post-graduation earnings, and return on investment (ROI). By exploring these relationships, we aim to better understand whether the additional financial burden of attending an expensive college is justified by measurable benefits.
 
-To answer these questions, we use data from the **U.S. Department of Education College Scorecard** database, supplemented by a Kaggle version of the dataset. The data include information on thousands of colleges and universities across the United States, including tuition, institutional characteristics, student outcomes, and geographic location. Each observation in the dataset represents a single institution, while some variables additionally provide information for specific student subgroups.
+To answer these questions, we use data from the U.S. Department of Education College Scorecard database, supplemented by a Kaggle version of the dataset. The data contain information on thousands of colleges and universities across the United States, including tuition, institutional characteristics, graduation outcomes, post-graduation earnings, and geographic location.
+
+Our analysis is organized around the central question of whether higher-cost colleges provide greater value to students. We first examine how college costs vary across institution types and geographic regions, establishing what constitutes an “expensive” college in the current higher education landscape. We then investigate whether higher tuition is associated with stronger outcomes, including higher graduation rates and greater earnings after graduation. Next, we evaluate whether these benefits justify the additional cost by examining measures related to return on investment (ROI). Finally, we explore how these outcomes differ across socioeconomic groups, with a particular focus on Pell Grant recipients and non-Pell students, to better understand whether the benefits of higher education are distributed equally across different student populations. Through these analyses, we aim to provide a more comprehensive picture of the relationship between college cost, student outcomes, and educational value.
 
 # Part 1 How Much More Expensive Are Expensive Colleges?
 
@@ -389,20 +394,6 @@ Our graph shows that there is a even stronger positive relationship between tuit
 # Part 3: ROI
 
 
-## Variables in question
-
-`name`: the institution name
-`state`: the institution's state
-`instate_tuition`: cost of instate tuition, before aid
-`outstate_tuition`: cost of out-of-state tuition, before aid
-`acceptance`: overall acceptance rate
-`graduation`: overall graduation rate, in four years
-`repaid_debt`: proportion of graduates who have fully repaid debt after 2 years
-`size:` the most recent number of undergraduate students
-`avg_cost:` average cost of attendance, before aid
-`one_yr_earnings:` median earnings of graduates after 1 year from graduation
-`five_yr_earnings:` median earnings of graduates after 5 years from graduation
-
 ## Charts
 
 ```{r}
@@ -420,7 +411,7 @@ roi_plot1 <- colleges %>%
 ggplotly(roi_plot1, tooltip = "text")
 ```
 
-### Observation: there is a clear positive trend between the two variables. This suggests that more expensive colleges might be worth it because there is a higher chance of graduating with a degree.
+Observation: there is a clear positive trend between the two variables. This suggests that more expensive colleges might be worth it because there is a higher chance of graduating with a degree.
 
 ```{r}
 roi_plot2 <- colleges %>%
@@ -438,7 +429,7 @@ roi_plot2 <- colleges %>%
 ggplotly(roi_plot2, tooltip = "text")
 ```
 
-### Observation: there is a slight positive trend, but it is almost flat. This suggests that a more expensive college might not be worth it in the short-term, using 1-year median earnings as a marker of ROI.
+Observation: there is a slight positive trend, but it is almost flat. This suggests that a more expensive college might not be worth it in the short-term, using 1-year median earnings as a marker of ROI.
 
 ```{r}
 roi_plot3 <- colleges %>%
@@ -456,23 +447,15 @@ roi_plot3 <- colleges %>%
 ggplotly(roi_plot3, tooltip = "text")
 ```
 
-### Observation: the trend is more significant after 5 years. This gives evidence that a more expensive college might be worth it in the long-term, as they can lead to higher-paying careers. 
+Observation: the trend is more significant after 5 years. This gives evidence that a more expensive college might be worth it in the long-term, as they can lead to higher-paying careers.
 
 ```{r}
+colleges <- colleges %>%
+  mutate(
+    repaid_debt = parse_number(repaid_debt)
+  )
 roi_plot4 <- colleges %>%
-  ggplot(aes(x = avg_cost, y = acceptance)) +
-    geom_point() +
-    geom_smooth(method = "lm", se = FALSE, color = "purple") +
-    theme_minimal() +
-    labs(
-      x = "Average Cost of Attendance",
-      y = "Acceptance Rate",
-      title = "Acceptance Rate vs. Cost of Attendance",
-    )
-roi_plot4
-```
-
- ggplot(aes(x = avg_cost, y = repaid_debt, color = acceptance)) +
+  ggplot(aes(x = avg_cost, y = repaid_debt, color = acceptance)) +
     geom_point(aes(text = name)) +
     geom_smooth(method = "lm", se = FALSE, color = "purple") +
     theme_minimal() +
@@ -492,17 +475,15 @@ roi_plot5 <- colleges %>%
   ggplot(aes(x = avg_cost, y = acceptance)) +
     geom_point() +
     geom_smooth(method = "lm", se = FALSE, color = "purple") +
-
-@@ -399,11 +420,67 @@ roi_plot4 <- colleges %>%
+    theme_minimal() +
+    labs(
+      x = "Average Cost of Attendance",
       y = "Acceptance Rate",
       title = "Acceptance Rate vs. Cost of Attendance",
     )
-roi_plot4
 roi_plot5
 ```
 
-### Observation: there is a strong negative association between these variables. More expensive colleges are often more selective, with lower acceptance rates. This could mean that the cost of attendance doesn't necessarily predict outcomes, but the prestige of the institution.
-<<<<<<< HEAD
 Observation: there is a strong negative association between these variables. More expensive colleges are often more selective, with lower acceptance rates. This could mean that the cost of attendance doesn't necessarily predict outcomes, but the prestige of the institution.
 
 ## Looking at top 500 college data
@@ -511,7 +492,7 @@ Observation: there is a strong negative association between these variables. Mor
 library(stringr)
 top_colleges <- read_csv("clean_top_colleges.csv")
 ```
-  
+ 
 ```{r}
 ranked_colleges <- top_colleges %>%
   left_join(colleges, by = "name")
@@ -520,7 +501,7 @@ ranked_colleges <- ranked_colleges %>%
   select(c("name", "rank", "state", "acceptance", "graduation", "avg_cost", "one_yr_earnings", "five_yr_earnings"))
 ```
 
-The new data set, `ranked_colleges`, contains the information from the College Scorecard API for just the top 500 colleges, according to this ranking of colleges from 2022. 
+The new data set, `ranked_colleges`, contains the information from the College Scorecard API for just the top 500 colleges, according to this ranking of colleges from 2022.
 
 ### Charts
 
@@ -540,7 +521,7 @@ roi_pt2_plot1 <- ranked_colleges %>%
 ggplotly(roi_pt2_plot1, tooltip = "text")
 ```
 
-Observation: there is not a clear trend here, though the line of best fit is slightly positive. There are also two clear clusters here, likely public schools on the left (cheaper) and private schools on the right (more expensive). 
+Observation: there is not a clear trend here, though the line of best fit is slightly positive. There are also two clear clusters here, likely public schools on the left (cheaper) and private schools on the right (more expensive).
 
 ```{r}
 roi_pt2_plot2 <- ranked_colleges %>%
@@ -561,16 +542,6 @@ ggplotly(roi_pt2_plot2, tooltip = "text")
 Observation: after 5 years, there is a slightly steeper trend line, though it's not clear. This is likely influenced by outliers on the upper right hand side of the graph. Other than those schools, the trend is basically flat, suggesting less expensive schools might be worth it because the outcomes are similar for schools across cost.
 
 Summary: unless you attend one of the outlier schools (MIT, Stanford, Harvey Mudd, Cal Tech), it doesn't really make a difference if you pay more. The less expensive schools probably have a better return on investment, but this perspective does not take into account financial aid.
-
-<<<<<<< HEAD
-
-
-
-
-
-### Observation: there is a strong negative association between these variables. More expensive colleges are often more selective, with lower acceptance rates. This could mean that the cost of attendance doesn't necessarily predict outcomes, but the prestige of the institution.
-
-
 
 
 #Part 4
@@ -763,8 +734,8 @@ filter(as.numeric(cip_code) >= 5202 & as.numeric(cip_code) <= 5215)%>%
 group_by(school_name)
 
 
-nonscorecard <- read_csv('university_salary_data.csv')%>%
-mutate(Buisnessesschool = str_replace(Institution, "\\s*\\(.*", ""))%>%
+nonscorecard <- read_csv("university_salary_data.csv")%>%
+mutate(Buisnessesschool = str_replace(Institution, "\\s*\\(.*", ""))
 bizcomparison <- inner_join(biz_clean, nonscorecard, by = c("school_name" = "Buisnessesschool"), suffix = c("Govdata","Bizscholdata"))%>%
  filter(!is.na(earnings_1_yr_median))%>%
 group_by(school_name) %>%
